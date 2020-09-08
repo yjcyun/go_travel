@@ -8,9 +8,14 @@ const hpp = require('hpp');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+
 const app = express();
+
+app.set('view engine', 'pug');
+
 
 // 1) GLOBAL MIDDLEWARES
 // Set Security HTTP Headers
@@ -55,6 +60,7 @@ app.use((req, res, next) => {
 // 2) ROUTES
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/reviews', reviewRouter);
 
 // 3) Error handler
 app.all('*', (req, res, next) => {
