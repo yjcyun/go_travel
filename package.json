@@ -23,7 +23,6 @@
     "mongoose": "^5.10.3",
     "morgan": "^1.10.0",
     "nodemailer": "^6.4.11",
-    "pug": "^3.0.0",
     "slugify": "^1.4.5",
     "validator": "^13.1.1",
     "xss-clean": "^0.1.1"
