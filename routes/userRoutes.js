@@ -10,17 +10,23 @@ router.post('/login', authController.login);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
+
+
+
+router.get(
+  '/me',
+  authController.isLoggedIn,
+  authController.protect,
+  userController.getMe,
+  userController.getUser
+)
+
 router.use(authController.protect);
 
 router.patch(
   '/updateMyPassword',
   authController.updatePassword
 );
-router.get(
-  '/me',
-  userController.getMe,
-  userController.getUser
-)
 router.patch('/updateMe', userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
 
