@@ -7,7 +7,7 @@ const TourShowHeader = ({ startLocation, ratingsAverage, price }) => {
   return (
     <Header>
       <div className='header-box'>
-        <span><FiMapPin className='header-icon' /></span> {startLocation.description}
+        <span><FiMapPin className='icon' /></span> {startLocation.description}
       </div>
       <div className='header-box'>
         <span>Rating:</span>{' '}
@@ -33,7 +33,7 @@ const Header = styled.div`
   grid-gap: 1px;
   background-color: silver;
 
-  .header-icon {
+  .icon {
     vertical-align: middle;
     margin-bottom: 3px;
   }

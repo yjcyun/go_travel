@@ -5,11 +5,15 @@ import styled from 'styled-components';
 import Title from '../../Title';
 import TourShowHeader from './TourShowHeader';
 import TourShowHeaderImg from './TourShowHeaderImg';
+import TourShowOverview from './TourShowOverview';
+
 
 class TourShow extends Component {
   componentDidMount() {
     this.props.fetchTour(this.props.match.params.id);
   }
+
+  
 
   render() {
     if (!this.props.tour) {
@@ -22,22 +26,8 @@ class TourShow extends Component {
         <h1>{name.toUpperCase()}</h1>
         <TourShowHeader {...this.props.tour} />
         <TourShowHeaderImg {...this.props.tour} />
+        <TourShowOverview {...this.props.tour} />
 
-        <TourOverviewContainer>
-          <Title title='Tour Overview' />
-          <TourOverview>
-            <div>
-              <div>Duration {duration}</div>
-              <div>Difficulty {difficulty}</div>
-              <div>Participants{maxGroupSize}</div>
-            </div>
-            <div>
-              <div>{description}</div>
-            </div>
-          </TourOverview>
-        </TourOverviewContainer>
-
-        <div>{price}</div>
         <Title title='Tour Highlights' center />
         <div>{startDates.map(date => <p key={date}>{date}</p>)}</div>
 
@@ -65,15 +55,6 @@ const TourShowContainer = styled.div`
   }
 `
 
-const TourOverviewContainer = styled.div` 
-  width: 70%;
-  margin: 10rem auto;
-`
 
-const TourOverview = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  margin: 2rem 0;
-`
 
 export default connect(mapStateToProps, { fetchTour })(TourShow)
