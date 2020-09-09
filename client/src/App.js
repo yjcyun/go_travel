@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ToursList from './components/tours/ToursList';
 import Header from './components/Header';
-import OneTour from './components/tours/OneTour';
+import TourShow from './components/tours/TourShow';
 import { connect } from 'react-redux';
 import { fetchUser } from './redux/actions';
 
@@ -11,8 +11,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Header />
-        <Route exact path='/' component={ToursList} />
-        <Route path='/tour/:id' component={OneTour} />
+        <Route exact path={['/', '/tour']} component={ToursList} />
+        <Route path='/tour/:id' component={TourShow} />
       </BrowserRouter>
     );
   }

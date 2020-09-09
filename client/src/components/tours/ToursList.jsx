@@ -16,6 +16,10 @@ class ToursList extends Component {
   }
 
   render() {
+    if(!this.props.tours){
+      return <div>Loading...</div>
+    }
+    
     return (
       <div>
         ToursList
