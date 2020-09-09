@@ -13,13 +13,12 @@ class TourShow extends Component {
     this.props.fetchTour(this.props.match.params.id);
   }
 
-  
-
   render() {
     if (!this.props.tour) {
       return <div>Loading...</div>
     }
-    const { name, price, duration, difficulty, description, maxGroupSize, startDates, startLocation } = this.props.tour;
+
+    const { name, startDates } = this.props.tour;
 
     return (
       <TourShowContainer>
