@@ -5,6 +5,7 @@ import Header from './components/Header';
 import TourShow from './components/tours/TourShow';
 import { connect } from 'react-redux';
 import { fetchUser } from './redux/actions';
+import './app.css';
 
 class App extends Component {
   render() {
