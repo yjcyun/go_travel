@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ToursList from './components/tours/ToursList';
 import Header from './components/Header';
-import TourShow from './components/tours/TourShow';
+import TourShow from './components/tours/tour-show/TourShow';
 import { connect } from 'react-redux';
 import { fetchUser } from './redux/actions';
 import './app.css';

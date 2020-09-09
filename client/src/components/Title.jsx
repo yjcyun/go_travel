@@ -15,6 +15,10 @@ const Title = ({ title, center }) => {
 
 const TitleContainer = styled.div`
   display: inline-block;
+
+  h2 {
+    font-size: 2.5rem;
+  }
 `
 const Accent = styled.div`
   height: 3px;

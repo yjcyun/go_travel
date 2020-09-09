@@ -27,9 +27,11 @@ const TourShowHeader = ({ startLocation, ratingsAverage, price }) => {
 }
 
 const Header = styled.div`
-  margin: 0 3rem;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  border: 1px solid silver;
+  grid-gap: 1px;
+  background-color: silver;
 
   .header-icon {
     vertical-align: middle;
@@ -37,10 +39,8 @@ const Header = styled.div`
   }
 
   .header-box{
-    border: 1px solid silver;
-    border-right: none;
+    background-color: #fff;
     padding: 1rem 2rem;
-    width: 25%;
     text-align: center;
   }
 
@@ -55,6 +55,14 @@ const Header = styled.div`
   
   .star-container {
     margin-top: 4px
+  }
+
+  @media (min-width: 750px) and (max-width:1100px) {
+    grid-template-columns: 1fr 1fr
+  }
+
+  @media (min-width: 768px){
+    margin: 0 3rem;
   }
 `
 export default TourShowHeader
