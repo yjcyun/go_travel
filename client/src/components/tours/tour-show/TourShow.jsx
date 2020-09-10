@@ -19,7 +19,7 @@ class TourShow extends Component {
     }
 
     const { name, images } = this.props.tour;
-    console.log(this.props.tour)
+    
     return (
       <TourShowContainer>
         <h1>{name.toUpperCase()}</h1>

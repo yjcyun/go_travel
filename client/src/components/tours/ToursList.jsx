@@ -11,7 +11,6 @@ class ToursList extends Component {
 
   // RENDER ALL TOURS
   renderTours = () => {
-    console.log(this.props.tours)
     return this.props.tours.map(tour =>
       <ToursItem key={tour.id} {...tour} />
     )
