@@ -7,6 +7,7 @@ import TourShowHeaderImg from './TourShowHeaderImg';
 import TourShowOverview from './TourShowOverview';
 import TourGallery from './TourGallery';
 import TourReviews from './TourReviews';
+import TourBanner from './TourBanner';
 
 class TourShow extends Component {
   componentDidMount() {
@@ -26,7 +27,8 @@ class TourShow extends Component {
         <TourShowHeaderImg {...this.props.tour} />
         <TourShowOverview {...this.props.tour} />
         <TourGallery image={images} />
-        <TourReviews {...this.props.tour}/>
+        <TourReviews {...this.props.tour} />
+        <TourBanner {...this.props.tour} />
       </TourShowContainer>
     )
   }

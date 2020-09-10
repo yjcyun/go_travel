@@ -14,7 +14,7 @@ body {
   max-width: 1170px;
   margin: auto;
   padding: 1rem;
-  background-color: #fcfcfc;
+  background-color: #F7F7F7;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -28,5 +28,11 @@ img {
 }
 
 .mb-10 {
-  margin-bottom: 10rem;
+  margin-bottom: 5rem;
+}
+
+@media (min-width: 568px) {
+  .mb-10 {
+    margin-bottom: 10rem;
+  }
 }

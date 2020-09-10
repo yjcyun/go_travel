@@ -57,7 +57,7 @@ const TitleWrapper = styled.div`
 const Reviews = styled.div`
   margin: 4rem 1.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1.5rem;
 `
 
