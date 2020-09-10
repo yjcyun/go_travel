@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchTour } from '../../../redux/actions/tourActions';
 import styled from 'styled-components';
-import Title from '../../Title';
 import TourShowHeader from './TourShowHeader';
 import TourShowHeaderImg from './TourShowHeaderImg';
 import TourShowOverview from './TourShowOverview';
-
+import TourGallery from './TourGallery';
+import TourReviews from './TourReviews';
 
 class TourShow extends Component {
   componentDidMount() {
@@ -18,18 +18,16 @@ class TourShow extends Component {
       return <div>Loading...</div>
     }
 
-    const { name, startDates } = this.props.tour;
-
+    const { name, images } = this.props.tour;
+    console.log(this.props.tour)
     return (
       <TourShowContainer>
         <h1>{name.toUpperCase()}</h1>
         <TourShowHeader {...this.props.tour} />
         <TourShowHeaderImg {...this.props.tour} />
         <TourShowOverview {...this.props.tour} />
-
-        <Title title='Tour Highlights' center />
-        <div>{startDates.map(date => <p key={date}>{date}</p>)}</div>
-
+        <TourGallery image={images} />
+        <TourReviews {...this.props.tour}/>
       </TourShowContainer>
     )
   }
@@ -53,7 +51,5 @@ const TourShowContainer = styled.div`
     }
   }
 `
-
-
 
 export default connect(mapStateToProps, { fetchTour })(TourShow)

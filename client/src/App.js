@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route, Router } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchUser } from './redux/actions';
 import ToursList from './components/tours/ToursList';
 import Header from './components/Header';
 import TourShow from './components/tours/tour-show/TourShow';
-import { connect } from 'react-redux';
-import { fetchUser } from './redux/actions';
+import history from './history';
 import './app.css';
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Header />
         <Route exact path={['/', '/tour']} component={ToursList} />
         <Route path='/tour/:id' component={TourShow} />
-      </BrowserRouter>
+      </Router>
     );
   }
 }

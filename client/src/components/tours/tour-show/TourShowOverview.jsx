@@ -17,9 +17,9 @@ const TourShowOverview = (props) => {
     return text.charAt(0).toUpperCase() + text.slice(1);
   }
 
-  // TODO: doesn't work. ex. January 2020
+  // CONVERT DATE TO MORE READABLE DATE
   const firstDate = dates => {
-    return dates[0].toLocaleString('en-us', { month: 'long', year: 'numeric' });
+    return new Date(dates[0]).toLocaleString('en-us', { month: 'long', year: 'numeric' });
   }
 
   // FILTER BASED ON HEADER
@@ -85,7 +85,8 @@ const TourOverviewContainer = styled.div`
   margin: 3rem auto;
 
   @media (min-width: 768px) {
-    margin: 10rem 3rem;
+    margin: 10rem 3rem 10rem 5rem;
+    height: 70vh;
   }
 `
 

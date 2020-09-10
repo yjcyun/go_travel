@@ -7,3 +7,6 @@ export const FETCH_TOUR = 'FETCH_TOUR';
 export const CREATE_TOUR = 'CREATE_TOUR';
 export const UPDATE_TOUR = 'UPDATE_TOUR';
 export const DELETE_TOUR = 'DELETE_TOUR';
+
+// REVIEWS
+export const FETCH_REVIEWS = 'FETCH_REVIEWS';

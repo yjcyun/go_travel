@@ -5,11 +5,11 @@ const { route } = require('./tourRoutes');
 
 const router = express.Router({ mergeParams: true });
 
+router.route('/').get(reviewController.getAllReviews)
 router.use(authController.protect);
 
 router
   .route('/')
-  .get(reviewController.getAllReviews)
   .post(
     authController.restrictTo('user'),
     reviewController.setTourUserIds,
