@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import TourMap from './TourMap'
 
 const TourShowHeaderImg = ({ imageCover, name, ...otherProps }) => {
-  console.log(otherProps)
   return (
     <HeaderImage>
       <img src={`/tours/${imageCover}`} alt={name} />
@@ -13,7 +12,6 @@ const TourShowHeaderImg = ({ imageCover, name, ...otherProps }) => {
     </HeaderImage>
   )
 }
-
 
 const HeaderImage = styled.div`
   margin: 2rem 0;

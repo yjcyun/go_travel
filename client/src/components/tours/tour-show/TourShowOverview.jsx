@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { AiOutlineClockCircle } from 'react-icons/ai'
 import { FiTrendingUp, FiUser, FiCalendar } from 'react-icons/fi'
@@ -6,11 +6,8 @@ import Title from '../../Title'
 import OverviewFilter from './OverviewFilter'
 
 const TourShowOverview = (props) => {
-  const [selectedFilterIndex, setSelectedFilterIndex] = useState(0);
-  const [filteredItem, setFilteredItem] = useState(props['description']);
-
   // PROPS FROM TourShow.jsx
-  const { duration, difficulty, maxGroupSize, startDates } = props;
+  const { duration, difficulty, maxGroupSize, startDates, description, summary } = props;
 
   //  CAPITALZE THE FIRST LETTER OF "DIFFICULTY"
   const capitalized = text => {
@@ -21,25 +18,6 @@ const TourShowOverview = (props) => {
   const firstDate = dates => {
     return new Date(dates[0]).toLocaleString('en-us', { month: 'long', year: 'numeric' });
   }
-
-  // FILTER BASED ON HEADER
-  const handleFilter = (option, index) => {
-    const optionsContent = Object.keys(props);
-    let filteredContent = optionsContent.filter(el => el === option).toString();
-
-    setFilteredItem(props[filteredContent]);
-    setSelectedFilterIndex(index);
-  }
-
-  // RENDER ARRAY
-  const renderArray = (arr) => {
-    return arr.map((event, idx) => (
-      <Fragment key={idx}>
-        <p>Day {event.day}</p>
-        <p>{event.description}</p>
-      </Fragment>
-    ))
-  };
 
   return (
     <TourOverviewContainer>
@@ -64,29 +42,20 @@ const TourShowOverview = (props) => {
         </div>
         </TourOverviewLeft>
 
-        <div>
-          <OverviewFilter
-            handleFilter={handleFilter}
-            selectedFilterIndex={selectedFilterIndex}
-          />
-          <OverviewContent>
-            {Array.isArray(filteredItem)
-              ? renderArray(filteredItem)
-              : <p>{filteredItem}</p>
-            }
-          </OverviewContent>
-        </div>
+        <TourDescription>
+          <h2>{summary}</h2>
+          <p>{description}</p>
+        </TourDescription>
       </TourOverview>
     </TourOverviewContainer>
   )
 }
 
 const TourOverviewContainer = styled.div` 
-  margin: 3rem auto;
+  margin: 3rem auto 7rem;
 
   @media (min-width: 768px) {
-    margin: 10rem 3rem 10rem 5rem;
-    height: 70vh;
+    margin: 10rem 3rem 15rem 5rem;
   }
 `
 
@@ -117,7 +86,11 @@ const TourOverviewLeft = styled.div`
   }
 `
 
-const OverviewContent = styled.div`
-  line-height: 1.7;
+const TourDescription = styled.div`
+  h2 {
+    color: silver;
+    font-weight: 500;
+    margin: 1rem 0 2rem;
+  }
 `
 export default TourShowOverview
