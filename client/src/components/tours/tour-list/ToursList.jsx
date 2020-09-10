@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchTours } from '../../redux/actions/tourActions'
+import { fetchTours } from '../../../redux/actions/tourActions'
 import styled from 'styled-components';
 import ToursItem from './ToursItem';
 
@@ -31,7 +31,7 @@ class ToursList extends Component {
 
 const CardLayout = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-gap: 2rem;
 `
 

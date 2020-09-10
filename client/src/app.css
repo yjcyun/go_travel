@@ -13,7 +13,7 @@
 body {
   max-width: 1170px;
   margin: auto;
-  padding: 1rem;
+  padding: 0 1rem;
   background-color: #F7F7F7;
   font-family: 'Poppins', sans-serif;
 }
