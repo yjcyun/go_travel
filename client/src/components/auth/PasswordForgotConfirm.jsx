@@ -1,16 +1,12 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import LoginForm from '../components/auth/LoginForm'
-import styled from 'styled-components'
-import Logo from '../components/nav/Logo'
-import Alert from '../components/Alert'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import Logo from '../nav/Logo'
+import Alert from '../Alert'
 
-const ForgotPwdSubmittedPage = () => {
-  return (
-    <LoginPageWrapper>
-      <LoginFormImg></LoginFormImg>
-
+class PasswordForgotConfirm extends Component {
+  render() {
+    return (
       <FormWrapper>
         <Logo large />
         <h2>Forgot Password?</h2>
@@ -25,28 +21,11 @@ const ForgotPwdSubmittedPage = () => {
           </Link>
         </ButtonWrapper>
       </FormWrapper>
-    </LoginPageWrapper>
-  )
+    )
+  }
 }
 
-const LoginPageWrapper = styled.div`
-  display: grid;
-  grid-template-rows: 2fr 3fr;
-  height: 100vh;
-  grid-gap: 1rem;
-
-  @media (min-width: 768px) {
-    grid-template-columns: 2fr 3fr;
-    grid-template-rows: none;
-  }
-`
-
-const LoginFormImg = styled.div`
-  background-image: url('/background-1.jpg');
-  background-size: cover;
-  background-position:center;
-`
-
+// STYLES
 const FormWrapper = styled.div`
   display:flex;
   flex-direction: column;
@@ -81,7 +60,7 @@ const Button = styled.button`
 `
 
 const Hr = styled.div`
-height: 1px;
+  height: 1px;
   width: 80%;
   margin: 0.2rem auto;
   background-color: silver;
@@ -96,10 +75,4 @@ height: 1px;
     font-size: 0.9rem;
   }
 `
-
-// BRING REDUX STATE
-const mapStateToProps = state => {
-  return { isSignedIn: state.auth }
-}
-
-export default connect(mapStateToProps)(ForgotPwdSubmittedPage)
+export default PasswordForgotConfirm;

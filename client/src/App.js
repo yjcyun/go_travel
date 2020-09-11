@@ -12,7 +12,7 @@ import SignupPage from './pages/SignupPage';
 import history from './history';
 import './app.css';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
-import ForgotPwdSubmittedPage from './pages/ForgotPwdSubmittedPage';
+import ForgotPwdConfirmPage from './pages/ForgotPwdConfirmPage';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -33,7 +33,7 @@ const App = () => {
       <Route path='/login' component={LoginPage} />
       <Route path='/signup' component={SignupPage} />
       <Route path='/forgot-password' component={ForgotPasswordPage} />
-      <Route path='/forgot-password-confirm' component={ForgotPwdSubmittedPage} />
+      <Route path='/forgot-password-confirm' component={ForgotPwdConfirmPage} />
     </>
   )
 
@@ -41,8 +41,8 @@ const App = () => {
   const defaultContainer = () => (
     <div className='body-container'>
       <Header />
-      <Route exact path={'/'} component={ToursList} />
-      <Route exact path={'/tours'} component={ToursList} />
+      <Route exact path='/' component={ToursList} />
+      <Route exact path='/tours' component={ToursList} />
       <Route path='/tours/:id' component={TourShow} />
     </div>
   )
@@ -51,7 +51,7 @@ const App = () => {
     <>
       <Router history={history}>
         <Switch>
-          <Route exact path={['/(login)', '/(signup)', '/(forgot-password)','/(forgot-password-confirm)']} component={loginContainer} />
+          <Route exact path={['/login', '/signup', '/forgot-password','/forgot-password-confirm']} component={loginContainer} />
           <Route component={defaultContainer} />
         </Switch>
       </Router>
