@@ -8,6 +8,7 @@ import ToursList from './components/tours/tour-list/ToursList';
 import Header from './components/nav/Header';
 import TourShow from './components/tours/tour-show/TourShow';
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import history from './history';
 import './app.css';
 
@@ -26,7 +27,10 @@ const App = () => {
 
   // FOR LOGIN/REGISTER PAGE, DON'T SHOW NAVBAR
   const loginContainer = () => (
-    <Route path='/login' component={LoginPage} />
+    <>
+      <Route path='/login' component={LoginPage} />
+      <Route path='/signup' component={SignupPage} />
+    </>
   )
 
   // FOR OTHER PAGES, SHOW NAVBAR
@@ -43,7 +47,7 @@ const App = () => {
     <>
       <Router history={history}>
         <Switch>
-          <Route exact path='/(login)' component={loginContainer} />
+          <Route exact path={['/(login)', '/(signup)']} component={loginContainer} />
           <Route component={defaultContainer} />
         </Switch>
       </Router>

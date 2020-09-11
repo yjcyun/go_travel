@@ -6,6 +6,6 @@ export const setAlert = (message) => async dispatch => {
   dispatch({ type: SET_ALERT, payload: { message, id } });
 
   setTimeout(() =>
-    dispatch({ type: REMOVE_ALERT, payload: id }), 3000
+    dispatch({ type: REMOVE_ALERT, payload: id }), 4000
   )
 }

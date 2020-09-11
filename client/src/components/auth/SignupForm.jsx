@@ -2,28 +2,34 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { logIn } from '../../redux/actions/authActions'
+import { signUp } from '../../redux/actions/authActions'
 import styled from 'styled-components'
 import FormInput from '../FormInput'
 import Logo from '../nav/Logo'
 import Alert from '../Alert'
 
-class LoginForm extends Component {
+class SignupForm extends Component {
   // RENDER FormInput.jsx
   renderInput = props => <FormInput {...props} />
 
   // FORM ONSUBMIT HANDLER
   onSubmit = formValues => {
-    this.props.logIn(formValues);
+    this.props.signUp(formValues);
   };
 
   render() {
     return (
       <FormWrapper>
         <Logo large />
-        <h2>Hello, Welcome Back!</h2>
-        {this.props.alert && <Alert message='Incorrect email or password' />}
-        <FormRow onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <h2>Welcome, create an account</h2>
+        {this.props.alert && <Alert message='This login email already exsists. Please try a different email address to register.' />}
+        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          <Field
+            name='name'
+            label='Name'
+            type='text'
+            component={this.renderInput}
+          />
           <Field
             name='email'
             label='Email'
@@ -36,24 +42,27 @@ class LoginForm extends Component {
             type='password'
             component={this.renderInput}
           />
-          <ForgotPwd>
-            <Link to='/forgot-password'>Forgot password?</Link>
-          </ForgotPwd>
+          <Field
+            name='passwordConfirm'
+            label='Confirm Password'
+            type='password'
+            component={this.renderInput}
+          />
           <ButtonWrapper>
-            <Button type='submit' login>Login</Button>
+            <Button type='submit' login>Sign Up</Button>
             <Hr><span>or</span></Hr>
-            <Link to='/signup'>
-              <Button>Sign Up</Button>
+            <Link to='/login'>
+              <Button>Login</Button>
             </Link>
           </ButtonWrapper>
-        </FormRow>
+        </form>
       </FormWrapper>
     )
   }
 }
 
 // FORM VALIDATION
-const validate = ({ email, password }) => {
+const validate = ({ email, password, passwordConfirm, name }) => {
   const errors = {};
   const emailCheck = value => !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
 
@@ -62,7 +71,10 @@ const validate = ({ email, password }) => {
   } else if (emailCheck(email)) {
     errors.email = 'Enter a valid email';
   }
+  if (!name) errors.name = 'Enter your name';
   if (!password) errors.password = 'Enter your password';
+  if (!passwordConfirm) errors.passwordConfirm = 'Re-enter your password';
+  if(password !== passwordConfirm) errors.passwordConfirm = 'Passwords must match'
 
   return errors;
 }
@@ -81,17 +93,6 @@ const FormWrapper = styled.div`
     margin: 0 auto;
     max-width: 600px;
     width: 100%;
-  }
-`
-
-const FormRow = styled.form``;
-
-const ForgotPwd = styled.div`
-  text-align: right;
-
-  a {
-    color: #0000EE;
-    font-size: 0.9rem;
   }
 `
 
@@ -132,10 +133,10 @@ const Hr = styled.div`
 const reduxFormConfigure = reduxForm({
   form: 'loginForm',
   validate
-})(LoginForm);
+})(SignupForm);
 
 const mapStateToProps = state => {
   return { alert: state.alert[0] }
 }
 
-export default connect(mapStateToProps, { logIn })(reduxFormConfigure);
+export default connect(mapStateToProps, { signUp })(reduxFormConfigure);
