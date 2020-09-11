@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import FormInput from '../FormInput'
+import { logIn } from '../../redux/actions/authActions'
 import styled from 'styled-components'
+import FormInput from '../FormInput'
 import Logo from '../nav/Logo'
 
 class LoginForm extends Component {
+  // RENDER FormInput.jsx
   renderInput = props => <FormInput {...props} />
+
+  // FORM ONSUBMIT HANDLER
+  onSubmit = formValues => {
+    this.props.logIn(formValues);
+  };
 
   render() {
     return (
       <FormWrapper>
         <Logo large />
         <h2>Hello, Welcome Back!</h2>
-        <FormRow>
+        <FormRow onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Field
             name='email'
             label='Email'
@@ -42,6 +50,21 @@ class LoginForm extends Component {
   }
 }
 
+// FORM VALIDATION
+const validate = ({ email, password }) => {
+  const errors = {};
+  const emailCheck = value => !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
+
+  if (!email) {
+    errors.email = 'Enter your email address';
+  } else if (emailCheck(email)) {
+    errors.email = 'Enter a valid email';
+  }
+  if (!password) errors.password = 'Enter your password';
+
+  return errors;
+}
+
 const FormWrapper = styled.div`
   display:flex;
   flex-direction: column;
@@ -59,7 +82,7 @@ const FormWrapper = styled.div`
   }
 `
 
-const FormRow = styled.div``;
+const FormRow = styled.form``;
 
 const ForgotPwd = styled.div`
   text-align: right;
@@ -103,6 +126,9 @@ const Hr = styled.div`
   }
 `
 
-export default reduxForm({
-  form: 'loginForm'
-})(LoginForm)
+const reduxFormConfigure = reduxForm({
+  form: 'loginForm',
+  validate
+})(LoginForm);
+
+export default connect(null, { logIn })(reduxFormConfigure);

@@ -1,5 +1,9 @@
 // AUTH
-export const FETCH_USER = 'fetch_user';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOG_OUT = 'LOG_OUT';
+export const SIGN_UP = 'SIGN_UP';
+
 
 // TOURS
 export const FETCH_TOURS = 'FETCH_TOURS';

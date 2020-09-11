@@ -1,9 +1,22 @@
-import { FETCH_USER } from "../type/types";
+import { LOGIN_SUCCESS, LOGIN_FAIL } from "../type/types";
 
-export const authReducer = (state = null, action) => {
+const INITIAL_STATE = {
+  isSignedIn: false
+}
+
+export const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_USER:
-      return action.payload || false
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        isSignedIn: true,
+      }
+    case LOGIN_FAIL:
+      return {
+        ...state,
+        isSignedIn: false
+      }
     default:
       return state;
   }
