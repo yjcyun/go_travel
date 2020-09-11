@@ -10,6 +10,8 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOG_OUT = 'LOG_OUT';
 export const USER_LOADED = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
+export const FORGOT_PASSWORD_FAIL = 'FORGOT_PASSWORD_FAIL';
 
 // TOURS
 export const FETCH_TOURS = 'FETCH_TOURS';

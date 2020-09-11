@@ -4,7 +4,7 @@ const { promisify } = require('util');
 const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
-const sendEmail = require('../utils/email');
+const Email = require('../utils/email');
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN }
@@ -41,6 +41,9 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordChangedAt: req.body.passwordChangedAt,
     role: req.body.role
   });
+  const url = `${req.protocol}://${req.get('host')}/`;
+  console.log(url);
+  await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res);
 });
@@ -160,14 +163,14 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 3) Send it to user's email
   const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}}`;
 
-  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email.`;
+  const message = `You recently requested to reset your password for your GoTravel account. Click the link below to reset it.\n ${resetURL}.\nIf you didn't forget your password, please ignore this email.`;
 
   try {
-    await sendEmail({
-      email: user.email,
-      subject: 'Your password reset token(valid for 10 minutes)',
-      message
-    });
+    // await Email({
+    //   email: user.email,
+    //   subject: 'GoTravel password reset(valid for 10 minutes)',
+    //   message
+    // });
 
     res.status(200).json({
       status: 'success',

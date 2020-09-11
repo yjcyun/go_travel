@@ -11,6 +11,8 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import history from './history';
 import './app.css';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ForgotPwdSubmittedPage from './pages/ForgotPwdSubmittedPage';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -30,6 +32,8 @@ const App = () => {
     <>
       <Route path='/login' component={LoginPage} />
       <Route path='/signup' component={SignupPage} />
+      <Route path='/forgot-password' component={ForgotPasswordPage} />
+      <Route path='/forgot-password-confirm' component={ForgotPwdSubmittedPage} />
     </>
   )
 
@@ -47,7 +51,7 @@ const App = () => {
     <>
       <Router history={history}>
         <Switch>
-          <Route exact path={['/(login)', '/(signup)']} component={loginContainer} />
+          <Route exact path={['/(login)', '/(signup)', '/(forgot-password)','/(forgot-password-confirm)']} component={loginContainer} />
           <Route component={defaultContainer} />
         </Switch>
       </Router>

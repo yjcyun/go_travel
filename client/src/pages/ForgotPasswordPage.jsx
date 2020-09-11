@@ -2,12 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import LoginForm from '../components/auth/LoginForm'
 import styled from 'styled-components'
+import PasswordForgot from '../components/auth/PasswordForgot'
 
-const LoginPage = () => {
+const ForgotPasswordPage = () => {
   return (
     <LoginPageWrapper>
       <LoginFormImg></LoginFormImg>
-      <LoginForm />
+      <PasswordForgot />
     </LoginPageWrapper>
   )
 }
@@ -35,4 +36,4 @@ const mapStateToProps = state => {
   return { isSignedIn: state.auth }
 }
 
-export default connect(mapStateToProps)(LoginPage)
+export default connect(mapStateToProps)(ForgotPasswordPage)
