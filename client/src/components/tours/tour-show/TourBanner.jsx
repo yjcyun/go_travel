@@ -55,7 +55,6 @@ const BannerButton = styled.div`
 
   button {
     text-transform: uppercase;
-    font-family: 'Poppins', sans-serif;
     padding: 1rem 2rem;
     border-radius: 2rem;
     background-color: #fff;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom';
 import { navLinks } from '../../constants/navLinks'
 import styled from 'styled-components'
@@ -10,6 +10,7 @@ const HeaderMobile = ({ open, setOpen }) => {
     !open && (document.body.style.overflow = '');
   }, [open]);
 
+  // RENDER NAV LINKS
   const renderLinks = navLinks.map(nav => (
     <NavItem key={nav.text}>
       <NavLink to={`${nav.url}`} onClick={() => setOpen(false)}>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const ToursItem = ({ name, price, duration, summary, imageCover, slug, id }) => {
   return (
-    <Link to={`/tour/${id}`}>
+    <Link to={`/tours/${id}`}>
       <TourCard>
         <CardImg>
           <img src={`/tours/${imageCover}`} alt={name} />

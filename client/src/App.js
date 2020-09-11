@@ -7,16 +7,31 @@ import Header from './components/nav/Header';
 import TourShow from './components/tours/tour-show/TourShow';
 import history from './history';
 import './app.css';
+import LoginPage from './pages/LoginPage';
 
 class App extends Component {
+  // FOR LOGIN/REGISTER PAGE, DON'T SHOW NAVBAR
+  loginContainer = () => (
+    <Route path='/login' component={LoginPage} />
+  )
+
+  // FOR OTHER PAGES, SHOW NAVBAR
+  defaultContainer = () => (
+    <div className='body-container'>
+      <Header />
+      <Route exact path={'/'} component={ToursList} />
+      <Route exact path={'/tours'} component={ToursList} />
+      <Route path='/tours/:id' component={TourShow} />
+    </div>
+  )
+
   render() {
     return (
       <>
         <BrowserRouter>
-          <Header />
           <Switch>
-            <Route exact path={['/', '/tour']} component={ToursList} />
-            <Route path='/tour/:id' component={TourShow} />
+            <Route exact path='/(login)' component={this.loginContainer} />
+            <Route component={this.defaultContainer} />
           </Switch>
         </BrowserRouter>
       </>

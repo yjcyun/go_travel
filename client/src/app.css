@@ -2,6 +2,7 @@
 
 :root {
   --accent-clr: #1D9AAC;
+  --background-clr: #F7F7F7;
 }
 
 *{
@@ -11,10 +12,7 @@
 }
 
 body {
-  max-width: 1170px;
-  margin: auto;
-  padding: 0 1rem;
-  background-color: #F7F7F7;
+  background-color: var(--background-clr);
   font-family: 'Poppins', sans-serif;
 }
 
@@ -27,8 +25,22 @@ img {
   width: 100%;
 }
 
+input, button {
+  font-family: 'Poppins', sans-serif;
+}
+
+:focus {
+  outline: none;
+}
+
 .mb-10 {
   margin-bottom: 5rem;
+}
+
+.body-container {
+  max-width: 1170px;
+  padding: 0 1rem;
+  margin: auto;
 }
 
 @media (min-width: 568px) {

@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { CgMenuRightAlt } from 'react-icons/cg';
 import { navLinks } from '../../constants/navLinks';
 import HeaderMobile from './HeaderMobile';
 import styled from 'styled-components';
+import Logo from './Logo';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
 
+  // RENDER NAV LINKS
   const renderLinks = navLinks.map(nav => (
     <NavItem key={nav.text}>
       <NavLink to={`${nav.url}`} >
@@ -19,12 +21,7 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <Logo>
-        <Link to='/'>
-          <img src='/logo.png' alt='Logo' />
-          <span>GoTravel</span>
-        </Link>
-      </Logo>
+      <Logo />
       <NavsList>
         {renderLinks}
       </NavsList>
@@ -47,18 +44,6 @@ const HeaderWrapper = styled.nav`
   height: 5rem;
   position: relative;
   transition: all 0.2s;
-`
-
-const Logo = styled.div`
-  img {
-    width: 30px;
-    margin-right: 1rem;
-  }
-
-   a{
-     display: flex;
-     align-items: center;
-   }
 `
 
 const NavsList = styled.ul`

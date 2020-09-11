@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { AiOutlineClockCircle } from 'react-icons/ai'
 import { FiTrendingUp, FiUser, FiCalendar } from 'react-icons/fi'
 import Title from '../../Title'
-import OverviewFilter from './OverviewFilter'
 
 const TourShowOverview = (props) => {
   // PROPS FROM TourShow.jsx
