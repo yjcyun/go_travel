@@ -1,8 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import LoginForm from '../components/auth/LoginForm'
 import styled from 'styled-components'
+import { Redirect } from 'react-router-dom'
 
-const LoginPage = () => {
+const LoginPage = ({ isSignedIn }) => {
+  if (isSignedIn.isSignedIn && isSignedIn.token) {
+    return <Redirect to='/' />
+  }
+  
   return (
     <LoginPageWrapper>
       <LoginFormImg></LoginFormImg>
@@ -29,4 +35,9 @@ const LoginFormImg = styled.div`
   background-position:center;
 `
 
-export default LoginPage
+// BRING REDUX STATE
+const mapStateToProps = state => {
+  return { isSignedIn: state.auth }
+}
+
+export default connect(mapStateToProps)(LoginPage)

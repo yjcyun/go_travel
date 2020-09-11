@@ -6,6 +6,7 @@ import { logIn } from '../../redux/actions/authActions'
 import styled from 'styled-components'
 import FormInput from '../FormInput'
 import Logo from '../nav/Logo'
+import Alert from '../Alert'
 
 class LoginForm extends Component {
   // RENDER FormInput.jsx
@@ -21,6 +22,7 @@ class LoginForm extends Component {
       <FormWrapper>
         <Logo large />
         <h2>Hello, Welcome Back!</h2>
+        {this.props.alert && <Alert message='Incorrect email or password' />}
         <FormRow onSubmit={this.props.handleSubmit(this.onSubmit)}>
           <Field
             name='email'
@@ -37,6 +39,8 @@ class LoginForm extends Component {
           <ForgotPwd>
             <Link to='/forgot-password'>Forgot password?</Link>
           </ForgotPwd>
+
+
           <ButtonWrapper>
             <Button type='submit' login>Login</Button>
             <Hr><span>or</span></Hr>
@@ -64,7 +68,7 @@ const validate = ({ email, password }) => {
 
   return errors;
 }
-
+// STYLES
 const FormWrapper = styled.div`
   display:flex;
   flex-direction: column;
@@ -126,9 +130,14 @@ const Hr = styled.div`
   }
 `
 
+// CONFIGURE REDUX-FORM
 const reduxFormConfigure = reduxForm({
   form: 'loginForm',
   validate
 })(LoginForm);
 
-export default connect(null, { logIn })(reduxFormConfigure);
+const mapStateToProps = state => {
+  return { alert: state.alert[0] }
+}
+
+export default connect(mapStateToProps, { logIn })(reduxFormConfigure);

@@ -5,7 +5,9 @@ const { route } = require('./tourRoutes');
 
 const router = express.Router({ mergeParams: true });
 
-router.route('/').get(reviewController.getAllReviews)
+router.route('/').get(reviewController.getAllReviews);
+
+router.use(authController.isLoggedIn);
 router.use(authController.protect);
 
 router

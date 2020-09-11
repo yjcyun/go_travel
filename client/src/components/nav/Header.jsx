@@ -3,21 +3,32 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { CgMenuRightAlt } from 'react-icons/cg';
 import { navLinks } from '../../constants/navLinks';
+import { logout } from '../../redux/actions/authActions';
 import HeaderMobile from './HeaderMobile';
 import styled from 'styled-components';
 import Logo from './Logo';
 
-const Header = () => {
+const Header = (props) => {
   const [open, setOpen] = useState(false);
-
+  console.log(props);
   // RENDER NAV LINKS
-  const renderLinks = navLinks.map(nav => (
-    <NavItem key={nav.text}>
-      <NavLink to={`${nav.url}`} >
-        {nav.text}
-      </NavLink>
-    </NavItem>
-  ))
+  const renderLinks = navLinks.map(nav => {
+    if (props.auth.isSignedIn && nav.text === 'login') {
+      return (
+        <NavItem key={nav.text} onClick={()=>props.logout()}>
+          logout
+        </NavItem>
+      )
+    }
+
+    return (
+      <NavItem key={nav.text} >
+        <NavLink to={`${nav.url}`}>
+          {nav.text}
+        </NavLink>
+      </NavItem>
+    )
+  })
 
   return (
     <HeaderWrapper>
@@ -67,7 +78,8 @@ const MenuBar = styled.div`
 const NavItem = styled.li`
   list-style: none;
   padding: 0 1rem;
+  cursor: pointer;
 `
 
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, { logout })(Header)

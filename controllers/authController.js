@@ -64,6 +64,15 @@ exports.login = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 })
 
+// LOGOUT
+exports.logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true
+  });
+  res.status(200).json({ status: 'success' })
+}
+
 // PROTECT ROUTES
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
@@ -99,7 +108,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 // CHECK IF USER IS LOGGED IN
-exports.isLoggedIn = catchAsync(async (req, res, next) => {
+exports.isLoggedIn = async (req, res, next) => {
   try {
     if (req.cookies.jwt) {
       const decoded = await promisify(jwt.verify)(
@@ -124,8 +133,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
   } catch (err) {
     return next();
   }
-});
-
+};
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {

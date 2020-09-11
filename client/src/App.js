@@ -1,20 +1,36 @@
-import React, { Component } from 'react';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import React, { Component, useEffect } from 'react';
+import { Route, Switch, Router } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { setAuthToken } from './utils/setAuthToken';
+import { loadUser } from './redux/actions/authActions';
+import { store } from './redux/store';
 import ToursList from './components/tours/tour-list/ToursList';
 import Header from './components/nav/Header';
 import TourShow from './components/tours/tour-show/TourShow';
 import LoginPage from './pages/LoginPage';
+import history from './history';
 import './app.css';
 
-class App extends Component {
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
+const App = () => {
+  // ONLY RUN ONCE WHEN LOADED
+  useEffect(() => {
+    store.dispatch(loadUser())
+    return () => {
+      //cleanup
+    }
+  }, []);
+
   // FOR LOGIN/REGISTER PAGE, DON'T SHOW NAVBAR
-  loginContainer = () => (
+  const loginContainer = () => (
     <Route path='/login' component={LoginPage} />
   )
 
   // FOR OTHER PAGES, SHOW NAVBAR
-  defaultContainer = () => (
+  const defaultContainer = () => (
     <div className='body-container'>
       <Header />
       <Route exact path={'/'} component={ToursList} />
@@ -23,18 +39,16 @@ class App extends Component {
     </div>
   )
 
-  render() {
-    return (
-      <>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path='/(login)' component={this.loginContainer} />
-            <Route component={this.defaultContainer} />
-          </Switch>
-        </BrowserRouter>
-      </>
-    );
-  }
+  return (
+    <>
+      <Router history={history}>
+        <Switch>
+          <Route exact path='/(login)' component={loginContainer} />
+          <Route component={defaultContainer} />
+        </Switch>
+      </Router>
+    </>
+  );
 }
 
 export default connect(null)(App);
