@@ -5,9 +5,9 @@ import { AiOutlinePoweroff, AiOutlineUser } from 'react-icons/ai'
 import { connect } from 'react-redux'
 import { logout } from '../../redux/actions/authActions'
 
-const MenuDropdown = (props) => {
+const MenuDropdown = ({ logout, close }) => {
   return (
-    <DropdownMenu>
+    <DropdownMenu onClick={close}>
       <DropItem>
         <NavLink to='/me/profile'>
           <DropLink>
@@ -16,7 +16,7 @@ const MenuDropdown = (props) => {
           </DropLink>
         </NavLink>
       </DropItem>
-      <DropItem onClick={() => props.logout()}>
+      <DropItem onClick={() => logout()}>
         <DropLink>
           <span>logout</span>
           <span className='icon'><AiOutlinePoweroff /></span>
@@ -34,7 +34,7 @@ const DropdownMenu = styled.div`
   bottom: -7rem;
   background: #fff;
   z-index:2;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--box-shadow);
   display:flex;
   flex-direction: column;
 

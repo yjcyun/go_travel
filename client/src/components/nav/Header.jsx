@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { CgMenuRightAlt } from 'react-icons/cg';
 import { navLinks } from '../../constants/navLinks';
-import { logout, loadUser } from '../../redux/actions/authActions';
-
+import { logout } from '../../redux/actions/authActions';
 import HeaderMobile from './HeaderMobile';
 import styled from 'styled-components';
 import Logo from './Logo';
@@ -25,7 +24,7 @@ const Header = (props) => {
             <NavItem key={nav.text} onClick={() => renderDropdown()}>
               <img src={`/users/${props.auth.user.photo}`} alt='' className='avatar' /> {props.auth.user.name}
             </NavItem>
-            {dropDown && <MenuDropdown />}
+            {dropDown && <MenuDropdown close={renderDropdown}/>}
           </Fragment>
         )
       }

@@ -4,6 +4,7 @@
   --accent-clr: #1D9AAC;
   --accent-light: #88dfeb;
   --background-clr: #F7F7F7;
+  --box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 *{
@@ -28,6 +29,14 @@ img {
 
 input, button {
   font-family: 'Poppins', sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+input:disabled {
+  cursor: not-allowed;
 }
 
 :focus {

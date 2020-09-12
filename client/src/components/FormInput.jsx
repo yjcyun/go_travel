@@ -2,17 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 
 const FormInput = (props) => {
-  const { label, input, type, meta } = props;
+  const { label, input, type, meta, white, placeholder,disabled } = props;
   const errorInput = meta.error && meta.touched;
 
   return (
     <InputWrapper>
-      <Label>{label}</Label>
+      <Label white={white}>{label}</Label>
       <Input
         {...input}
         error={errorInput}
         type={type}
         autoComplete='off'
+        placeholder={placeholder}
+        disabled={disabled}
       />
       {errorInput
         ? <Error>{meta.error}</Error>
@@ -27,11 +29,10 @@ const InputWrapper = styled.div`
 `
 
 const Input = styled.input`
-  border: 1px solid silver;
   border: ${props => props.error ? '1px solid tomato' : '1px solid silver'};
   border-radius: 5px;
   padding: 0.7rem 1.5rem;
-  background-color:  var(--background-clr);
+  background-color:  transparent;
   display: block;
   width: 100%;
   position: relative;
@@ -46,7 +47,7 @@ const Label = styled.label`
   left: 1.3rem;
   top: -0.9rem;
   padding: 0 0.5rem;
-  background:  var(--background-clr);
+  background:  ${props => props.white ? '#fff' : 'var(--background-clr)'};
   z-index:3;
 `
 

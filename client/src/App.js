@@ -13,6 +13,7 @@ import history from './history';
 import './app.css';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ForgotPwdConfirmPage from './pages/ForgotPwdConfirmPage';
+import ProfilePage from './pages/ProfilePage';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -44,6 +45,7 @@ const App = () => {
       <Route exact path='/' component={ToursList} />
       <Route exact path='/tours' component={ToursList} />
       <Route path='/tours/:id' component={TourShow} />
+      <Route path='/me/profile' component={ProfilePage} />
     </div>
   )
 
