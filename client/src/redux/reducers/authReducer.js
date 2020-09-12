@@ -11,7 +11,8 @@ import {
 
 const INITIAL_STATE = {
   isSignedIn: null,
-  token: localStorage.getItem('token')
+  token: localStorage.getItem('token'),
+  user: null
 }
 
 export const authReducer = (state = INITIAL_STATE, action) => {
@@ -19,7 +20,8 @@ export const authReducer = (state = INITIAL_STATE, action) => {
     case USER_LOADED:
       return {
         ...state,
-        isSignedIn: true
+        isSignedIn: true,
+        user: action.payload.data.data
       }
     case SIGNUP_SUCCESS:
     case LOGIN_SUCCESS:
@@ -28,6 +30,7 @@ export const authReducer = (state = INITIAL_STATE, action) => {
         ...state,
         ...action.payload,
         isSignedIn: true,
+        user: action.payload.data.data
       }
     case LOGIN_FAIL:
     case AUTH_ERROR:
@@ -37,7 +40,8 @@ export const authReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         token: null,
-        isSignedIn: false
+        isSignedIn: false,
+        user: null
       }
 
     case FORGOT_PASSWORD_SUCCESS:
