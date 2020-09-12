@@ -1,9 +1,9 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { CgMenuRightAlt } from 'react-icons/cg';
 import { navLinks } from '../../constants/navLinks';
-import { logout } from '../../redux/actions/authActions';
+import { logout, loadUser } from '../../redux/actions/authActions';
 
 import HeaderMobile from './HeaderMobile';
 import styled from 'styled-components';
@@ -19,14 +19,16 @@ const Header = (props) => {
   // RENDER NAV LINKS
   const renderLinks = navLinks.map(nav => {
     if (props.auth.isSignedIn && nav.text === 'login') {
-      return (
-        <Fragment key={nav.text}>
-          <NavItem key={nav.text} onClick={() => renderDropdown()}>
-            <img src={`/users/${props.auth.user.photo}`} alt='' className='avatar' /> {props.auth.user.name}
-          </NavItem>
-          {dropDown && <MenuDropdown />}
-        </Fragment>
-      )
+      if (props.auth.user) {
+        return (
+          <Fragment key={nav.text}>
+            <NavItem key={nav.text} onClick={() => renderDropdown()}>
+              <img src={`/users/${props.auth.user.photo}`} alt='' className='avatar' /> {props.auth.user.name}
+            </NavItem>
+            {dropDown && <MenuDropdown />}
+          </Fragment>
+        )
+      }
     }
 
     return (
