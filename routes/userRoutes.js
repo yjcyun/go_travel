@@ -25,7 +25,7 @@ router.patch(
   '/updateMyPassword',
   authController.updatePassword
 );
-router.patch('/updateMe', userController.updateMe);
+router.patch('/updateMe', userController.uploadUserPhoto, userController.resizeUserPhoto, userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
 
 
@@ -35,7 +35,7 @@ router
   .route('/')
   .get(userController.getAllUsers)
   .post(userController.createUser);
-  
+
 router
   .route('/:id')
   .get(userController.getUser)
