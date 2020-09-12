@@ -6,7 +6,8 @@ import {
   LOG_OUT,
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
-  FORGOT_PASSWORD_SUCCESS
+  FORGOT_PASSWORD_SUCCESS,
+  UPDATE_USER_SUCCESS
 } from "../type/types";
 
 const INITIAL_STATE = {
@@ -46,6 +47,12 @@ export const authReducer = (state = INITIAL_STATE, action) => {
 
     case FORGOT_PASSWORD_SUCCESS:
       return { ...state }
+
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.payload.data.data
+      }
     default:
       return state;
   }

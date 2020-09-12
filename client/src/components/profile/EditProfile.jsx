@@ -4,17 +4,17 @@ import FormInput from '../FormInput'
 import { Field } from 'redux-form'
 import { editProfile } from '../../constants/profileFields'
 import { connect } from 'react-redux'
-import { loadUser } from '../../redux/actions/authActions'
+import { loadUser, updateUserProfile } from '../../redux/actions/authActions'
 import styled from 'styled-components'
 
-const EditProfile = (props) => {
+const EditProfile = ({ user, updateUserProfile }) => {
   // RENDER FormInput.jsx
   const renderInput = props => <FormInput {...props} white />
 
   // RENDER INPUT FIELD
   const renderInputFields =
     editProfile.map(profile => {
-      if (props.user.user) {
+      if (user.user) {
         return (
           <Field
             key={profile.name}
@@ -22,21 +22,19 @@ const EditProfile = (props) => {
             label={profile.label}
             type={profile.type}
             component={renderInput}
-            placeholder={profile.name === 'name' ? props.user.user.name : props.user.user.email}
+            placeholder={profile.name === 'name' ? user.user.name : user.user.email}
             disabled={profile.name === 'email'}
           />
         )
       }
     });
 
-  console.log(props.user.user)
-
   // FORM ONSUBMIT HANDLER
   const onSubmit = formValues => {
-    console.log(formValues)
+    updateUserProfile(formValues)
   };
 
-  if (!props.user.user) {
+  if (!user.user) {
     return null;
   }
 
@@ -57,4 +55,6 @@ const mapStateToProps = state => {
   return { user: state.auth }
 }
 
-export default connect(mapStateToProps, { loadUser })(EditProfile)
+export default connect(
+  mapStateToProps, { loadUser, updateUserProfile }
+)(EditProfile)

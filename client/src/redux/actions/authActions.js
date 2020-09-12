@@ -8,7 +8,9 @@ import {
   SIGNUP_FAIL,
   SIGNUP_SUCCESS,
   FORGOT_PASSWORD_FAIL,
-  FORGOT_PASSWORD_SUCCESS
+  FORGOT_PASSWORD_SUCCESS,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAIL
 } from '../type/types';
 import { setAuthToken } from '../../utils/setAuthToken';
 import { setAlert } from './alertAction';
@@ -102,6 +104,20 @@ export const forgotPassword = formValues => async dispatch => {
   }
   catch (err) {
     dispatch({ type: FORGOT_PASSWORD_FAIL });
+    const error = err.response.data;
+    if (error) dispatch(setAlert(error.message))
+  }
+}
+
+// UPDATE USER PROFILE
+export const updateUserProfile = formValues => async dispatch => {
+  try {
+    const response = await axios.patch('/api/v1/users/updateMe', formValues);
+    dispatch({ type: UPDATE_USER_SUCCESS, payload: response.data });
+    dispatch(loadUser());
+    
+  } catch (err) {
+    dispatch({ type: UPDATE_USER_FAIL });
     const error = err.response.data;
     if (error) dispatch(setAlert(error.message))
   }

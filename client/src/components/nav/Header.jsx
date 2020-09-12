@@ -19,10 +19,11 @@ const Header = (props) => {
   const renderLinks = navLinks.map(nav => {
     if (props.auth.isSignedIn && nav.text === 'login') {
       if (props.auth.user) {
+        const name = props.auth.user.name.split(' ')[0];
         return (
           <Fragment key={nav.text}>
             <NavItem key={nav.text} onClick={() => renderDropdown()}>
-              <img src={`/users/${props.auth.user.photo}`} alt='' className='avatar' /> {props.auth.user.name}
+              <img src={`/users/${props.auth.user.photo}`} alt='' className='avatar' /> {name}
             </NavItem>
             {dropDown && <MenuDropdown close={renderDropdown}/>}
           </Fragment>

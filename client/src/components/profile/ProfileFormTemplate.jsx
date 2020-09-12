@@ -22,13 +22,6 @@ class ProfileFormTemplate extends Component {
 // FORM VALIDATION
 const validate = ({ email, name }) => {
   const errors = {};
-  const emailCheck = value => !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
-
-  if (!email) {
-    errors.email = 'Enter your email address';
-  } else if (emailCheck(email)) {
-    errors.email = 'Enter a valid email';
-  }
   if (!name) errors.name = 'Enter your name';
   return errors;
 }
@@ -38,7 +31,7 @@ const FormWrapper = styled.div`
   display:flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 1rem;
+  padding: 5rem;
 
   h2 {
     margin: 1.5rem 0;

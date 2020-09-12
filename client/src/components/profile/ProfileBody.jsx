@@ -7,6 +7,7 @@ const ProfileBody = () => {
   return (
     <ProfileBodyWrapper>
       <EditProfile />
+      <Hr />
       <ChangePassword />
     </ProfileBodyWrapper>
   )
@@ -16,9 +17,13 @@ const ProfileBodyWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 5rem;
   background-color: #fff;
   box-shadow: var(--box-shadow);
+`
+const Hr = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: silver;
 `
 
 export default ProfileBody
