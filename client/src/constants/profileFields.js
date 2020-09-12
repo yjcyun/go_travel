@@ -19,17 +19,17 @@ export const editProfile = [
 
 export const changePassword = [
   {
-    name: 'currentPassword',
+    name: 'passwordCurrent',
     label: 'Current Password',
     type: 'password'
   },
   {
-    name: 'newPassword',
+    name: 'password',
     label: 'New Password',
     type: 'password'
   },
   {
-    name: 'confirmPassword',
+    name: 'passwordConfirm',
     label: 'Confirm Password',
     type: 'password'
   }
