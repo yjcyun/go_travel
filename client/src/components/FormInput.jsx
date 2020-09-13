@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const FormInput = (props) => {
-  const { label, input, type, meta, white, placeholder,disabled } = props;
+  const { label, input, type, meta, white, placeholder, disabled } = props;
   const errorInput = meta.error && meta.touched;
 
   return (

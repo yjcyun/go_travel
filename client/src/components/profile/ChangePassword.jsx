@@ -7,24 +7,25 @@ import { reduxForm } from 'redux-form'
 import { FormWrapper, ButtonWrapper, Button } from '../../globalStyle'
 import FormInput from '../FormInput';
 
-const ChangePassword = ({ user, updateUserProfile, handleSubmit,reset }) => {
+const ChangePassword = ({ user, updateUserProfile, handleSubmit, reset }) => {
   // RENDER FormInput.jsx
   const renderInput = props => <FormInput {...props} white />
 
   // RENDER INPUT FIELD
   const renderInputFields =
     changePassword.map(profile => {
-      if (user.user) {
-        return (
-          <Field
-            key={profile.name}
-            name={profile.name}
-            label={profile.label}
-            type={profile.type}
-            component={renderInput}
-          />
-        )
+      if (!user.user) {
+        return null;
       }
+      return (
+        <Field
+          key={profile.name}
+          name={profile.name}
+          label={profile.label}
+          type={profile.type}
+          component={renderInput}
+        />
+      )
     });
 
   // FORM ONSUBMIT HANDLER

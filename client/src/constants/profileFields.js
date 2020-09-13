@@ -8,13 +8,7 @@ export const editProfile = [
     name: 'email',
     label: 'Email',
     type: 'text'
-  },
-  {
-    name: 'avatar',
-    label: 'Profile Avatar',
-    type: 'file',
-    accept:'.jpg, .png, .jpeg'
-  },
+  }
 ];
 
 export const changePassword = [

@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react'
+import React, { useState, Fragment } from 'react'
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { CgMenuRightAlt } from 'react-icons/cg';
@@ -25,7 +25,7 @@ const Header = (props) => {
             <NavItem key={nav.text} onClick={() => renderDropdown()}>
               <img src={`/users/${props.auth.user.photo}`} alt='' className='avatar' /> {name}
             </NavItem>
-            {dropDown && <MenuDropdown close={renderDropdown}/>}
+            {dropDown && <MenuDropdown close={renderDropdown} />}
           </Fragment>
         )
       }

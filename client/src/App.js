@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAuthToken } from './utils/setAuthToken';
@@ -53,7 +53,7 @@ const App = () => {
     <>
       <Router history={history}>
         <Switch>
-          <Route exact path={['/login', '/signup', '/forgot-password','/forgot-password-confirm']} component={loginContainer} />
+          <Route exact path={['/login', '/signup', '/forgot-password', '/forgot-password-confirm']} component={loginContainer} />
           <Route component={defaultContainer} />
         </Switch>
       </Router>

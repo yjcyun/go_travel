@@ -110,20 +110,24 @@ export const forgotPassword = formValues => async dispatch => {
 }
 
 // UPDATE USER PROFILE & PASSWORD
-export const updateUserProfile = (type, formValues) => async dispatch => {
+export const updateUserProfile = (type, formValues) => async (dispatch, getState) => {
+
   try {
     const url =
       type === 'password'
         ? '/api/v1/users/updateMyPassword'
         : '/api/v1/users/updateMe';
 
-    const response = await axios.patch(url, formValues);
+    const form = new FormData();
+    if (formValues.name) form.append('name', formValues.name);
+    if (formValues.photo) form.append('photo', formValues.photo[0]);
+
+    const response = await axios.patch(url, form);
     dispatch({ type: UPDATE_USER_SUCCESS, payload: response.data });
     dispatch(loadUser());
 
   } catch (err) {
     dispatch({ type: UPDATE_USER_FAIL });
-    const error = err.response.data;
-    if (error) dispatch(setAlert(error.message))
+    console.log(err)
   }
 }
