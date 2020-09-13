@@ -29,7 +29,7 @@ const InputWrapper = styled.div`
 `
 
 const Input = styled.input`
-  border: ${props => props.error ? '1px solid tomato' : '1px solid silver'};
+  border: ${props => props.error ? '1px solid tomato' : 'var(--border)'};
   border-radius: 5px;
   padding: 0.7rem 1.5rem;
   background-color:  transparent;

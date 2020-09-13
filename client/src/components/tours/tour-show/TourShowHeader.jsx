@@ -29,7 +29,7 @@ const TourShowHeader = ({ startLocation, ratingsAverage, price }) => {
 const Header = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  border: 1px solid silver;
+  border: var(--border);
   grid-gap: 1px;
   background-color: silver;
 

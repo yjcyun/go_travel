@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import ProfileBody from '../profile/ProfileBody'
-import { fetchTours } from '../../redux/actions/tourActions'
 import { Link } from 'react-router-dom';
+import { fetchTours } from '../../redux/actions/tourActions'
+import ProfileBody from '../profile/ProfileBody'
+import TourItem from './TourItem';
+import styled from 'styled-components';
 
 class ToursList extends Component {
   componentDidMount() {
@@ -12,12 +14,7 @@ class ToursList extends Component {
   renderTours = () => {
     return this.props.tours.map(tour =>
       <Fragment key={tour._id}>
-        <div>
-          <Link to={`/admin/tours/${tour.id}`}>
-            {tour.name}
-          </Link>
-        </div>
-        <div></div>
+        <TourItem {...tour} />
       </Fragment>
     )
   }
@@ -29,7 +26,15 @@ class ToursList extends Component {
 
     return (
       <ProfileBody>
-        {this.renderTours()}
+        <ToursListWrapper>
+          <h2>Tours List</h2>
+          <Table>
+            <span className='heading'>Tour Name</span>
+            <span className='heading'>Lead Guide</span>
+            <span className='heading'></span>
+            {this.renderTours()}
+          </Table>
+        </ToursListWrapper>
       </ProfileBody>
     )
   }
@@ -39,5 +44,31 @@ const mapStateToProps = state => ({
   tours: Object.values(state.tours)
 });
 
+const ToursListWrapper = styled.div`
+  margin: 5rem;
+`
+
+const Table = styled.div`
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+  border-top: var(--border);
+
+  .heading {
+    font-weight: 500;
+  }
+
+  span {
+    padding: 0.5rem;
+    border-bottom: var(--border);
+    display: flex;
+    align-items: center;
+
+    a{
+      display: flex;
+      align-items: center;
+    }
+  }
+`
 
 export default connect(mapStateToProps, { fetchTours })(ToursList)

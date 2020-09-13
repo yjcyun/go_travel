@@ -23,7 +23,7 @@ const OverviewFilter = ({ handleFilter, selectedFilterIndex }) => {
 const FilterButtonWrapper = styled.div`
   cursor: pointer;
   display: flex;
-  border-bottom: 1px solid silver;
+  border-bottom: var(--border);
   margin-bottom: 0.5rem;
 `
 
