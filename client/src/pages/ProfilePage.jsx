@@ -17,4 +17,8 @@ const ProfilePageWrapper = styled.div`
   display: flex;
 `
 
+const mapStateToProps = state => {
+  return { auth: state.auth }
+}
+
 export default ProfilePage
