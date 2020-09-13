@@ -14,6 +14,7 @@ const ProfileSidebar = () => {
   return (
     <SideNavWrapper>
       <ul>
+      <p className='header'>User</p>
         <NavList>
           <NavLink to='/me/profile' activeClassName='selected' isActive={checkActive}>
             <MdDashboard /> Profile
@@ -29,6 +30,30 @@ const ProfileSidebar = () => {
             <BsPeopleFill /> My Reviews
           </NavLink>
         </NavList>
+        {/* ADMIN ONLY */}
+        <Admin>
+          <p className='header'>Admin</p>
+          <NavList>
+            <NavLink to='/admin/tours' activeClassName='selected'>
+              <BsPeopleFill /> Manage tours
+          </NavLink>
+          </NavList>
+          <NavList>
+            <NavLink to='/admin/users' activeClassName='selected'>
+              <BsPeopleFill /> manage users
+          </NavLink>
+          </NavList>
+          <NavList>
+            <NavLink to='/admin/reviews' activeClassName='selected'>
+              <BsPeopleFill /> manage reviews
+          </NavLink>
+          </NavList>
+          <NavList>
+            <NavLink to='/admin/bookings' activeClassName='selected'>
+              <BsPeopleFill /> manage bookings
+          </NavLink>
+          </NavList>
+        </Admin>
       </ul>
     </SideNavWrapper>
   )
@@ -37,9 +62,17 @@ const ProfileSidebar = () => {
 const SideNavWrapper = styled.aside`
   background-color: var(--accent-clr);
   height: auto;
-  width: 300px;
+  width: 330px;
   padding: 5rem 0 5rem 1rem;
   color: #fff;
+
+  .header {
+    padding-left: 2rem;
+    background-color: var(--accent-dark);
+    padding: 0.5rem 0 0.5rem 2rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+  }
 `;
 
 const NavList = styled.li`
@@ -51,7 +84,6 @@ const NavList = styled.li`
     text-transform: uppercase;
     padding: 1rem 0 1rem 2rem;
     display:block;
-    letter-spacing: 0.1rem;
   }
 
   :hover, .selected {
@@ -60,6 +92,10 @@ const NavList = styled.li`
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
   }
+`
+
+const Admin = styled.div`
+  margin-top: 4rem;
 `
 
 export default ProfileSidebar

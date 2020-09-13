@@ -1,24 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import ProfileSidebar from '../components/profile/ProfileSidebar'
-import ProfileBody from '../components/profile/ProfileBody'
+import UserProfile from '../components/profile/UserProfile'
+import { ProfilePageWrapper } from '../globalStyle'
 
 const ProfilePage = () => {
   return (
     <ProfilePageWrapper>
       <ProfileSidebar />
-      <ProfileBody />
+      <UserProfile />
     </ProfilePageWrapper>
   )
-}
-
-const ProfilePageWrapper = styled.div`
-  margin: 5rem 0;
-  display: flex;
-`
-
-const mapStateToProps = state => {
-  return { auth: state.auth }
 }
 
 export default ProfilePage

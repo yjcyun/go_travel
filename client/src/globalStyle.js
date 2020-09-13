@@ -33,3 +33,14 @@ export const Button = styled.button`
   color: ${props => props.login ? '#fff' : '000'};
   text-transform: uppercase;
 `
+
+export const Hr = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: silver;
+`
+
+export const ProfilePageWrapper = styled.div`
+  margin: 5rem 0;
+  display: flex;
+`

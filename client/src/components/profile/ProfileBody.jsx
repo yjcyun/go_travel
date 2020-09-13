@@ -3,12 +3,10 @@ import styled from 'styled-components'
 import EditProfile from './EditProfile'
 import ChangePassword from './ChangePassword'
 
-const ProfileBody = () => {
+const ProfileBody = ({children}) => {
   return (
     <ProfileBodyWrapper>
-      <EditProfile />
-      <Hr />
-      <ChangePassword />
+      {children}
     </ProfileBodyWrapper>
   )
 }
@@ -20,10 +18,6 @@ const ProfileBodyWrapper = styled.div`
   background-color: #fff;
   box-shadow: var(--box-shadow);
 `
-const Hr = styled.div`
-  height: 1px;
-  width: 100%;
-  background-color: silver;
-`
+
 
 export default ProfileBody

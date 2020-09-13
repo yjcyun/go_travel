@@ -14,7 +14,8 @@ import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ForgotPwdConfirmPage from './pages/ForgotPwdConfirmPage';
 import ProfilePage from './pages/ProfilePage';
 import './app.css';
-import PrivateRoutes from './PrivateRoutes';
+import AdminToursPage from './pages/AdminToursPage';
+import AdminTourPage from './pages/AdminTourPage';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -46,7 +47,9 @@ const App = () => {
       <Route exact path='/' component={ToursList} />
       <Route exact path='/tours' component={ToursList} />
       <Route path='/tours/:id' component={TourShow} />
-      <PrivateRoutes path='/me/profile' component={ProfilePage} />
+      <Route path='/me/profile' component={ProfilePage} />
+      <Route exact path='/admin/tours' component={AdminToursPage} />
+      <Route path='/admin/tours/:id' component={AdminTourPage} />
     </div>
   )
 
