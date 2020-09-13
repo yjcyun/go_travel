@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { changePassword } from '../../constants/profileFields';
 import { Field } from 'redux-form'
 import { connect } from 'react-redux'
@@ -7,45 +7,40 @@ import { reduxForm } from 'redux-form'
 import { FormWrapper, ButtonWrapper, Button } from '../../globalStyle'
 import FormInput from '../FormInput';
 
-const ChangePassword = ({ user, updateUserProfile, handleSubmit, reset }) => {
+class ChangePassword extends Component {
   // RENDER FormInput.jsx
-  const renderInput = props => <FormInput {...props} white />
-
-  // RENDER INPUT FIELD
-  const renderInputFields =
-    changePassword.map(profile => {
-      if (!user.user) {
-        return null;
-      }
-      return (
-        <Field
-          key={profile.name}
-          name={profile.name}
-          label={profile.label}
-          type={profile.type}
-          component={renderInput}
-        />
-      )
-    });
+  renderInput = props => <FormInput {...props} white />
 
   // FORM ONSUBMIT HANDLER
-  const onSubmit = formValues => {
-    updateUserProfile('password', formValues);
-    reset();
+  onSubmit = formValues => {
+    this.props.updateUserProfile('password', formValues);
+    this.props.reset();
   };
 
   // RENDER COMPONENT
-  return (
-    <FormWrapper>
-      <h2>Change Password</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {renderInputFields}
-        <ButtonWrapper>
-          <Button type='submit' login>change password</Button>
-        </ButtonWrapper>
-      </form>
-    </FormWrapper>
-  )
+  render() {
+    return (
+      <FormWrapper>
+        <h2>Change Password</h2>
+        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+          {changePassword.map(profile => {
+            return (
+              <Field
+                key={profile.name}
+                name={profile.name}
+                label={profile.label}
+                type={profile.type}
+                component={this.renderInput}
+              />
+            )
+          })}
+          <ButtonWrapper>
+            <Button type='submit' login>change password</Button>
+          </ButtonWrapper>
+        </form>
+      </FormWrapper >
+    )
+  }
 }
 
 // REDUX STATE
