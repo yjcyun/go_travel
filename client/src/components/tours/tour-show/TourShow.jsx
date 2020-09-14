@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchTour } from '../../../redux/actions/tourActions';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import styled from 'styled-components';
 import TourShowHeader from './TourShowHeader';
 import TourShowHeaderImg from './TourShowHeaderImg';
@@ -20,16 +22,17 @@ class TourShow extends Component {
     }
 
     const { name, images } = this.props.tour;
+
     return (
-      <TourShowContainer>
-        <h1>{name.toUpperCase()}</h1>
-        <TourShowHeader {...this.props.tour} />
-        <TourShowHeaderImg {...this.props.tour} />
-        <TourShowOverview {...this.props.tour} />
-        <TourGallery image={images} />
-        <TourReviews {...this.props.tour} />
-        <TourBanner {...this.props.tour} />
-      </TourShowContainer>
+        <TourShowContainer>
+          <h1>{name.toUpperCase()}</h1>
+          <TourShowHeader {...this.props.tour} />
+          <TourShowHeaderImg {...this.props.tour} />
+          <TourShowOverview {...this.props.tour} />
+          <TourGallery image={images} />
+          <TourReviews {...this.props.tour} />
+          <TourBanner {...this.props.tour} />
+        </TourShowContainer>
     )
   }
 }

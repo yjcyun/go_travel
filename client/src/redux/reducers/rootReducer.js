@@ -5,6 +5,7 @@ import { tourReducer } from './tourReducer';
 import { reviewReducer } from './reviewReducer';
 import { alertReducer } from './alertReducer';
 import { mapReducer } from './mapReducer';
+import { checkoutReducer } from './checkoutReducer';
 
 
 export const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
   form: formReducer,
   reviews: reviewReducer,
   alert: alertReducer,
-  map: mapReducer
+  map: mapReducer,
+  pay: checkoutReducer
 })
 

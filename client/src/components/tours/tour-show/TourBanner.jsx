@@ -1,18 +1,30 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { processPayment } from '../../../redux/actions/checkoutAction';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import styled from 'styled-components';
 
-const TourBanner = ({ duration }) => {
-  // imageCover, name
+const stripePromise = loadStripe('pk_test_51HRLnVLvko24kY0Nr99KNbtMFmDxl640uBpsdgKwEVgZXb7Evf0kVOo3RZrWdXCmyYPZziPE3S5HeyExG2eAPooL00Z62Uw8nQ');
+
+const TourBanner = ({ id, duration, processPayment }) => {
+
+  const handlePayment = async () => {
+    processPayment(id, stripePromise)
+  }
+
   return (
-    <BannerWrapper>
-      <BannerText>
-        <h2>What are you waiting for? </h2>
-        <p>{duration} Days. 1 Adventure. Infinite memories. Make it yours today!</p>
-      </BannerText>
-      <BannerButton>
-        <button>Book Tour Now</button>
-      </BannerButton>
-    </BannerWrapper>
+    <Elements stripe={stripePromise}>
+      <BannerWrapper>
+        <BannerText>
+          <h2>What are you waiting for? </h2>
+          <p>{duration} Days. 1 Adventure. Infinite memories. Make it yours today!</p>
+        </BannerText>
+        <BannerButton onClick={handlePayment}>
+          <button>Book Tour Now</button>
+        </BannerButton>
+      </BannerWrapper>
+    </Elements>
   )
 }
 
@@ -68,4 +80,4 @@ const BannerButton = styled.div`
   }
 `
 
-export default TourBanner
+export default connect(null, { processPayment })(TourBanner)
