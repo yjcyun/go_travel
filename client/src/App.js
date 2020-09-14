@@ -13,9 +13,10 @@ import history from './history';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ForgotPwdConfirmPage from './pages/ForgotPwdConfirmPage';
 import ProfilePage from './pages/ProfilePage';
-import './app.css';
 import AdminToursPage from './pages/AdminToursPage';
-import AdminTourPage from './pages/AdminTourPage';
+import TourEdit from './components/admin/TourEdit';
+import './app.css';
+import TourCreate from './components/admin/TourCreate';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -49,7 +50,8 @@ const App = () => {
       <Route path='/tours/:id' component={TourShow} />
       <Route path='/me/profile' component={ProfilePage} />
       <Route exact path='/admin/tours' component={AdminToursPage} />
-      <Route path='/admin/tours/:id' component={AdminTourPage} />
+      <Route exact path='/admin/tours/create' component={TourCreate} />
+      <Route path='/admin/tours/edit/:id' component={TourEdit} />
     </div>
   )
 

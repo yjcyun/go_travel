@@ -5,6 +5,7 @@ import { fetchTours } from '../../redux/actions/tourActions'
 import ProfileBody from '../profile/ProfileBody'
 import TourItem from './TourItem';
 import styled from 'styled-components';
+import { Button } from '../../globalStyle';
 
 class ToursList extends Component {
   componentDidMount() {
@@ -12,10 +13,13 @@ class ToursList extends Component {
   }
 
   renderTours = () => {
-    return this.props.tours.map(tour =>
-      <Fragment key={tour._id}>
-        <TourItem {...tour} />
-      </Fragment>
+    return this.props.tours.map(tour => {
+      return (
+        <Fragment key={tour._id}>
+          <TourItem {...tour} />
+        </Fragment>
+      )
+    }
     )
   }
 
@@ -27,7 +31,13 @@ class ToursList extends Component {
     return (
       <ProfileBody>
         <ToursListWrapper>
-          <h2>Tours List</h2>
+          <Title>
+            <h2>Tours List</h2>
+            <Link to={`/admin/tours/create`}>
+              <Button dark>Add Tour</Button>
+            </Link>
+          </Title>
+
           <Table>
             <span className='heading'>Tour Name</span>
             <span className='heading'>Lead Guide</span>
@@ -69,6 +79,13 @@ const Table = styled.div`
       align-items: center;
     }
   }
+`
+
+const Title = styled.div`
+  display:grid;
+  grid-template-columns: 3fr 1fr;
+  justify-content: space-between;
+  align-items: center;
 `
 
 export default connect(mapStateToProps, { fetchTours })(ToursList)

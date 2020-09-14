@@ -29,8 +29,8 @@ export const Button = styled.button`
   border-radius: 5px;
   border: 1px solid var(--accent-clr);
   margin: 1rem 0;
-  background-color: ${props => props.login ? 'var(--accent-clr)' : 'transparent'};
-  color: ${props => props.login ? '#fff' : '000'};
+  background-color: ${props => props.dark ? 'var(--accent-clr)' : 'transparent'};
+  color: ${props => props.dark ? '#fff' : '000'};
   text-transform: uppercase;
 `
 
@@ -43,4 +43,15 @@ export const Hr = styled.div`
 export const ProfilePageWrapper = styled.div`
   margin: 5rem 0;
   display: flex;
+`
+
+export const TourFormWrapper = styled.div`
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2rem;
+
+  @media (min-width: 996px) {
+    width: 100%;
+  }
 `

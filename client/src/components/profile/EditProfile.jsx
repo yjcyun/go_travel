@@ -12,7 +12,7 @@ class EditProfile extends Component {
   // RENDER FormInput.jsx
   renderInput = props => <FormInput {...props} white />
 
-  // FILEUPLOAD COMPONENT
+  // FILE UPLOAD COMPONENT
   fileUpload = ({ input, type }) => {
     delete input.value;
     return (
@@ -57,7 +57,7 @@ class EditProfile extends Component {
             />
           </UploadAvatar>
           <ButtonWrapper>
-            <Button type='submit' login>save setting</Button>
+            <Button type='submit' dark>save setting</Button>
           </ButtonWrapper>
         </form>
       </FormWrapper>

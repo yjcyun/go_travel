@@ -2,21 +2,24 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FiEdit, FiDelete } from 'react-icons/fi';
 import styled from 'styled-components'
-import { isArguments } from 'lodash';
 
 const TourItem = ({ name, id, guides, imageCover }) => {
-  const leadGuide = guides[0].name
+  const leadGuide = (guides) => {
+    if (guides.length === 0) return <span></span>
+    return <span>{guides[0].name}</span>
+  }
+  
   return (
     <>
       <span>
-        <Link to={`/admin/tours/${id}`}>
-          <Img src={`/tours/${imageCover}`} alt={name}/>{name}
+        <Link to={`/tours/${id}`}>
+          <Img src={`/tours/${imageCover}`} alt={name} />{name}
         </Link>
       </span>
-      <span>{leadGuide}</span>
+      {leadGuide(guides)}
       <ActionSpan>
-        <div><FiEdit className='icon'/></div>
-        <div><FiDelete className='icon'/></div>
+        <Link to={`/admin/tours/edit/${id}`}><FiEdit className='icon' /></Link>
+        <div><FiDelete className='icon' /></div>
       </ActionSpan>
     </>
   )

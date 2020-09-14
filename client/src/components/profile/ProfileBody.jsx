@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import EditProfile from './EditProfile'
-import ChangePassword from './ChangePassword'
 
 const ProfileBody = ({children}) => {
   return (
@@ -18,6 +16,5 @@ const ProfileBodyWrapper = styled.div`
   background-color: #fff;
   box-shadow: var(--box-shadow);
 `
-
 
 export default ProfileBody

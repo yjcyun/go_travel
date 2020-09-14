@@ -15,8 +15,21 @@ export const fetchTour = id => async dispatch => {
 
 // CREATE TOUR
 export const createTour = (formValues) => async (dispatch) => {
-  const response = await axios.post(`/api/v1/tours`, { ...formValues });
-  dispatch({ type: CREATE_TOUR, payload: response.data });
+  try {
+    const form = new FormData();
+    if (formValues.name) form.append('name', formValues.name);
+    if (formValues.summary) form.append('summary', formValues.summary);
+    if (formValues.difficulty) form.append('difficulty', formValues.difficulty);
+    if (formValues.price) form.append('price', formValues.price);
+    if (formValues.maxGroupSize) form.append('maxGroupSize', formValues.maxGroupSize);
+    if (formValues.duration) form.append('duration', formValues.duration);
+    if (formValues.imageCover) form.append('imageCover', formValues.imageCover[0]);
+
+    const response = await axios.post(`/api/v1/tours`, { ...form });
+    dispatch({ type: CREATE_TOUR, payload: response.data });
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 // UPDATE TOUR

@@ -110,7 +110,7 @@ export const forgotPassword = formValues => async dispatch => {
 }
 
 // UPDATE USER PROFILE & PASSWORD
-export const updateUserProfile = (type, formValues) => async (dispatch, getState) => {
+export const updateUserProfile = (type, formValues) => async dispatch => {
 
   try {
     const url =

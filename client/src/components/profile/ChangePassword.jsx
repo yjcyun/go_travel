@@ -35,7 +35,7 @@ class ChangePassword extends Component {
             )
           })}
           <ButtonWrapper>
-            <Button type='submit' login>change password</Button>
+            <Button type='submit' dark>change password</Button>
           </ButtonWrapper>
         </form>
       </FormWrapper >
