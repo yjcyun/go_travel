@@ -4,7 +4,7 @@ export const FormWrapper = styled.div`
   display:flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5rem;
+  padding: ${props => props.auth ? '0 1rem' : '5rem'};
 
   h2 {
     margin: 1.5rem 0;
@@ -18,7 +18,7 @@ export const FormWrapper = styled.div`
 `
 
 export const ButtonWrapper = styled.div`
-  display: inline-block;
+  display: ${props => props.auth ? 'inline-block' : 'block'};
   margin: 2rem 0;
 `
 
@@ -38,6 +38,22 @@ export const Hr = styled.div`
   height: 1px;
   width: 100%;
   background-color: silver;
+`
+
+export const AuthHr = styled.div`
+  height: 1px;
+  width: 80%;
+  margin: 0.2rem auto;
+  background-color: silver;
+  position: relative;
+  span {
+    position: absolute;
+    left: calc(50% - 1.5rem);
+    top: -0.8rem;
+    background-color: var(--background-clr);
+    padding: 0 1rem;
+    font-size: 0.9rem;
+  }
 `
 
 export const ProfilePageWrapper = styled.div`

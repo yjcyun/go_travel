@@ -55,6 +55,7 @@ class LoginForm extends Component {
         linkto='/signup'
         button1='Login'
         button2='Sign Up'
+        auth
       />
     )
   }

@@ -6,6 +6,7 @@ import { tourForm } from '../../constants/formFields'
 import FormInput from '../FormInput'
 import styled from 'styled-components'
 import { createTour } from '../../redux/actions/tourActions'
+import { convertToCoordinates } from '../../redux/actions/mapActions'
 
 class TourFormTemplate extends Component {
   // RENDER FormInput.jsx
@@ -24,6 +25,7 @@ class TourFormTemplate extends Component {
 
   // COORDINATES
   renderCoordinates = ({ fields }) => {
+
     return fields.map((coord, index) => {
       if (index > 2) {
         return null
@@ -41,9 +43,15 @@ class TourFormTemplate extends Component {
     })
   }
 
+  // // CONVERT ADDRESS TO COORDINATES
+  // convertToCoord = formValues => {
+    
+  // }
+
 
   // FORM SUBMIT HANDLER
   onSubmit = formValues => {
+    this.props.convertToCoordinates(formValues.startLocation)
     console.log(formValues);
     // this.props.createTour(formValues);
   };
@@ -51,11 +59,8 @@ class TourFormTemplate extends Component {
   render() {
     return (
       <TourFormWrapper>
-
         <small style={{ color: 'tomato' }}>* fields are required</small>
         <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-
-
           {tourForm.map(tour => {
             return (
               <Field
@@ -70,7 +75,6 @@ class TourFormTemplate extends Component {
           })}
 
           <div>
-
             <img src={`/users}`} alt='' />
             <Field
               name='imageCover'
@@ -123,5 +127,5 @@ const tourReduxForm = reduxForm({
 })(TourFormTemplate);
 
 export default connect(
-  null, { createTour }
+  null, { createTour, convertToCoordinates }
 )(tourReduxForm);

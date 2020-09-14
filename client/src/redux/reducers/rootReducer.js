@@ -4,6 +4,7 @@ import { authReducer } from './authReducer';
 import { tourReducer } from './tourReducer';
 import { reviewReducer } from './reviewReducer';
 import { alertReducer } from './alertReducer';
+import { mapReducer } from './mapReducer';
 
 
 export const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ export const rootReducer = combineReducers({
   tours: tourReducer,
   form: formReducer,
   reviews: reviewReducer,
-  alert: alertReducer
+  alert: alertReducer,
+  map: mapReducer
 })
 

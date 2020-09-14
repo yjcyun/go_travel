@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import { reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { FormWrapper, ButtonWrapper, Button, AuthHr } from '../../globalStyle'
 import Logo from '../nav/Logo'
-import { FormWrapper, ButtonWrapper, Button, Hr } from '../../globalStyle'
 
 class AuthFormTemplate extends Component {
   render() {
-    const { title, alert, onSubmit, fields, forgotpass, button1, button2, linkto } = this.props;
+    const { title, alert, onSubmit, fields, forgotpass, button1, button2, linkto, auth } = this.props;
     return (
-      <FormWrapper>
+      <FormWrapper auth={auth}>
         <Logo large />
         <h2>{title}</h2>
         {alert}
@@ -18,7 +17,7 @@ class AuthFormTemplate extends Component {
           {forgotpass}
           <ButtonWrapper>
             <Button type='submit' dark>{button1}</Button>
-            <Hr><span>or</span></Hr>
+            <AuthHr><span>or</span></AuthHr>
             <Link to={linkto}>
               <Button>{button2}</Button>
             </Link>

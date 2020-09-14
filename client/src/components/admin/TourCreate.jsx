@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { ProfilePageWrapper } from '../../globalStyle'
 import ProfileSidebar from '../profile/ProfileSidebar'
 import styled from 'styled-components'
 import ProfileBody from '../profile/ProfileBody'
 import TourFormTemplate from './TourFormTemplate'
 
-class TourCreate extends Component {
 
+class TourCreate extends Component {
   render() {
     return (
       <ProfilePageWrapper>
@@ -27,4 +26,4 @@ const TourEditWrapper = styled.div`
   margin: 5rem; 
 `
 
-export default connect(null)(TourCreate)
+export default TourCreate

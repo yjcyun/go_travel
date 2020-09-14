@@ -1,8 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
+import { ProfilePageWrapper } from '../globalStyle'
 import ProfileSidebar from '../components/profile/ProfileSidebar'
 import UserProfile from '../components/profile/UserProfile'
-import { ProfilePageWrapper } from '../globalStyle'
 
 const ProfilePage = () => {
   return (

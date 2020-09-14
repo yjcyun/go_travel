@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { Button, Hr, ButtonWrapper, FormWrapper } from '../../globalStyle'
 import Logo from '../nav/Logo'
 import Alert from '../Alert'
-import styled from 'styled-components'
 
 class PasswordForgotConfirm extends Component {
   render() {
