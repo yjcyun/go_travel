@@ -13,47 +13,19 @@ class TourFormTemplate extends Component {
   renderInput = props => <FormInput {...props} white />
 
   // FILE UPLOAD COMPONENT
-  fileUpload = ({ label, input, type }) => {
+  fileUpload = ({  input, type }) => {
     delete input.value;
     return (
-      <>
-        <label>{label}</label>
         <input type={type} {...input} />
-      </>
+
     )
   }
 
-  // COORDINATES
-  renderCoordinates = ({ fields }) => {
-
-    return fields.map((coord, index) => {
-      if (index > 2) {
-        return null
-      }
-      return (
-        <div key={index}>
-          <Field
-            name={coord}
-            type='number'
-            label={`Coordinates #${index + 1}`}
-            component={this.renderInput}
-          />
-        </div>
-      )
-    })
-  }
-
-  // // CONVERT ADDRESS TO COORDINATES
-  // convertToCoord = formValues => {
-    
-  // }
-
-
   // FORM SUBMIT HANDLER
   onSubmit = formValues => {
-    this.props.convertToCoordinates(formValues.startLocation)
-    console.log(formValues);
-    // this.props.createTour(formValues);
+    
+    this.props.createTour(formValues);
+    console.log(formValues)
   };
 
   render() {
@@ -74,22 +46,29 @@ class TourFormTemplate extends Component {
             )
           })}
 
+          <Field
+            name='startLocation'
+            label='Start Location Address'
+            type='text'
+            component={this.renderInput}
+          />
+
+
+
           <div>
-            <img src={`/users}`} alt='' />
             <Field
               name='imageCover'
-              label='Cover Image*'
               type='file'
               component={this.fileUpload}
               accept='image/*'
             />
-            <Field
+            {/* <Field
               name='images'
               label='Tour Images'
               type='file'
               component={this.fileUpload}
               accept='image/*'
-            />
+            /> */}
           </div>
           <ButtonWrapper>
             <Button type='submit' dark>Create</Button>
@@ -105,6 +84,10 @@ const Form = styled.form`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 2rem;
+`
+
+const Options = styled.div`
+
 `
 
 // FORM VALIDATE
@@ -126,6 +109,10 @@ const tourReduxForm = reduxForm({
   validate
 })(TourFormTemplate);
 
+const mapStateToProps = state => ({
+  map: state.map
+});
+
 export default connect(
-  null, { createTour, convertToCoordinates }
+  mapStateToProps, { createTour, convertToCoordinates }
 )(tourReduxForm);

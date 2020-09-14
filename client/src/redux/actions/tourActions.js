@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { FETCH_TOURS, FETCH_TOUR, CREATE_TOUR, UPDATE_TOUR, DELETE_TOUR } from '../type/types';
+import { convertToCoordinates } from './mapActions';
 
 // GET ALL TOURS
 export const fetchTours = () => async dispatch => {
@@ -16,16 +17,18 @@ export const fetchTour = id => async dispatch => {
 // CREATE TOUR
 export const createTour = (formValues) => async (dispatch) => {
   try {
-    const form = new FormData();
-    if (formValues.name) form.append('name', formValues.name);
-    if (formValues.summary) form.append('summary', formValues.summary);
-    if (formValues.difficulty) form.append('difficulty', formValues.difficulty);
-    if (formValues.price) form.append('price', formValues.price);
-    if (formValues.maxGroupSize) form.append('maxGroupSize', formValues.maxGroupSize);
-    if (formValues.duration) form.append('duration', formValues.duration);
-    if (formValues.imageCover) form.append('imageCover', formValues.imageCover[0]);
-
-    const response = await axios.post(`/api/v1/tours`, { ...form });
+    const formData = new FormData();
+    if (formValues.name) formData.append('name', formValues.name);
+    if (formValues.summary) formData.append('summary', formValues.summary);
+    if (formValues.difficulty) formData.append('difficulty', formValues.difficulty);
+    if (formValues.price) formData.append('price', formValues.price);
+    if (formValues.maxGroupSize) formData.append('maxGroupSize', formValues.maxGroupSize);
+    if (formValues.duration) formData.append('duration', formValues.duration);
+    if(formValues.startLocation) formData.append('startLocation', formValues.startLocation);
+    if (formValues.imageCover) formData.append('imageCover', formValues.imageCover[0]);
+    
+    const response = await axios.post('/api/v1/tours', formData);
+    console.log(response);
     dispatch({ type: CREATE_TOUR, payload: response.data });
   } catch (err) {
     console.log(err)

@@ -22,7 +22,7 @@ class EditProfile extends Component {
 
   // FORM ONSUBMIT HANDLER
   onSubmit = formValues => {
-    this.props.updateUserProfile('profile', formValues)
+    this.props.updateUserProfile('profile', formValues);
   };
 
   // RENDER COMPONENT

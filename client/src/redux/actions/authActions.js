@@ -121,8 +121,8 @@ export const updateUserProfile = (type, formValues) => async dispatch => {
     const form = new FormData();
     if (formValues.name) form.append('name', formValues.name);
     if (formValues.photo) form.append('photo', formValues.photo[0]);
-
     const response = await axios.patch(url, form);
+
     dispatch({ type: UPDATE_USER_SUCCESS, payload: response.data });
     dispatch(loadUser());
 

@@ -65,7 +65,8 @@ const tourSchema = new mongoose.Schema({
   },
   imageCover: {
     type: String,
-    required: [true, 'A tour must have a cover image']
+    default: 'default.jpg'
+    // required: [true, 'A tour must have a cover image']
   },
   images: [String],
   createdAt: {
@@ -82,10 +83,12 @@ const tourSchema = new mongoose.Schema({
     //GeoJSON
     type: {
       type: String,
-      default: 'Point',
       enum: ['Point']
     },
-    coordinates: [Number],
+    coordinates: {
+      type: [Number],
+      default: undefined
+    },
     address: String,
     description: String
   },
@@ -116,7 +119,7 @@ const tourSchema = new mongoose.Schema({
 // Improve read performance with Indexes
 tourSchema.index({ price: 1, ratingsAverage: -1 });
 tourSchema.index({ slug: 1 });
-tourSchema.index({ startLocation: '2dsphere' });
+// tourSchema.index({ startLocation: '2dsphere' });
 
 tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
