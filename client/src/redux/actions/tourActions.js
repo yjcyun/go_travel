@@ -17,7 +17,7 @@ export const fetchTour = id => async dispatch => {
 // CREATE TOUR
 export const createTour = (formValues) => async (dispatch) => {
   try {
-    const formData = new FormData();
+    const formData = new FormData(); 
     if (formValues.name) formData.append('name', formValues.name);
     if (formValues.summary) formData.append('summary', formValues.summary);
     if (formValues.difficulty) formData.append('difficulty', formValues.difficulty);

@@ -1,9 +1,11 @@
 const multer = require('multer');
 const sharp = require('sharp');
 const User = require('../models/userModel');
+const Booking = require("../models/bookingModel");
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const factory = require('./handlerFactory');
+const Tour = require('../models/tourModel');
 
 //  MULTER
 // const multerStorage = multer.diskStorage({
@@ -33,7 +35,7 @@ const upload = multer({
 
 exports.uploadUserPhoto = upload.single('photo');
 
-exports.resizeUserPhoto = catchAsync(async(req, res, next) => {
+exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
@@ -43,7 +45,7 @@ exports.resizeUserPhoto = catchAsync(async(req, res, next) => {
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
     .toFile(`client/public/users/${req.file.filename}`);
-    
+
   next();
 })
 
@@ -68,6 +70,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   }
   // 2) Filter out unwanted fields name that are not allowed to be updated
   const filteredBody = filterObj(req.body, 'name', 'email');
+  console.log(filteredBody)
   if (req.file) filteredBody.photo = req.file.filename;
 
   // 3) Update user doc
@@ -95,6 +98,22 @@ exports.createUser = (req, res) => {
     message: 'This route is not yet defined. Please use /signup instead'
   })
 }
+
+exports.getMyTours = catchAsync(async (req, res, next) => {
+  // 1) Find all bookings
+  const bookings = await Booking.find({ user: req.user.id });
+
+  // 2) Find tours with the returned IDs
+  const tourIDs = bookings.map(el => el.tour);
+  const tours = await Tour.find({ _id: { $in: tourIDs } });
+
+  res.status(200).json({
+    status: 'success',
+    tours
+  })
+})
+
+
 
 exports.getAllUsers = factory.getAll(User);
 exports.getUser = factory.getOne(User);

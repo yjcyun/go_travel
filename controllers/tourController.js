@@ -66,7 +66,31 @@ exports.aliasTopTours = (req, res, next) => {
 
 exports.getAllTours = factory.getAll(Tour);
 exports.getTour = factory.getOne(Tour, { path: 'reviews' });
-exports.createTour = factory.createOne(Tour);
+
+
+exports.createTour = catchAsync(async (req, res, next) => {
+  console.log('hi')
+  // 2) Filter out unwanted fields name that are not allowed to be updated
+  console.log(req.body);
+  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration');
+  // if (req.file) filteredBody.photo = req.file.filename;
+  console.log(filteredBody);
+  // 3) Update user doc
+  const doc = await Tour.create(filteredBody);
+
+  res.status(201).json({
+    status: 'success',
+    data: { data: doc }
+  });
+})
+
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach(el => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  })
+  return newObj;
+}
 exports.updateTour = factory.updateOne(Tour);
 exports.deleteTour = factory.deleteOne(Tour);
 

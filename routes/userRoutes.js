@@ -21,11 +21,16 @@ router.get(
 
 router.use(authController.protect);
 
+router.get('/my-tours', userController.getMyTours)
 router.patch(
   '/updateMyPassword',
   authController.updatePassword
 );
-router.patch('/updateMe', userController.uploadUserPhoto, userController.resizeUserPhoto, userController.updateMe);
+router.patch('/updateMe',
+  userController.uploadUserPhoto,
+  userController.resizeUserPhoto,
+  userController.updateMe
+);
 router.delete('/deleteMe', userController.deleteMe);
 
 
