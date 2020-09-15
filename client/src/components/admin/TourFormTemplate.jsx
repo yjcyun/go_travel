@@ -7,8 +7,7 @@ import { ButtonWrapper, Button, TourFormWrapper } from '../../globalStyle'
 import Dropzone from 'react-dropzone'
 import FormInput from '../FormInput'
 import styled from 'styled-components'
-
-
+import FormSelect from '../FormSelect'
 
 class TourFormTemplate extends Component {
   constructor() {
@@ -23,6 +22,8 @@ class TourFormTemplate extends Component {
 
   // RENDER FormInput.jsx
   renderInput = props => <FormInput {...props} white />
+
+  renderSelect = props => <FormSelect {...props} white />
 
   // FILE UPLOAD COMPONENT
   fileUpload = ({ label, input, type }) => {
@@ -80,7 +81,8 @@ class TourFormTemplate extends Component {
                 label={tour.label}
                 type={tour.type}
                 min={tour.min}
-                component={this.renderInput}
+                values={tour.values}
+                component={tour.type === 'select' ? this.renderSelect : this.renderInput}
               />
             )
           })}

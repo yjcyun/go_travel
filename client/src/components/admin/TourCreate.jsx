@@ -12,18 +12,13 @@ class TourCreate extends Component {
       <ProfilePageWrapper>
         <ProfileSidebar />
         <ProfileBody>
-          <TourEditWrapper>
-            <h2>Create New Tour</h2>
-            <TourFormTemplate />
-          </TourEditWrapper>
+          <h2>Create New Tour</h2>
+          <TourFormTemplate />
         </ProfileBody>
       </ProfilePageWrapper>
     )
   }
 }
 
-const TourEditWrapper = styled.div`
-  margin: 5rem; 
-`
 
 export default TourCreate

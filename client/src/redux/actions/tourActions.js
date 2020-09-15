@@ -46,7 +46,7 @@ export const createTour = (formValues) => async (dispatch) => {
 
 // UPDATE TOUR
 export const updateTour = (id, formValues) => async dispatch => {
-  const response = await axios.post(`/api/v1/tours/${id}`, formValues);
+  const response = await axios.patch(`/api/v1/tours/${id}`, formValues);
   dispatch({ type: UPDATE_TOUR, payload: response.data });
 }
 

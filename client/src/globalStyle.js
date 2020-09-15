@@ -71,3 +71,37 @@ export const TourFormWrapper = styled.div`
     width: 100%;
   }
 `
+
+
+export const InputWrapper = styled.div`
+  position: relative;
+  margin-top: 2.5rem;
+`
+
+export const Input = styled.input`
+  border: ${props => props.error ? '1px solid tomato' : 'var(--border)'};
+  border-radius: 5px;
+  padding: 0.7rem 1.5rem;
+  background-color:  transparent;
+  display: block;
+  width: 100%;
+  position: relative;
+
+  &[type=password] {
+    letter-spacing: 0.2rem;
+  }
+`
+export const Label = styled.label`
+  position: absolute;
+  left: 1.3rem;
+  top: -0.9rem;
+  padding: 0 0.5rem;
+  background:  ${props => props.white ? '#fff' : 'var(--background-clr)'};
+  z-index:3;
+`
+
+export const Error = styled.span`
+  color: tomato;
+  font-size: 0.8rem;
+  position: absolute;
+`

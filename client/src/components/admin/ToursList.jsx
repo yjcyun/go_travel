@@ -30,7 +30,6 @@ class ToursList extends Component {
 
     return (
       <ProfileBody>
-        <ToursListWrapper>
           <Title>
             <h2>Tours List</h2>
             <Link to={`/admin/tours/create`}>
@@ -44,7 +43,6 @@ class ToursList extends Component {
             <span className='heading'></span>
             {this.renderTours()}
           </Table>
-        </ToursListWrapper>
       </ProfileBody>
     )
   }
@@ -53,10 +51,6 @@ class ToursList extends Component {
 const mapStateToProps = state => ({
   tours: Object.values(state.tours)
 });
-
-const ToursListWrapper = styled.div`
-  margin: 5rem;
-`
 
 const Table = styled.div`
   margin: 2rem 0;
