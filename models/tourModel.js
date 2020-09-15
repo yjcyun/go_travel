@@ -78,6 +78,9 @@ const tourSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  startLocation: {
+    type: String
+  },
   locations: [
     {
       type: String,
@@ -100,11 +103,6 @@ const tourSchema = new mongoose.Schema({
 // Improve read performance with Indexes
 tourSchema.index({ price: 1, ratingsAverage: -1 });
 tourSchema.index({ slug: 1 });
-// tourSchema.index({ startLocation: '2dsphere' });
-
-tourSchema.virtual('durationWeeks').get(function () {
-  return this.duration / 7;
-});
 
 // VIRTUAL POPULATE
 tourSchema.virtual('reviews', {

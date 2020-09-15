@@ -29,7 +29,7 @@ exports.uploadTourImages = upload.fields([
 // upload.array('images',5)
 
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
- if (!req.files.imageCover || !req.files.images) return next();
+  if (!req.files.imageCover || !req.files.images) return next();
 
   const tourName = slugify(req.body.name);
 
@@ -43,28 +43,29 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
     .toFile(`client/public/tours/${req.files.imageCover.filename}`);
 
   // 2) Images
-  // req.body.images = [];
-  // await Promise.all(
-  //   req.files.images.map(async (file, i) => {
-  //     const filename = `tour-${tourName}-${Date.now()}-${i + 1}.jpeg`;
+  req.body.images = [];
+  await Promise.all(
+    req.files.images.map(async (file, i) => {
+      const filename = `tour-${tourName}-${Date.now()}-${i + 1}.jpeg`;
 
-  //     await sharp(file.buffer)
-  //       .resize(2000, 1333)
-  //       .toFormat('jpeg')
-  //       .jpeg({ quality: 90 })
-  //       .toFile(`client/public/tours/${filename}`);
+      await sharp(file.buffer)
+        .resize(2000, 1333)
+        .toFormat('jpeg')
+        .jpeg({ quality: 90 })
+        .toFile(`client/public/tours/${filename}`);
 
-  //     req.body.images.push(filename);
-  //   })
-  // )
+      req.body.images.push(filename);
+    })
+  )
   next();
 });
 
 exports.createTour = catchAsync(async (req, res, next) => {
-  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'images');
+  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'images', 'description', 'guides', 'startLocation');
 
-  //if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
-  //if (req.files) filteredBody.images = req.body.images;
+  if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
+  if (req.files) filteredBody.images = req.body.images;
+
 
   // 3) Update user doc
   const doc = await Tour.create(filteredBody);

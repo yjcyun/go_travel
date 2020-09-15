@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { ButtonWrapper, Button, TourFormWrapper } from '../../globalStyle'
 import { tourForm } from '../../constants/formFields'
+import { createTour } from '../../redux/actions/tourActions'
+import { ButtonWrapper, Button, TourFormWrapper } from '../../globalStyle'
+import Dropzone from 'react-dropzone'
 import FormInput from '../FormInput'
 import styled from 'styled-components'
-import { createTour } from '../../redux/actions/tourActions'
+
+
 
 class TourFormTemplate extends Component {
+  constructor() {
+    super();
+    this.onDrop = (files) => {
+      this.setState({ files })
+    };
+    this.state = {
+      files: []
+    };
+  }
+
   // RENDER FormInput.jsx
   renderInput = props => <FormInput {...props} white />
 
@@ -22,13 +35,39 @@ class TourFormTemplate extends Component {
     )
   }
 
+  renderDropzoneInput = ({ input, name, meta }) => {
+    const files = input.value;
+    return (
+      <>
+        <Dropzone
+          name={name}
+          onDrop={filesToUpload => input.onChange(filesToUpload)}
+        >
+          <div>Try dropping some files here, or click to select files to upload</div>
+        </Dropzone>
+        {meta.touched && meta.error &&
+          <span className='error'>{meta.error}</span>}
+        {files && Array.isArray(files) && (
+          <ul>
+            {files.map((file, i) => <li key={i}>{file.name}</li>)}
+          </ul>
+        )}
+      </>
+    )
+  }
+
   // FORM SUBMIT HANDLER
   onSubmit = formValues => {
-    this.props.createTour(formValues);
     console.log(formValues);
+    this.props.createTour(formValues);
   };
 
   render() {
+    const files = this.state.files.map(file => (
+      <li key={file.name}>{file.name}</li>
+    ));
+    console.log(files);
+
     return (
       <TourFormWrapper>
         <small style={{ color: 'tomato' }}>* fields are required</small>
@@ -46,13 +85,6 @@ class TourFormTemplate extends Component {
             )
           })}
 
-          <Field
-            name='startLocation'
-            label='Start Location Address'
-            type='text'
-            component={this.renderInput}
-          />
-
           <div>
             <Field
               name='imageCover'
@@ -61,13 +93,22 @@ class TourFormTemplate extends Component {
               component={this.fileUpload}
               accept='image/*'
             />
-            <Field
-              name='images'
-              label='Tour Images'
-              type='file'
-              component={this.fileUpload}
-              accept='image/*'
-            />
+
+            <Dropzone onDrop={this.onDrop}>
+              {({ getRootProps, getInputProps }) => (
+                <section className="container">
+                  <aside>
+                    <h4>Images</h4>
+                  </aside>
+                  <div {...getRootProps({ className: 'dropzone' })}>
+                    <input {...getInputProps()} />
+                    <p>Drag 'n' drop some files here, or click to select files</p>
+                  </div>
+                  <ul>{files}</ul>
+                </section>
+              )}
+            </Dropzone>
+
           </div>
           <ButtonWrapper>
             <Button type='submit' dark>Create</Button>

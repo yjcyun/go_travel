@@ -7,7 +7,7 @@ const TourShowHeader = ({ startLocation, ratingsAverage, price }) => {
   return (
     <Header>
       <div className='header-box'>
-        <span><FiMapPin className='icon' /></span> {startLocation.description}
+        <span><FiMapPin className='icon' /></span> {startLocation}
       </div>
       <div className='header-box'>
         <span>Rating:</span>{' '}
