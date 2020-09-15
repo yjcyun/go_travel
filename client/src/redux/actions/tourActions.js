@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { FETCH_TOURS, FETCH_TOUR, CREATE_TOUR, UPDATE_TOUR, DELETE_TOUR } from '../type/types';
-import { convertToCoordinates } from './mapActions';
+import history from '../../history';
 
 // GET ALL TOURS
 export const fetchTours = () => async dispatch => {
@@ -17,19 +17,23 @@ export const fetchTour = id => async dispatch => {
 // CREATE TOUR
 export const createTour = (formValues) => async (dispatch) => {
   try {
-    const formData = new FormData(); 
+    const formData = new FormData();
     if (formValues.name) formData.append('name', formValues.name);
     if (formValues.summary) formData.append('summary', formValues.summary);
     if (formValues.difficulty) formData.append('difficulty', formValues.difficulty);
     if (formValues.price) formData.append('price', formValues.price);
     if (formValues.maxGroupSize) formData.append('maxGroupSize', formValues.maxGroupSize);
     if (formValues.duration) formData.append('duration', formValues.duration);
-    if(formValues.startLocation) formData.append('startLocation', formValues.startLocation);
+    if (formValues.startLocation) formData.append('startLocation', formValues.startLocation);
     if (formValues.imageCover) formData.append('imageCover', formValues.imageCover[0]);
-    
+    if (formValues.images) formData.append('images', formValues.images[0]);
+
     const response = await axios.post('/api/v1/tours', formData);
-    console.log(response);
+    console.log(response)
     dispatch({ type: CREATE_TOUR, payload: response.data });
+    //FIXME: PAGE RELOADS AFTER DISPATCH - possibly from the backend? history.push does not work
+    history.push('/');
+
   } catch (err) {
     console.log(err)
   }

@@ -4,6 +4,7 @@ const Tour = require('../models/tourModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const factory = require('./handlerFactory');
+const slugify = require('slugify');
 
 const multerStorage = multer.memoryStorage();
 
@@ -27,23 +28,25 @@ exports.uploadTourImages = upload.fields([
 
 // upload.array('images',5)
 
-exports.resizeTourImages = async (req, res, next) => {
+exports.resizeTourImages = catchAsync(async (req, res, next) => {
   if (!req.files.imageCover || !req.files.images) return next();
 
+  const tourName = slugify(req.body.name);
+
   // 1) Cover Image
-  req.body.imageCover = `tour-${req.params.id}-${Date.now()}-cover.jpeg`;
+  req.files.imageCover.filename = `tour-${tourName}-${Date.now()}-cover.jpeg`;
 
   await sharp(req.files.imageCover[0].buffer)
     .resize(2000, 1333)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`client/public/tours/${req.body.imageCover}`);
+    .toFile(`client/public/tours/${req.files.imageCover.filename}`);
 
   // 2) Images
   req.body.images = [];
   await Promise.all(
     req.files.images.map(async (file, i) => {
-      const filename = `tour-${req.params.id}-${Date.now()}-${i + 1}.jpeg`;
+      const filename = `tour-${tourName}-${Date.now()}-${i + 1}.jpeg`;
 
       await sharp(file.buffer)
         .resize(2000, 1333)
@@ -55,7 +58,22 @@ exports.resizeTourImages = async (req, res, next) => {
     })
   )
   next();
-};
+});
+
+exports.createTour = catchAsync(async (req, res, next) => {
+  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'images');
+
+  if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
+  if (req.files) filteredBody.images = req.body.images;
+
+  // 3) Update user doc
+  const doc = await Tour.create(filteredBody);
+
+  res.status(201).json({
+    status: 'success',
+    data: { data: doc }
+  });
+})
 
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
@@ -68,21 +86,6 @@ exports.getAllTours = factory.getAll(Tour);
 exports.getTour = factory.getOne(Tour, { path: 'reviews' });
 
 
-exports.createTour = catchAsync(async (req, res, next) => {
-  console.log('hi')
-  // 2) Filter out unwanted fields name that are not allowed to be updated
-  console.log(req.body);
-  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration');
-  // if (req.file) filteredBody.photo = req.file.filename;
-  console.log(filteredBody);
-  // 3) Update user doc
-  const doc = await Tour.create(filteredBody);
-
-  res.status(201).json({
-    status: 'success',
-    data: { data: doc }
-  });
-})
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -91,6 +94,7 @@ const filterObj = (obj, ...allowedFields) => {
   })
   return newObj;
 }
+
 exports.updateTour = factory.updateOne(Tour);
 exports.deleteTour = factory.deleteOne(Tour);
 

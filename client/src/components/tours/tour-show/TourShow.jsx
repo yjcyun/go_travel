@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchTour } from '../../../redux/actions/tourActions';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import styled from 'styled-components';
 import TourShowHeader from './TourShowHeader';
 import TourShowHeaderImg from './TourShowHeaderImg';

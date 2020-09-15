@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Field, FieldArray, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { ButtonWrapper, Button, TourFormWrapper } from '../../globalStyle'
 import { tourForm } from '../../constants/formFields'
@@ -13,19 +13,19 @@ class TourFormTemplate extends Component {
   renderInput = props => <FormInput {...props} white />
 
   // FILE UPLOAD COMPONENT
-  fileUpload = ({  input, type }) => {
+  fileUpload = ({ label, input, type }) => {
     delete input.value;
     return (
+      <>
+        <label>{label}</label>
         <input type={type} {...input} />
-
+      </>
     )
   }
 
   // FORM SUBMIT HANDLER
   onSubmit = formValues => {
-    
     this.props.createTour(formValues);
-    console.log(formValues)
   };
 
   render() {
@@ -53,22 +53,21 @@ class TourFormTemplate extends Component {
             component={this.renderInput}
           />
 
-
-
           <div>
             <Field
               name='imageCover'
               type='file'
+              label='Cover Image'
               component={this.fileUpload}
               accept='image/*'
             />
-            {/* <Field
+            <Field
               name='images'
               label='Tour Images'
               type='file'
               component={this.fileUpload}
               accept='image/*'
-            /> */}
+            />
           </div>
           <ButtonWrapper>
             <Button type='submit' dark>Create</Button>
@@ -86,10 +85,6 @@ const Form = styled.form`
   grid-column-gap: 2rem;
 `
 
-const Options = styled.div`
-
-`
-
 // FORM VALIDATE
 const validate = ({ name, price, maxGroupSize, duration, summary }) => {
   const errors = {};
@@ -99,7 +94,6 @@ const validate = ({ name, price, maxGroupSize, duration, summary }) => {
   if (!maxGroupSize) errors.maxGroupSize = 'Enter number of participants';
   if (!duration) errors.duration = 'Enter tour duration';
   if (!summary) errors.summary = 'Enter tour summary';
-
 
   return errors;
 }
