@@ -6,7 +6,6 @@ import { tourForm } from '../../constants/formFields'
 import FormInput from '../FormInput'
 import styled from 'styled-components'
 import { createTour } from '../../redux/actions/tourActions'
-import { convertToCoordinates } from '../../redux/actions/mapActions'
 
 class TourFormTemplate extends Component {
   // RENDER FormInput.jsx
@@ -26,6 +25,7 @@ class TourFormTemplate extends Component {
   // FORM SUBMIT HANDLER
   onSubmit = formValues => {
     this.props.createTour(formValues);
+    console.log(formValues);
   };
 
   render() {
@@ -103,10 +103,8 @@ const tourReduxForm = reduxForm({
   validate
 })(TourFormTemplate);
 
-const mapStateToProps = state => ({
-  map: state.map
-});
+
 
 export default connect(
-  mapStateToProps, { createTour, convertToCoordinates }
+  null, { createTour }
 )(tourReduxForm);

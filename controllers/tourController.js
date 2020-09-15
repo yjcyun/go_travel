@@ -29,7 +29,7 @@ exports.uploadTourImages = upload.fields([
 // upload.array('images',5)
 
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
-  if (!req.files.imageCover || !req.files.images) return next();
+ if (!req.files.imageCover || !req.files.images) return next();
 
   const tourName = slugify(req.body.name);
 
@@ -43,28 +43,28 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
     .toFile(`client/public/tours/${req.files.imageCover.filename}`);
 
   // 2) Images
-  req.body.images = [];
-  await Promise.all(
-    req.files.images.map(async (file, i) => {
-      const filename = `tour-${tourName}-${Date.now()}-${i + 1}.jpeg`;
+  // req.body.images = [];
+  // await Promise.all(
+  //   req.files.images.map(async (file, i) => {
+  //     const filename = `tour-${tourName}-${Date.now()}-${i + 1}.jpeg`;
 
-      await sharp(file.buffer)
-        .resize(2000, 1333)
-        .toFormat('jpeg')
-        .jpeg({ quality: 90 })
-        .toFile(`client/public/tours/${filename}`);
+  //     await sharp(file.buffer)
+  //       .resize(2000, 1333)
+  //       .toFormat('jpeg')
+  //       .jpeg({ quality: 90 })
+  //       .toFile(`client/public/tours/${filename}`);
 
-      req.body.images.push(filename);
-    })
-  )
+  //     req.body.images.push(filename);
+  //   })
+  // )
   next();
 });
 
 exports.createTour = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'images');
 
-  if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
-  if (req.files) filteredBody.images = req.body.images;
+  //if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
+  //if (req.files) filteredBody.images = req.body.images;
 
   // 3) Update user doc
   const doc = await Tour.create(filteredBody);
@@ -170,66 +170,3 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
     data: plan
   });
 });
-
-exports.getToursWithin = catchAsync(async (req, res, next) => {
-  const { distance, latlng, unit } = req.params;
-  const [lat, lng] = latlng.split(',');
-  const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1
-
-  if (!lat || !lng) {
-    next(new AppError('Please provide latitude and longitutide in the format lat,lng.', 400))
-  }
-
-  const tours = await Tour.find({
-    startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
-  });
-
-  res.status(200).json({
-    status: 'success',
-    results: tours.length,
-    data: {
-      data: tours
-    }
-  })
-})
-
-// router.route('/tours-within/:distance/center/:latlng/unit/:unit',tourController.getToursWithin)
-// tours-distance/233/center/34.111745,-118.113491/unit/mi
-
-
-exports.getDistances = catchAsync(async (req, res, next) => {
-  const { latlng, unit } = req.params;
-  const [lat, lng] = latlng.split(',');
-  const multiplier = unit === 'mi' ? 0.000621371 : 0.001;
-
-  if (!lat || !lng) {
-    next(new AppError('Please provide latitude and longitutide in the format lat,lng.', 400))
-  }
-
-  const distances = await Tour.aggregate([
-    {
-      $geoNear: {
-        near: {
-          type: 'Point',
-          coordinates: [lng * 1, lat * 1]
-        },
-        distanceField: 'distance',
-        distanceMultiplier: multiplier
-      }
-    },
-    {
-      $project: {
-        distance: 1,
-        name: 1
-      }
-    }
-  ]);
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: distances
-    }
-  })
-
-})
