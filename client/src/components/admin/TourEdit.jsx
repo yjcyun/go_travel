@@ -13,19 +13,14 @@ import styled from 'styled-components'
 import FormSelect from '../FormSelect'
 
 class TourEdit extends Component {
-
   componentDidMount() {
     this.props.fetchTour(this.props.match.params.id)
   }
 
   // RENDER FormInput.jsx
   renderInput = props => <FormInput {...props} white />
+  renderSelect = props => <FormSelect {...props} white />
 
-  renderSelect = (props) => {
-    return (
-      <FormSelect  {...props} />
-    )
-  }
   // FILE UPLOAD COMPONENT
   fileUpload = ({ label, input, type }) => {
     delete input.value;
@@ -37,7 +32,6 @@ class TourEdit extends Component {
     )
   }
 
-
   // FORM SUBMIT HANDLER
   onSubmit = formValues => {
     console.log(formValues);
@@ -45,32 +39,28 @@ class TourEdit extends Component {
   };
 
   render() {
-   
     if (!this.props.tour) {
       return <div>Loading...</div>
     }
 
-    console.log(this.props.tour)
     return (
       <ProfilePageWrapper>
         <ProfileSidebar />
         <ProfileBody>
           <h2>Edit Tour</h2>
-          {/* _.pick(this.props.tour, 'name', 'price', 'maxGroupSize', 'duration', 'summary', 'description') */}
           <TourFormWrapper>
             <small style={{ color: 'tomato' }}>* fields are required</small>
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
               {tourForm.map(tour => {
                 return (
                   <Field
-                    initialValues={{ name: 'Hello?' }}
                     key={tour.label}
                     name={tour.name}
                     label={tour.label}
                     type={tour.type}
                     min={tour.min}
-                    value={tour.value}
-                    component={this.renderInput}
+                    values={tour.values}
+                    component={tour.type === 'select' ? this.renderSelect : this.renderInput}
                   />
                 )
               })}
@@ -78,6 +68,13 @@ class TourEdit extends Component {
               <div>
                 <Field
                   name='imageCover'
+                  type='file'
+                  label='Cover Image'
+                  component={this.fileUpload}
+                  accept='image/*'
+                />
+                <Field
+                  name='images'
                   type='file'
                   label='Cover Image'
                   component={this.fileUpload}
@@ -123,7 +120,12 @@ const tourReduxForm = reduxForm({
 })(TourEdit);
 
 const mapStateToProps = (state, ownProps) => {
-  return { tour: state.tours[ownProps.match.params.id] }
+  let initialValues = state.tours[ownProps.match.params.id];
+ 
+  return {
+    tour: state.tours[ownProps.match.params.id],
+    initialValues: initialValues
+  }
 }
 
 export default connect(

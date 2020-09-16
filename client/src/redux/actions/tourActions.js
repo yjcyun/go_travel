@@ -28,8 +28,6 @@ export const createTour = (formValues) => async (dispatch) => {
 
     if (formValues.startLocation) formData.append('startLocation', formValues.startLocation);
 
-    if (formValues.guides) formData.append('guides', formValues.guides[0]);
-
     if (formValues.imageCover) formData.append('imageCover', formValues.imageCover[0]);
     if (formValues.images) formData.append('images', formValues.images[0]);
 
@@ -46,8 +44,26 @@ export const createTour = (formValues) => async (dispatch) => {
 
 // UPDATE TOUR
 export const updateTour = (id, formValues) => async dispatch => {
-  const response = await axios.patch(`/api/v1/tours/${id}`, formValues);
-  dispatch({ type: UPDATE_TOUR, payload: response.data });
+
+  const formData = new FormData();
+  if (formValues.name) formData.append('name', formValues.name);
+  if (formValues.summary) formData.append('summary', formValues.summary);
+  if (formValues.description) formData.append('description', formValues.description);
+  if (formValues.difficulty) formData.append('difficulty', formValues.difficulty);
+  if (formValues.price) formData.append('price', formValues.price);
+  if (formValues.maxGroupSize) formData.append('maxGroupSize', formValues.maxGroupSize);
+  if (formValues.duration) formData.append('duration', formValues.duration);
+
+  if (formValues.startLocation) formData.append('startLocation', formValues.startLocation);
+
+  if (formValues.imageCover) formData.append('imageCover', formValues.imageCover[0]);
+
+  if (formValues.images) formData.append('images', formValues.images[0]);
+
+  const response = await axios.patch(`/api/v1/tours/${id}`, formData);
+  console.log('tourAction', response.data);
+  //dispatch({ type: UPDATE_TOUR, payload: response.data });
+  history.push('/')
 }
 
 // DELETE TOUR

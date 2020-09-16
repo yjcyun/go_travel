@@ -39,7 +39,7 @@ class ToursList extends Component {
 
           <Table>
             <span className='heading'>Tour Name</span>
-            <span className='heading'>Lead Guide</span>
+            <span className='heading'>Location</span>
             <span className='heading'></span>
             {this.renderTours()}
           </Table>

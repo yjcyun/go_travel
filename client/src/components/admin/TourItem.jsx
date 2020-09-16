@@ -3,12 +3,9 @@ import { Link } from 'react-router-dom'
 import { FiEdit, FiDelete } from 'react-icons/fi';
 import styled from 'styled-components'
 
-const TourItem = ({ name, id, guides, imageCover }) => {
-  const leadGuide = (guides) => {
-    if (guides.length === 0) return <span></span>
-    return <span>{guides[0].name}</span>
-  }
-  
+const TourItem = ({ name, id, startLocation, imageCover }) => {
+ 
+
   return (
     <>
       <span>
@@ -16,7 +13,7 @@ const TourItem = ({ name, id, guides, imageCover }) => {
           <Img src={`/tours/${imageCover}`} alt={name} />{name}
         </Link>
       </span>
-      {leadGuide(guides)}
+      <span>{startLocation}</span>
       <ActionSpan>
         <Link to={`/admin/tours/edit/${id}`}><FiEdit className='icon' /></Link>
         <div><FiDelete className='icon' /></div>

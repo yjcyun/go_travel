@@ -112,8 +112,8 @@ export const tourForm = [
   },
   {
     id: '15',
-    name: 'guide',
-    label: 'Guide Name',
+    name: 'startLocation',
+    label: 'Location',
     type: 'text'
   },
 ]

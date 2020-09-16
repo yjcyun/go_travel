@@ -61,7 +61,7 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
 });
 
 exports.createTour = catchAsync(async (req, res, next) => {
-  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'images', 'description', 'guides', 'startLocation');
+  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'images', 'description', 'startLocation');
 
   if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
   if (req.files) filteredBody.images = req.body.images;
@@ -69,12 +69,35 @@ exports.createTour = catchAsync(async (req, res, next) => {
 
   // 3) Update user doc
   const doc = await Tour.create(filteredBody);
-
+  console.log(doc);
   res.status(201).json({
     status: 'success',
     data: { data: doc }
   });
 })
+
+exports.updateTour = catchAsync(async (req, res, next) => {
+  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'images', 'description', 'startLocation');
+  console.log('Backend-updateTour', req.params)
+  if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
+  if (req.files) filteredBody.images = req.body.images;
+
+  const doc = await Tour.findByIdAndUpdate(req.params.id, filteredBody, {
+    new: true,
+    runValidators: true
+  });
+
+  if (!doc) {
+    return next(new AppError('No doc found with that ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: { doc }
+  });
+});;
+
+
 
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
@@ -82,6 +105,7 @@ exports.aliasTopTours = (req, res, next) => {
   req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
   next();
 }
+
 
 exports.getAllTours = factory.getAll(Tour);
 exports.getTour = factory.getOne(Tour, { path: 'reviews' });
@@ -96,7 +120,7 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 }
 
-exports.updateTour = factory.updateOne(Tour);
+
 exports.deleteTour = factory.deleteOne(Tour);
 
 exports.getTourStats = catchAsync(async (req, res, next) => {

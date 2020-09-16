@@ -89,12 +89,10 @@ const tourSchema = new mongoose.Schema({
       day: Number
     }
   ],
-  guides: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'User'
-    }
-  ]
+  guides: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  }
 }, {
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
@@ -103,6 +101,7 @@ const tourSchema = new mongoose.Schema({
 // Improve read performance with Indexes
 tourSchema.index({ price: 1, ratingsAverage: -1 });
 tourSchema.index({ slug: 1 });
+
 
 // VIRTUAL POPULATE
 tourSchema.virtual('reviews', {

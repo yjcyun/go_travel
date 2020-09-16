@@ -10,7 +10,7 @@ export const tourReducer = (state = {}, action) => {
     case CREATE_TOUR:
       return { ...state, [action.payload.data.data.id]: action.payload.data.data };
     case UPDATE_TOUR:
-      return { ...state, [action.payload.data.data.id]: action.payload.data.data };
+      return { ...state, [action.payload.data.doc.id]: action.payload.data.data };
     case DELETE_TOUR:
       return _.omit(state, action.payload.data.data);
     default:
