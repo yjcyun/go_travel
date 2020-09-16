@@ -63,11 +63,13 @@ export const updateTour = (id, formValues) => async dispatch => {
   if (formValues.duration) formData.append('duration', formValues.duration);
 
   if (formValues.startLocation) formData.append('startLocation', formValues.startLocation);
+  if (formValues.startDates) formData.append('startDates', formValues.startDates);
 
   if (formValues.imageCover) formData.append('imageCover', formValues.imageCover[0]);
-  if (formValues.image1) formData.append('image1', formValues.image1);
-  if (formValues.image2) formData.append('image2', formValues.image2);
-  if (formValues.image3) formData.append('image3', formValues.image3);
+  if (formValues.image1) formData.append('image1', formValues.image1[0]);
+  if (formValues.image2) formData.append('image2', formValues.image2[0]);
+  if (formValues.image3) formData.append('image3', formValues.image3[0]);
+
 
   const response = await axios.patch(`/api/v1/tours/${id}`, formData);
   dispatch({ type: UPDATE_TOUR, payload: response.data });

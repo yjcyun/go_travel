@@ -3,9 +3,9 @@ import { Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { forgotPassword } from '../../redux/actions/authActions'
 import { forgotPassForm } from '../../constants/formFields'
-import FormInput from '../FormInput'
-import Alert from '../Alert'
+import Alert from '../utils/Alert'
 import AuthFormTemplate from './AuthFormTemplate'
+import FormInput from '../utils/FormInput'
 
 class PasswordForgot extends Component {
   // RENDER FormInput.jsx

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { loadUser, updateUserProfile } from '../../redux/actions/authActions'
 import { reduxForm } from 'redux-form'
 import { FormWrapper, ButtonWrapper, Button } from '../../globalStyle'
-import FormInput from '../FormInput'
+import FormInput from '../utils/FormInput'
 import styled from 'styled-components'
 
 class EditProfile extends Component {

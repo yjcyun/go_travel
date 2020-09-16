@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Title from '../../Title'
+import Title from '../../utils/Title'
 import styled from 'styled-components'
 
 const TourGallery = ({ image1, image2, image3 }) => {

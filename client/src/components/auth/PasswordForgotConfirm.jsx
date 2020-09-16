@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Hr, ButtonWrapper, FormWrapper } from '../../globalStyle'
 import Logo from '../nav/Logo'
-import Alert from '../Alert'
+import Alert from '../utils/Alert'
 
 class PasswordForgotConfirm extends Component {
   render() {

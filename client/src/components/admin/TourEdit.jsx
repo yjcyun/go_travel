@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import { tourForm } from '../../constants/formFields'
 import { fetchTour, updateTour } from '../../redux/actions/tourActions'
 import { ButtonWrapper, Button, TourFormWrapper, ProfilePageWrapper } from '../../globalStyle'
-import FormInput from '../FormInput'
 import ProfileSidebar from '../profile/ProfileSidebar'
 import ProfileBody from '../profile/ProfileBody'
 import styled from 'styled-components'
-import FormSelect from '../FormSelect'
+import FormInput from '../utils/FormInput'
+import FormSelect from '../utils/FormSelect'
+import FormFile from '../utils/FormFile'
 
 class TourEdit extends Component {
   componentDidMount() {
@@ -20,19 +21,15 @@ class TourEdit extends Component {
   renderSelect = props => <FormSelect {...props} white />
 
   // FILE UPLOAD COMPONENT
-  fileUpload = ({ label, input, type }) => {
-    delete input.value;
-    return (
-      <>
-        <label>{label}</label>
-        <input type={type} {...input} />
-      </>
-    )
-  }
+  fileUpload = props => <FormFile {...props} white />
 
   // FORM SUBMIT HANDLER
   onSubmit = formValues => {
-    console.log(formValues);
+    if (formValues.startDate) {
+      const time = new Date(formValues.startDate);
+      const convertedDate = time.toISOString();
+      formValues.startDate = convertedDate;
+    }
     this.props.updateTour(this.props.match.params.id, formValues);
   };
 
@@ -72,16 +69,30 @@ class TourEdit extends Component {
                   accept='image/*'
                 />
                 <Field
-                  name='images'
+                  name='image1'
                   type='file'
-                  label='Cover Image'
+                  label='Image 1'
+                  component={this.fileUpload}
+                  accept='image/*'
+                />
+                <Field
+                  name='image2'
+                  type='file'
+                  label='Image2'
+                  component={this.fileUpload}
+                  accept='image/*'
+                />
+                <Field
+                  name='image3'
+                  type='file'
+                  label='Image3'
                   component={this.fileUpload}
                   accept='image/*'
                 />
 
               </div>
               <ButtonWrapper>
-                <Button type='submit' dark>Create</Button>
+                <Button type='submit' dark>Update</Button>
               </ButtonWrapper>
             </Form>
           </TourFormWrapper>
@@ -119,7 +130,7 @@ const tourReduxForm = reduxForm({
 
 const mapStateToProps = (state, ownProps) => {
   let initialValues = state.tours[ownProps.match.params.id];
- 
+
   return {
     tour: state.tours[ownProps.match.params.id],
     initialValues: initialValues

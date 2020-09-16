@@ -1,34 +1,7 @@
-// import React from 'react'
-// import styled from 'styled-components'
-// import { Label, InputWrapper, Input, Error } from '../globalStyle';
-
-// const FormSelect = (props) => {
-//   const { label, input, meta, values } = props;
-//   const errorInput = meta.error && meta.touched;
-
-//   const renderOptions = ({ value, label }) => {
-//     return <option key={value} value={value}>{label}</option>
-//   }
-
-//   return (
-//     <InputWrapper>
-//       <Label>{label}</Label>
-//       <Input error={errorInput} {...input}>
-//         <option value=''>Select</option>
-//         {values ? values.map(value => renderOptions(value)) : null}
-//       </Input>
-//       {errorInput
-//         ? <Error>{meta.error}</Error>
-//         : null}
-//     </InputWrapper>
-//   )
-// }
-
-// export default FormSelect
-
 import React from 'react'
 import styled from 'styled-components'
-import { InputWrapper, Label, Error } from '../globalStyle';
+import { InputWrapper, Label, Error } from '../../globalStyle';
+
 
 const FormSelect = (props) => {
   const { label, input, meta, values, white } = props;

@@ -2,10 +2,10 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { fetchTours } from '../../redux/actions/tourActions'
+import { Button } from '../../globalStyle';
 import ProfileBody from '../profile/ProfileBody'
 import TourItem from './TourItem';
 import styled from 'styled-components';
-import { Button } from '../../globalStyle';
 
 class ToursList extends Component {
   componentDidMount() {

@@ -3,48 +3,28 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { tourForm } from '../../constants/formFields'
 import { createTour } from '../../redux/actions/tourActions'
-import { ButtonWrapper, Button, TourFormWrapper } from '../../globalStyle'
-import FormInput from '../FormInput'
+import { ButtonWrapper, TourFormWrapper } from '../../globalStyle'
+import FormInput from '../utils/FormInput'
 import styled from 'styled-components'
-import FormSelect from '../FormSelect'
+import FormSelect from '../utils/FormSelect'
+import FormFile from '../utils/FormFile'
 
 
 class TourFormTemplate extends Component {
 
-  // RENDER FormInput.jsx
+  // RENDER FORM INPUT/SELECT
   renderInput = props => <FormInput {...props} white />
-
   renderSelect = props => <FormSelect {...props} white />
 
-
   // FILE UPLOAD COMPONENT
-  fileUpload = ({ label, input, type }) => {
-    delete input.value;
-    return (
-      <>
-        <label>{label}</label>
-        <input type={type} {...input} />
-      </>
-    )
-  }
+  fileUpload = props => <FormFile {...props} white />
 
-  // FORM SUBMIT HANDLER
-  onSubmit = formValues => {
-    if (formValues.startDate) {
-      const time = new Date(formValues.startDate);
-      const convertedDate = time.toISOString();
-      formValues.startDate = convertedDate;
-    }
-    this.props.createTour(formValues);
-  };
-
-
+  // RENDER COMPONENT
   render() {
-
     return (
       <TourFormWrapper>
         <small style={{ color: 'tomato' }}>* fields are required</small>
-        <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <Form onSubmit={this.props.handleSubmit(this.props.minonSubmit)}>
           {tourForm.map(tour => {
             return (
               <Field
@@ -90,7 +70,7 @@ class TourFormTemplate extends Component {
             />
           </div>
           <ButtonWrapper>
-            <Button type='submit' dark>Create</Button>
+            {this.props.actions}
           </ButtonWrapper>
         </Form>
       </TourFormWrapper>
@@ -118,13 +98,13 @@ const validate = ({ name, price, maxGroupSize, duration, summary }) => {
   return errors;
 }
 
+// WRAP REDUX-FORM 
 const tourReduxForm = reduxForm({
   form: 'tourForm',
   validate
 })(TourFormTemplate);
 
-
-
+// WRAP REDUX
 export default connect(
   null, { createTour }
 )(tourReduxForm);

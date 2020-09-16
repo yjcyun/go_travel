@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 import { logIn } from '../../redux/actions/authActions'
 import { loginForm } from '../../constants/formFields'
 import styled from 'styled-components'
-import FormInput from '../FormInput'
-import Alert from '../Alert'
 import AuthFormTemplate from './AuthFormTemplate'
+import Alert from '../utils/Alert'
+import FormInput from '../utils/FormInput'
 
 class LoginForm extends Component {
   // RENDER FormInput.jsx

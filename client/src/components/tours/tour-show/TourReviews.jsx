@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import StarRatings from 'react-star-ratings';
 import { FaQuoteLeft } from 'react-icons/fa'
 import { AiOutlineMinus } from 'react-icons/ai'
-import Title from '../../Title'
+import Title from '../../utils/Title';
+
 
 const TourReviews = ({ reviews }) => {
   const betterDate = date => {

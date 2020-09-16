@@ -1,10 +1,10 @@
 import React from 'react'
-import { Input, InputWrapper, Label, Error } from '../globalStyle';
+import { Input, InputWrapper, Label, Error } from '../../globalStyle';
 
-const FormInput = (props) => {
-  const { label, input, type, meta, white, placeholder, disabled } = props;
+const FormFile = (props) => {
+  const { label, input, type, meta, white } = props;
   const errorInput = meta.error && meta.touched;
-
+  delete input.value;
   return (
     <InputWrapper>
       <Label white={white}>{label}</Label>
@@ -12,9 +12,6 @@ const FormInput = (props) => {
         {...input}
         error={errorInput}
         type={type}
-        autoComplete='off'
-        placeholder={placeholder}
-        disabled={disabled}
       />
       {errorInput
         ? <Error>{meta.error}</Error>
@@ -23,8 +20,4 @@ const FormInput = (props) => {
   )
 }
 
-
-
-
-
-export default FormInput
+export default FormFile

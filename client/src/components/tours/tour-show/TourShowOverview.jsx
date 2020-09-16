@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { AiOutlineClockCircle } from 'react-icons/ai'
 import { FiTrendingUp, FiUser, FiCalendar } from 'react-icons/fi'
-import Title from '../../Title'
+import Title from '../../utils/Title'
+
 
 const TourShowOverview = (props) => {
   // PROPS FROM TourShow.jsx

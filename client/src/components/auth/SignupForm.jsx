@@ -3,9 +3,9 @@ import { Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { signUp } from '../../redux/actions/authActions'
 import { signupForm } from '../../constants/formFields'
-import FormInput from '../FormInput'
 import AuthFormTemplate from './AuthFormTemplate'
-import Alert from '../Alert'
+import Alert from '../utils/Alert'
+import FormInput from '../utils/FormInput'
 
 class SignupForm extends Component {
   // INPUT FIELDS
