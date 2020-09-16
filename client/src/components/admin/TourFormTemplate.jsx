@@ -10,7 +10,7 @@ import FormSelect from '../FormSelect'
 
 
 class TourFormTemplate extends Component {
-  
+
   // RENDER FormInput.jsx
   renderInput = props => <FormInput {...props} white />
 
@@ -30,7 +30,11 @@ class TourFormTemplate extends Component {
 
   // FORM SUBMIT HANDLER
   onSubmit = formValues => {
-    console.log(formValues);
+    if (formValues.startDate) {
+      const time = new Date(formValues.startDate);
+      const convertedDate = time.toISOString();
+      formValues.startDate = convertedDate;
+    }
     this.props.createTour(formValues);
   };
 
@@ -54,7 +58,7 @@ class TourFormTemplate extends Component {
               />
             )
           })}
-
+          {/* IMAGES */}
           <div>
             <Field
               name='imageCover'
@@ -84,7 +88,6 @@ class TourFormTemplate extends Component {
               component={this.fileUpload}
               accept='image/*'
             />
-
           </div>
           <ButtonWrapper>
             <Button type='submit' dark>Create</Button>

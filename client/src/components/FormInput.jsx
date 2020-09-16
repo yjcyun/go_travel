@@ -2,8 +2,9 @@ import React from 'react'
 import { Input, InputWrapper, Label, Error } from '../globalStyle';
 
 const FormInput = (props) => {
-  const { label, input, type, meta, white, placeholder, disabled} = props;
+  const { label, input, type, meta, white, placeholder, disabled } = props;
   const errorInput = meta.error && meta.touched;
+
   return (
     <InputWrapper>
       <Label white={white}>{label}</Label>

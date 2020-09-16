@@ -25,14 +25,17 @@ export const createTour = (formValues) => async (dispatch) => {
     if (formValues.price) formData.append('price', formValues.price);
     if (formValues.maxGroupSize) formData.append('maxGroupSize', formValues.maxGroupSize);
     if (formValues.duration) formData.append('duration', formValues.duration);
-
     if (formValues.startLocation) formData.append('startLocation', formValues.startLocation);
-
+  
+    if (formValues.startDates) formData.append('startDates', formValues.startDates);
+  
+    // IMAGES
     if (formValues.imageCover) formData.append('imageCover', formValues.imageCover[0]);
     if (formValues.image1) formData.append('image1', formValues.image1[0]);
     if (formValues.image2) formData.append('image2', formValues.image2[0]);
     if (formValues.image3) formData.append('image3', formValues.image3[0]);
 
+    console.log(formValues)
     for (var pair of formData.entries()) {
       console.log('frontend', pair[0] + ' - ' + pair[1]);
     }

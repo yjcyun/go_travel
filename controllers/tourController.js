@@ -6,8 +6,7 @@ const AppError = require('../utils/appError');
 const factory = require('./handlerFactory');
 const slugify = require('slugify');
 
-
-
+// MULTER CONFIGUREATION
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
@@ -30,10 +29,11 @@ exports.uploadTourImages = upload.fields([
   { name: 'image3', maxCount: 1 },
 ]);
 
-
+// RESIZE UPLOADED IMAGES
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
 
   if (!req.files.imageCover || !req.files.image1 || !req.files.image2 || !req.files.image3) return next();
+
   const tourName = slugify(req.body.name);
 
   // 1) Cover Image
@@ -46,6 +46,7 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
     .toFile(`client/public/tours/${req.files.imageCover.filename}`);
 
   // 2) Images
+  // TODO: NEEDS REFACTORING. TOO MANY REPETITIONS
   req.files.image1.filename = `tour-${tourName}-${Date.now()}-1.jpeg`;
   await sharp(req.files.image1[0].buffer)
     .resize(2000, 1333)
@@ -66,23 +67,23 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
     .toFile(`client/public/tours/${req.files.image3.filename}`);
-console.log('req.files.image1.filename',req.files.image1.filename)
 
   next();
 });
 
+// CREATE TOUR CONTROLLER
 exports.createTour = catchAsync(async (req, res, next) => {
-  console.log('req.files',req.files);
-  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'image1', 'image2', 'image3', 'description', 'startLocation');
-  console.log('req.body', req.body)
+  console.log(req.body)
+  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'image1', 'image2', 'image3', 'description', 'startLocation','startDates');
+
   if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
   if (req.files) filteredBody.image1 = req.files.image1.filename;
   if (req.files) filteredBody.image2 = req.files.image2.filename;
   if (req.files) filteredBody.image3 = req.files.image3.filename;
-  console.log('filteredBody', filteredBody)
-
+console.log('filteredBody',filteredBody)
   // 3) Update user doc
   const doc = await Tour.create(filteredBody);
+  console.log(doc)
 
   res.status(201).json({
     status: 'success',
@@ -90,13 +91,14 @@ exports.createTour = catchAsync(async (req, res, next) => {
   });
 })
 
+// UPDATE TOUR CONTROLLER
 exports.updateTour = catchAsync(async (req, res, next) => {
-  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'images', 'description', 'startLocation');
-  console.log('Backend-updateTour', req.params)
+  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'image1', 'image2', 'image3', 'description', 'startLocation');
+
   if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
-  if (req.files) filteredBody.image1 = req.body.image1;
-  if (req.files) filteredBody.image2 = req.body.image2;
-  if (req.files) filteredBody.image3 = req.body.image3;
+  if (req.files) filteredBody.image1 = req.files.image1.filename;
+  if (req.files) filteredBody.image2 = req.files.image2.filename;
+  if (req.files) filteredBody.image3 = req.files.image3.filename;
 
   const doc = await Tour.findByIdAndUpdate(req.params.id, filteredBody, {
     new: true,
