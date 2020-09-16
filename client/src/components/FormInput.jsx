@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import { Input, InputWrapper, Label, Error } from '../globalStyle';
 
 const FormInput = (props) => {

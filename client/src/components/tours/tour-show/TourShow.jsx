@@ -19,7 +19,7 @@ class TourShow extends Component {
       return <div>Loading...</div>
     }
 
-    const { name, images } = this.props.tour;
+    const { name } = this.props.tour;
 
     return (
         <TourShowContainer>
@@ -27,7 +27,7 @@ class TourShow extends Component {
           <TourShowHeader {...this.props.tour} />
           <TourShowHeaderImg {...this.props.tour} />
           <TourShowOverview {...this.props.tour} />
-          <TourGallery image={images} />
+          <TourGallery {...this.props.tour} />
           <TourReviews {...this.props.tour} />
           <TourBanner {...this.props.tour} />
         </TourShowContainer>

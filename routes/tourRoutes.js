@@ -38,6 +38,7 @@ router
     tourController.createTour
   );
 
+
 router
   .route('/:id')
   .get(tourController.getTour)

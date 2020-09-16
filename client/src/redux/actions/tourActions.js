@@ -29,10 +29,16 @@ export const createTour = (formValues) => async (dispatch) => {
     if (formValues.startLocation) formData.append('startLocation', formValues.startLocation);
 
     if (formValues.imageCover) formData.append('imageCover', formValues.imageCover[0]);
-    if (formValues.images) formData.append('images', formValues.images[0]);
+    if (formValues.image1) formData.append('image1', formValues.image1[0]);
+    if (formValues.image2) formData.append('image2', formValues.image2[0]);
+    if (formValues.image3) formData.append('image3', formValues.image3[0]);
+
+    for (var pair of formData.entries()) {
+      console.log('frontend', pair[0] + ' - ' + pair[1]);
+    }
 
     const response = await axios.post('/api/v1/tours', formData);
-    console.log(response)
+
     dispatch({ type: CREATE_TOUR, payload: response.data });
     //FIXME: PAGE RELOADS AFTER DISPATCH - possibly from the backend? history.push does not work
     history.push('/');
@@ -44,7 +50,6 @@ export const createTour = (formValues) => async (dispatch) => {
 
 // UPDATE TOUR
 export const updateTour = (id, formValues) => async dispatch => {
-
   const formData = new FormData();
   if (formValues.name) formData.append('name', formValues.name);
   if (formValues.summary) formData.append('summary', formValues.summary);
@@ -57,12 +62,12 @@ export const updateTour = (id, formValues) => async dispatch => {
   if (formValues.startLocation) formData.append('startLocation', formValues.startLocation);
 
   if (formValues.imageCover) formData.append('imageCover', formValues.imageCover[0]);
-
-  if (formValues.images) formData.append('images', formValues.images[0]);
+  if (formValues.image1) formData.append('image1', formValues.image1);
+  if (formValues.image2) formData.append('image2', formValues.image2);
+  if (formValues.image3) formData.append('image3', formValues.image3);
 
   const response = await axios.patch(`/api/v1/tours/${id}`, formData);
-  console.log('tourAction', response.data);
-  //dispatch({ type: UPDATE_TOUR, payload: response.data });
+  dispatch({ type: UPDATE_TOUR, payload: response.data });
   history.push('/')
 }
 

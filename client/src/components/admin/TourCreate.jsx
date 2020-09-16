@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { ProfilePageWrapper } from '../../globalStyle'
 import ProfileSidebar from '../profile/ProfileSidebar'
-import styled from 'styled-components'
 import ProfileBody from '../profile/ProfileBody'
 import TourFormTemplate from './TourFormTemplate'
-
 
 class TourCreate extends Component {
   render() {
@@ -19,6 +17,5 @@ class TourCreate extends Component {
     )
   }
 }
-
 
 export default TourCreate

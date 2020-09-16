@@ -6,6 +6,8 @@ const AppError = require('../utils/appError');
 const factory = require('./handlerFactory');
 const slugify = require('slugify');
 
+
+
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
@@ -23,14 +25,15 @@ const upload = multer({
 
 exports.uploadTourImages = upload.fields([
   { name: 'imageCover', maxCount: 1 },
-  { name: 'images', maxCount: 3 }
+  { name: 'image1', maxCount: 1 },
+  { name: 'image2', maxCount: 1 },
+  { name: 'image3', maxCount: 1 },
 ]);
 
-// upload.array('images',5)
 
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
-  if (!req.files.imageCover || !req.files.images) return next();
 
+  if (!req.files.imageCover || !req.files.image1 || !req.files.image2 || !req.files.image3) return next();
   const tourName = slugify(req.body.name);
 
   // 1) Cover Image
@@ -43,33 +46,44 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
     .toFile(`client/public/tours/${req.files.imageCover.filename}`);
 
   // 2) Images
-  req.body.images = [];
-  await Promise.all(
-    req.files.images.map(async (file, i) => {
-      const filename = `tour-${tourName}-${Date.now()}-${i + 1}.jpeg`;
+  req.files.image1.filename = `tour-${tourName}-${Date.now()}-1.jpeg`;
+  await sharp(req.files.image1[0].buffer)
+    .resize(2000, 1333)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`client/public/tours/${req.files.image1.filename}`);
 
-      await sharp(file.buffer)
-        .resize(2000, 1333)
-        .toFormat('jpeg')
-        .jpeg({ quality: 90 })
-        .toFile(`client/public/tours/${filename}`);
+  req.files.image2.filename = `tour-${tourName}-${Date.now()}-2.jpeg`;
+  await sharp(req.files.image2[0].buffer)
+    .resize(2000, 1333)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`client/public/tours/${req.files.image2.filename}`);
 
-      req.body.images.push(filename);
-    })
-  )
+  req.files.image3.filename = `tour-${tourName}-${Date.now()}-3.jpeg`;
+  await sharp(req.files.image3[0].buffer)
+    .resize(2000, 1333)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`client/public/tours/${req.files.image3.filename}`);
+console.log('req.files.image1.filename',req.files.image1.filename)
+
   next();
 });
 
 exports.createTour = catchAsync(async (req, res, next) => {
-  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'images', 'description', 'startLocation');
-
+  console.log('req.files',req.files);
+  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'image1', 'image2', 'image3', 'description', 'startLocation');
+  console.log('req.body', req.body)
   if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
-  if (req.files) filteredBody.images = req.body.images;
-
+  if (req.files) filteredBody.image1 = req.files.image1.filename;
+  if (req.files) filteredBody.image2 = req.files.image2.filename;
+  if (req.files) filteredBody.image3 = req.files.image3.filename;
+  console.log('filteredBody', filteredBody)
 
   // 3) Update user doc
   const doc = await Tour.create(filteredBody);
-  console.log(doc);
+
   res.status(201).json({
     status: 'success',
     data: { data: doc }
@@ -80,7 +94,9 @@ exports.updateTour = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'images', 'description', 'startLocation');
   console.log('Backend-updateTour', req.params)
   if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
-  if (req.files) filteredBody.images = req.body.images;
+  if (req.files) filteredBody.image1 = req.body.image1;
+  if (req.files) filteredBody.image2 = req.body.image2;
+  if (req.files) filteredBody.image3 = req.body.image3;
 
   const doc = await Tour.findByIdAndUpdate(req.params.id, filteredBody, {
     new: true,
@@ -95,9 +111,7 @@ exports.updateTour = catchAsync(async (req, res, next) => {
     status: 'success',
     data: { doc }
   });
-});;
-
-
+});
 
 exports.aliasTopTours = (req, res, next) => {
   req.query.limit = '5';
@@ -106,20 +120,8 @@ exports.aliasTopTours = (req, res, next) => {
   next();
 }
 
-
 exports.getAllTours = factory.getAll(Tour);
 exports.getTour = factory.getOne(Tour, { path: 'reviews' });
-
-
-
-const filterObj = (obj, ...allowedFields) => {
-  const newObj = {};
-  Object.keys(obj).forEach(el => {
-    if (allowedFields.includes(el)) newObj[el] = obj[el];
-  })
-  return newObj;
-}
-
 
 exports.deleteTour = factory.deleteOne(Tour);
 
@@ -195,3 +197,11 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
     data: plan
   });
 });
+
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach(el => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  })
+  return newObj;
+}

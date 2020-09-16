@@ -18,7 +18,6 @@ import AdminToursPage from './pages/AdminToursPage';
 import TourEdit from './components/admin/TourEdit';
 import TourCreate from './components/admin/TourCreate';
 import './app.css';
-import testing from './components/admin/testing';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -55,7 +54,6 @@ const App = () => {
       <Route exact path='/admin/tours' component={AdminToursPage} />
       <Route exact path='/admin/tours/create' component={TourCreate} />
       <Route path='/admin/tours/edit/:id' component={TourEdit} />
-      <Route path='/testing' component={testing} />
     </div>
   )
 

@@ -4,26 +4,18 @@ import { connect } from 'react-redux'
 import { tourForm } from '../../constants/formFields'
 import { createTour } from '../../redux/actions/tourActions'
 import { ButtonWrapper, Button, TourFormWrapper } from '../../globalStyle'
-import Dropzone from 'react-dropzone'
 import FormInput from '../FormInput'
 import styled from 'styled-components'
 import FormSelect from '../FormSelect'
 
-class TourFormTemplate extends Component {
-  constructor() {
-    super();
-    this.onDrop = (files) => {
-      this.setState({ files })
-    };
-    this.state = {
-      files: []
-    };
-  }
 
+class TourFormTemplate extends Component {
+  
   // RENDER FormInput.jsx
   renderInput = props => <FormInput {...props} white />
 
   renderSelect = props => <FormSelect {...props} white />
+
 
   // FILE UPLOAD COMPONENT
   fileUpload = ({ label, input, type }) => {
@@ -36,38 +28,14 @@ class TourFormTemplate extends Component {
     )
   }
 
-  renderDropzoneInput = ({ input, name, meta }) => {
-    const files = input.value;
-    return (
-      <>
-        <Dropzone
-          name={name}
-          onDrop={filesToUpload => input.onChange(filesToUpload)}
-        >
-          <div>Try dropping some files here, or click to select files to upload</div>
-        </Dropzone>
-        {meta.touched && meta.error &&
-          <span className='error'>{meta.error}</span>}
-        {files && Array.isArray(files) && (
-          <ul>
-            {files.map((file, i) => <li key={i}>{file.name}</li>)}
-          </ul>
-        )}
-      </>
-    )
-  }
-
   // FORM SUBMIT HANDLER
   onSubmit = formValues => {
     console.log(formValues);
     this.props.createTour(formValues);
   };
 
+
   render() {
-    const files = this.state.files.map(file => (
-      <li key={file.name}>{file.name}</li>
-    ));
-    console.log(files);
 
     return (
       <TourFormWrapper>
@@ -95,21 +63,27 @@ class TourFormTemplate extends Component {
               component={this.fileUpload}
               accept='image/*'
             />
-
-            <Dropzone onDrop={this.onDrop}>
-              {({ getRootProps, getInputProps }) => (
-                <section className="container">
-                  <aside>
-                    <h4>Images</h4>
-                  </aside>
-                  <div {...getRootProps({ className: 'dropzone' })}>
-                    <input {...getInputProps()} />
-                    <p>Drag 'n' drop some files here, or click to select files</p>
-                  </div>
-                  <ul>{files}</ul>
-                </section>
-              )}
-            </Dropzone>
+            <Field
+              name='image1'
+              type='file'
+              label='Image 1'
+              component={this.fileUpload}
+              accept='image/*'
+            />
+            <Field
+              name='image2'
+              type='file'
+              label='Image2'
+              component={this.fileUpload}
+              accept='image/*'
+            />
+            <Field
+              name='image3'
+              type='file'
+              label='Image3'
+              component={this.fileUpload}
+              accept='image/*'
+            />
 
           </div>
           <ButtonWrapper>

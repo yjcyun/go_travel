@@ -2,18 +2,31 @@ import React, { useState } from 'react'
 import Title from '../../Title'
 import styled from 'styled-components'
 
-const TourGallery = ({ image }) => {
-  const [imageIndex, setImageIndex] = useState(0);
-
+const TourGallery = ({ image1, image2, image3 }) => {
+  const [image, setImage] = useState(image1);
   const renderImage = () => {
-    return image.map((img, index) => (
-      <img
-        src={`/tours/${img}`}
-        key={img}
-        alt={img}
-        onClick={() => setImageIndex(index)}
-      />
-    ))
+    return (
+      <>
+        <img
+          src={`/tours/${image1}`}
+          key={image1}
+          alt={image1}
+          onClick={() => setImage(image1)}
+        />
+        <img
+          src={`/tours/${image2}`}
+          key={image2}
+          alt={image2}
+          onClick={() => setImage(image2)}
+        />
+        <img
+          src={`/tours/${image3}`}
+          key={image3}
+          alt={image3}
+          onClick={() => setImage(image3)}
+        />
+      </>
+    )
   }
 
 
@@ -24,7 +37,7 @@ const TourGallery = ({ image }) => {
       </TitleWrapper>
       <Gallery>
         <div>
-          <img src={`/tours/${image[imageIndex]}`} alt={image[0]} />
+          <img src={`/tours/${image}`} alt={image} />
         </div>
         <Thumbnails>
           {renderImage()}
