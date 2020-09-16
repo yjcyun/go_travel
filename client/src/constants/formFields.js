@@ -93,18 +93,6 @@ export const tourForm = [
     type: 'text'
   },
   {
-    id: '8',
-    name: 'priceDiscount',
-    label: 'Discount',
-    type: 'number'
-  },
-  {
-    id: '9',
-    name: 'description',
-    label: 'Description',
-    type: 'text'
-  },
-  {
     id: '10',
     name: 'startDates',
     label: 'Start Dates',
@@ -116,4 +104,31 @@ export const tourForm = [
     label: 'Location',
     type: 'text'
   },
+]
+
+export const imageForm = [
+  {
+    id: 1,
+    name:'imageCover',
+    label: 'Cover Image',
+    type:'file'
+  },
+  {
+    id: 2,
+    name:'image1',
+    label: 'Image 1',
+    type:'file'
+  },
+  {
+    id: 3,
+    name:'image2',
+    label: 'Image 2',
+    type:'file'
+  },
+  {
+    id: 4,
+    name:'image3',
+    label: 'Image 3',
+    type:'file'
+  }
 ]

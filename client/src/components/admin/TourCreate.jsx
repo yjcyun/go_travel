@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Button, ProfilePageWrapper, TourFormWrapper, ButtonWrapper } from '../../globalStyle'
 import { createTour } from '../../redux/actions/tourActions'
+import { imageForm, tourForm } from '../../constants/formFields'
 import ProfileSidebar from '../profile/ProfileSidebar'
 import ProfileBody from '../profile/ProfileBody'
-import TourFormTemplate from './TourFormTemplate'
 import FormInput from '../utils/FormInput'
 import FormSelect from '../utils/FormSelect'
 import FormFile from '../utils/FormFile'
+import FormTextarea from '../utils/FormTextarea'
 import styled from 'styled-components'
-import { tourForm } from '../../constants/formFields'
 
 class TourCreate extends Component {
 
@@ -19,6 +19,7 @@ class TourCreate extends Component {
   renderSelect = props => <FormSelect {...props} white />
   // FILE UPLOAD COMPONENT
   fileUpload = props => <FormFile {...props} white />
+  renderTextarea = props => <FormTextarea {...props} white />
 
   // FORM SUBMIT HANDLER
   onSubmit = formValues => {
@@ -53,37 +54,22 @@ class TourCreate extends Component {
                   />
                 )
               })}
-              {/* IMAGES */}
-              <div>
+              {imageForm.map(image => (
                 <Field
-                  name='imageCover'
-                  type='file'
-                  label='Cover Image'
+                  key={image.id}
+                  name={image.name}
+                  label={image.label}
+                  type={image.type}
                   component={this.fileUpload}
                   accept='image/*'
                 />
-                <Field
-                  name='image1'
-                  type='file'
-                  label='Image 1'
-                  component={this.fileUpload}
-                  accept='image/*'
-                />
-                <Field
-                  name='image2'
-                  type='file'
-                  label='Image2'
-                  component={this.fileUpload}
-                  accept='image/*'
-                />
-                <Field
-                  name='image3'
-                  type='file'
-                  label='Image3'
-                  component={this.fileUpload}
-                  accept='image/*'
-                />
-              </div>
+              ))}
+              <Field
+                name='description'
+                label='Description'
+                component={this.renderTextarea}
+                placeholder='Write a description of tour'
+              />
               <ButtonWrapper>
                 <Button type='submit' dark>Create</Button>
               </ButtonWrapper>

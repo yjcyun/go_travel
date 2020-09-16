@@ -29,7 +29,7 @@ img {
   width: 100%;
 }
 
-input, button {
+input, button, textarea {
   font-family: 'Poppins', sans-serif;
 }
 

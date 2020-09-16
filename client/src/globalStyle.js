@@ -72,7 +72,6 @@ export const TourFormWrapper = styled.div`
   }
 `
 
-
 export const InputWrapper = styled.div`
   position: relative;
   margin-top: 2.5rem;
@@ -90,6 +89,16 @@ export const Input = styled.input`
   &[type=password] {
     letter-spacing: 0.2rem;
   }
+`
+
+export const Textarea = styled.textarea`
+  border: ${props => props.error ? '1px solid tomato' : 'var(--border)'};
+  border-radius: 5px;
+  padding: 0.7rem 1.5rem;
+  background-color:  transparent;
+  display: block;
+  width: 100%;
+  position: relative;
 `
 export const Label = styled.label`
   position: absolute;
