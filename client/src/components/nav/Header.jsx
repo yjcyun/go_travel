@@ -22,8 +22,8 @@ const Header = (props) => {
         const name = props.auth.user.name.split(' ')[0];
         return (
           <Fragment key={nav.text}>
-            <NavItem key={nav.text} onClick={() => renderDropdown()}>
-              <img src={`/users/${props.auth.user.photo}`} alt='' className='avatar' /> {name}
+            <NavItem key={nav.text} onClick={() => renderDropdown()} dark={props.dark}>
+              <img src={`/users/${props.auth.user.photo}`} alt='' className='avatar' /><span>{name}</span>
             </NavItem>
             {dropDown && <MenuDropdown close={renderDropdown} />}
           </Fragment>
@@ -32,7 +32,7 @@ const Header = (props) => {
     }
 
     return (
-      <NavItem key={nav.text} >
+      <NavItem key={nav.text} dark={props.dark}>
         <NavLink to={`${nav.url}`}>
           {nav.text}
         </NavLink>
@@ -41,8 +41,8 @@ const Header = (props) => {
   })
 
   return (
-    <HeaderWrapper>
-      <Logo />
+    <HeaderWrapper className='body-container'>
+      <Logo dark />
       <NavsList>
         {renderLinks}
       </NavsList>
@@ -65,10 +65,11 @@ const HeaderWrapper = styled.nav`
   height: 5rem;
   position: relative;
   transition: all 0.2s;
+  width: 100%;
 `
 
 const NavsList = styled.ul`
-  text-transform: uppercase;
+  text-transform: capitalize;
   display: none;
   position: relative;
 
@@ -89,10 +90,16 @@ const MenuBar = styled.div`
 
 const NavItem = styled.li`
   list-style: none;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   cursor: pointer;
   display: flex;
   align-items: center;
+
+  a, span {
+    color: ${props => props.dark ? '#fff' : '#000'};
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
 
   .avatar {
     width: 45px;

@@ -26,8 +26,8 @@ const ToursItem = ({ name, price, duration, summary, imageCover, slug, id }) => 
 const TourCard = styled.div`
   box-shadow: rgba(2,12,27,0.7) 5px 8px 10px -15px;
   background: #fff;
-  border-radius: 0.7rem;
   position: relative;
+  color: #000;
 
   span {
     color: var(--accent-clr);
@@ -38,8 +38,6 @@ const CardImg = styled.div`
   img {
     width: 100%;
     height: 200px;
-    border-top-left-radius:0.7rem;
-    border-top-right-radius:0.7rem;
   }
 `
 
@@ -48,6 +46,10 @@ const CardBody = styled.div`
 
   p {
     margin: 1.5rem 0;
+  }
+  
+  small {
+    color: var(--accent-clr);
   }
 `
 

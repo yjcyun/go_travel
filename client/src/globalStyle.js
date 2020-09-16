@@ -115,3 +115,17 @@ export const Error = styled.span`
   font-size: 0.8rem;
   position: absolute;
 `
+
+export const CardLayout = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: 2rem;
+  margin: 5rem auto;
+
+  a:nth-child(2){
+    padding-top: ${props => props.home ? '2rem' : ''};
+  }
+  a:nth-child(3){
+    padding-top: ${props => props.home ? '4rem' : ''};
+  }
+`

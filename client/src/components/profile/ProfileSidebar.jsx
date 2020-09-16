@@ -1,20 +1,57 @@
 import React from 'react'
 import { BsPeopleFill } from 'react-icons/bs';
 import { MdDashboard } from 'react-icons/md';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-const ProfileSidebar = () => {
+const ProfileSidebar = (props) => {
   const checkActive = (match, location) => {
     if (!location) return false;
     const { pathname } = location;
     return pathname === "/me/profile";
   }
 
+
+  const renderAdminNav = () => {
+    if (!props.isAdmin.user) {
+      return;
+    } else if (props.isAdmin.user.role === 'admin') {
+      return (
+        <>
+          <Admin>
+            <p className='header'>Admin</p>
+            <NavList>
+              <NavLink to='/admin/tours' activeClassName='selected'>
+                <BsPeopleFill /> Manage tours
+          </NavLink>
+            </NavList>
+            <NavList>
+              <NavLink to='/admin/users' activeClassName='selected'>
+                <BsPeopleFill /> manage users
+          </NavLink>
+            </NavList>
+            <NavList>
+              <NavLink to='/admin/reviews' activeClassName='selected'>
+                <BsPeopleFill /> manage reviews
+          </NavLink>
+            </NavList>
+            <NavList>
+              <NavLink to='/admin/bookings' activeClassName='selected'>
+                <BsPeopleFill /> manage bookings
+          </NavLink>
+            </NavList>
+          </Admin>
+        </>
+      )
+    }
+  }
+
+
   return (
     <SideNavWrapper>
       <ul>
-      <p className='header'>User</p>
+        <p className='header'>User</p>
         <NavList>
           <NavLink to='/me/profile' activeClassName='selected' isActive={checkActive}>
             <MdDashboard /> Profile
@@ -31,29 +68,7 @@ const ProfileSidebar = () => {
           </NavLink>
         </NavList>
         {/* ADMIN ONLY */}
-        <Admin>
-          <p className='header'>Admin</p>
-          <NavList>
-            <NavLink to='/admin/tours' activeClassName='selected'>
-              <BsPeopleFill /> Manage tours
-          </NavLink>
-          </NavList>
-          <NavList>
-            <NavLink to='/admin/users' activeClassName='selected'>
-              <BsPeopleFill /> manage users
-          </NavLink>
-          </NavList>
-          <NavList>
-            <NavLink to='/admin/reviews' activeClassName='selected'>
-              <BsPeopleFill /> manage reviews
-          </NavLink>
-          </NavList>
-          <NavList>
-            <NavLink to='/admin/bookings' activeClassName='selected'>
-              <BsPeopleFill /> manage bookings
-          </NavLink>
-          </NavList>
-        </Admin>
+        {renderAdminNav()}
       </ul>
     </SideNavWrapper>
   )
@@ -68,7 +83,6 @@ const SideNavWrapper = styled.aside`
   display: none;
 
   .header {
-    padding-left: 2rem;
     background-color: var(--accent-dark);
     padding: 0.5rem 0 0.5rem 2rem;
     border-top-left-radius: 2rem;
@@ -76,7 +90,7 @@ const SideNavWrapper = styled.aside`
   }
 
   @media (min-width: 768px) {
-    display: flex;
+    display: block;
   }
 `;
 
@@ -103,4 +117,8 @@ const Admin = styled.div`
   margin-top: 4rem;
 `
 
-export default ProfileSidebar
+const mapStateToProps = state => {
+  return { isAdmin: state.auth }
+}
+
+export default connect(mapStateToProps)(ProfileSidebar)

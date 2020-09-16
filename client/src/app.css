@@ -18,10 +18,10 @@
 body {
   background-color: var(--background-clr);
   font-family: 'Poppins', sans-serif;
+  margin: 1.5rem;
 }
 
 a {
-  color: #000;
   text-decoration:none;
 }
 

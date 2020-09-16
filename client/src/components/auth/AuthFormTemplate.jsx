@@ -9,7 +9,7 @@ class AuthFormTemplate extends Component {
     const { title, alert, onSubmit, fields, forgotpass, button1, button2, linkto, auth } = this.props;
     return (
       <FormWrapper auth={auth}>
-        <Logo large />
+        <Logo largeLogo />
         <h2>{title}</h2>
         {alert}
         <form onSubmit={this.props.handleSubmit(onSubmit)}>

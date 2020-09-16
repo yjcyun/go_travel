@@ -5,7 +5,7 @@ import { STRIPE_CHECKOUT } from "../type/types";
 export const processPayment = (id, stripePromise) => async dispatch => {
   try {
     const stripe = await stripePromise;
-    const response = await axios(`/api/v1/booking/checkout-session/${id}`);
+    const response = await axios(`/api/v1/bookings/checkout-session/${id}`);
 
     await stripe.redirectToCheckout({
       sessionId: response.data.session.id

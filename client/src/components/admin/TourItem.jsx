@@ -23,17 +23,28 @@ const TourItem = ({ name, id, startLocation, imageCover }) => {
 const Img = styled.img`
   width: 4rem;
   margin-right: 1rem; 
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
 `
 
 const ActionSpan = styled.span`
   justify-content: flex-end;
 
-  div {
-    margin: 0 0.5rem;
+  a {
+    margin: 0 0.3rem;
 
     .icon {
       vertical-align:middle;
       margin-bottom: 2px;
+    }
+  }
+
+  @media (min-width: 768px ){
+    a {
+      margin: 0 0.5rem;
     }
   }
 `

@@ -15,6 +15,10 @@ router
   .get(bookingController.getAllBookings)
   .post(bookingController.createBooking);
 
+router.route('/my-tours')
+  .get(
+    bookingController.createBookingCheckout)
+
 router
   .route('/:id')
   .get(bookingController.getBooking)
