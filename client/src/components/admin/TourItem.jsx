@@ -4,8 +4,6 @@ import { FiEdit, FiDelete } from 'react-icons/fi';
 import styled from 'styled-components'
 
 const TourItem = ({ name, id, startLocation, imageCover }) => {
- 
-
   return (
     <>
       <span>
@@ -16,7 +14,7 @@ const TourItem = ({ name, id, startLocation, imageCover }) => {
       <span>{startLocation}</span>
       <ActionSpan>
         <Link to={`/admin/tours/edit/${id}`}><FiEdit className='icon' /></Link>
-        <div><FiDelete className='icon' /></div>
+        <Link to={`/admin/tours/delete/${id}`}><FiDelete className='icon' /></Link>
       </ActionSpan>
     </>
   )

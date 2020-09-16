@@ -26,9 +26,9 @@ export const createTour = (formValues) => async (dispatch) => {
     if (formValues.maxGroupSize) formData.append('maxGroupSize', formValues.maxGroupSize);
     if (formValues.duration) formData.append('duration', formValues.duration);
     if (formValues.startLocation) formData.append('startLocation', formValues.startLocation);
-  
+
     if (formValues.startDates) formData.append('startDates', formValues.startDates);
-  
+
     // IMAGES
     if (formValues.imageCover) formData.append('imageCover', formValues.imageCover[0]);
     if (formValues.image1) formData.append('image1', formValues.image1[0]);
@@ -80,4 +80,5 @@ export const updateTour = (id, formValues) => async dispatch => {
 export const deleteTour = id => async dispatch => {
   await axios.delete(`/api/v1/tours/${id}`);
   dispatch({ type: DELETE_TOUR, payload: id });
+  history.push('/admin/tours')
 }
