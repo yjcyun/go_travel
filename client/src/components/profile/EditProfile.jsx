@@ -16,7 +16,7 @@ class EditProfile extends Component {
   fileUpload = ({ input, type }) => {
     delete input.value;
     return (
-      <input type={type} {...input} />
+      <FileInput type={type} {...input} />
     )
   }
 
@@ -68,8 +68,13 @@ class EditProfile extends Component {
 // STYLE
 const UploadAvatar = styled.div`
   display: flex;
+  flex-direction: column;
   margin-top: 2.5rem;
   align-items: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 
   img {
     width: 5rem;
@@ -77,6 +82,13 @@ const UploadAvatar = styled.div`
     margin-right: 1rem;
   }
 `
+
+const FileInput = styled.input`
+  width:100%;
+  text-align:center;
+  padding-top: 1rem;
+`
+
 
 // REDUX STATE
 const mapStateToProps = state => {

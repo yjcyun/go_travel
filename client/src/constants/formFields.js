@@ -46,25 +46,19 @@ export const tourForm = [
   {
     id: '1',
     name: 'name',
-    label: 'Tour Name*',
-    type: 'text'
-  },
-  {
-    id: '2',
-    name: 'slug',
-    label: 'URL Name',
+    label: 'Tour Name',
     type: 'text'
   },
   {
     id: '3',
     name: 'price',
-    label: 'Price*',
+    label: 'Price',
     type: 'number'
   },
   {
     id: '4',
     name: 'difficulty',
-    label: 'Difficulty*',
+    label: 'Difficulty',
     type: 'select',
     values: [
       { label: 'Easy', value: 'easy' },
@@ -75,7 +69,7 @@ export const tourForm = [
   {
     id: '5',
     name: 'maxGroupSize',
-    label: 'Participants*',
+    label: 'Participants',
     type: 'number',
     min: '1'
   },
@@ -83,13 +77,13 @@ export const tourForm = [
   {
     id: '6',
     name: 'duration',
-    label: 'Duration*',
+    label: 'Duration',
     type: 'number'
   },
   {
     id: '7',
     name: 'summary',
-    label: 'Summary*',
+    label: 'Summary',
     type: 'text'
   },
   {

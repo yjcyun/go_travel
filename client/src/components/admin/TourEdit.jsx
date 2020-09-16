@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { tourForm } from '../../constants/formFields'
+import { imageForm, tourForm } from '../../constants/formFields'
 import { fetchTour, updateTour } from '../../redux/actions/tourActions'
 import { ButtonWrapper, Button, TourFormWrapper, ProfilePageWrapper } from '../../globalStyle'
 import ProfileSidebar from '../profile/ProfileSidebar'
@@ -9,6 +9,7 @@ import ProfileBody from '../profile/ProfileBody'
 import styled from 'styled-components'
 import FormInput from '../utils/FormInput'
 import FormSelect from '../utils/FormSelect'
+import FormTextarea from '../utils/FormTextarea'
 import FormFile from '../utils/FormFile'
 
 class TourEdit extends Component {
@@ -19,7 +20,7 @@ class TourEdit extends Component {
   // RENDER FormInput.jsx
   renderInput = props => <FormInput {...props} white />
   renderSelect = props => <FormSelect {...props} white />
-
+  renderTextarea = props => <FormTextarea {...props} white />
   // FILE UPLOAD COMPONENT
   fileUpload = props => <FormFile {...props} white />
 
@@ -44,7 +45,7 @@ class TourEdit extends Component {
         <ProfileBody>
           <h2>Edit Tour</h2>
           <TourFormWrapper>
-            <small style={{ color: 'tomato' }}>* fields are required</small>
+            <small style={{ color: 'tomato' }}>All fields are required</small>
             <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
               {tourForm.map(tour => {
                 return (
@@ -59,38 +60,22 @@ class TourEdit extends Component {
                   />
                 )
               })}
-
-              <div>
+              {imageForm.map(image => (
                 <Field
-                  name='imageCover'
-                  type='file'
-                  label='Cover Image'
+                  key={image.id}
+                  name={image.name}
+                  label={image.label}
+                  type={image.type}
                   component={this.fileUpload}
                   accept='image/*'
                 />
-                <Field
-                  name='image1'
-                  type='file'
-                  label='Image 1'
-                  component={this.fileUpload}
-                  accept='image/*'
-                />
-                <Field
-                  name='image2'
-                  type='file'
-                  label='Image2'
-                  component={this.fileUpload}
-                  accept='image/*'
-                />
-                <Field
-                  name='image3'
-                  type='file'
-                  label='Image3'
-                  component={this.fileUpload}
-                  accept='image/*'
-                />
-
-              </div>
+              ))}
+              <Field
+                name='description'
+                label='Description'
+                component={this.renderTextarea}
+                placeholder='Write a description of tour'
+              />
               <ButtonWrapper>
                 <Button type='submit' dark>Update</Button>
               </ButtonWrapper>
@@ -111,7 +96,7 @@ const Form = styled.form`
 `
 
 // FORM VALIDATE
-const validate = ({ name, price, maxGroupSize, duration, summary }) => {
+const validate = ({ name, price, maxGroupSize, duration, summary, startDates, description, startLocation, imageCover, image1, image2, image3 }) => {
   const errors = {};
 
   if (!name) errors.name = 'Enter tour name';
@@ -119,6 +104,13 @@ const validate = ({ name, price, maxGroupSize, duration, summary }) => {
   if (!maxGroupSize) errors.maxGroupSize = 'Enter number of participants';
   if (!duration) errors.duration = 'Enter tour duration';
   if (!summary) errors.summary = 'Enter tour summary';
+  if (!startDates) errors.startDates = 'Enter tour startDates';
+  if (!description) errors.description = 'Enter tour description';
+  if (!startLocation) errors.startLocation = 'Enter tour start location';
+  if (!imageCover) errors.imageCover = 'Enter tour thumbnail';
+  if (!image1) errors.image1 = 'Enter tour image1';
+  if (!image2) errors.image2 = 'Enter tour image2';
+  if (!image3) errors.image3 = 'Enter tour image3';
 
   return errors;
 }

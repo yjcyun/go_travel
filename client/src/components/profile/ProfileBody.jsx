@@ -15,7 +15,10 @@ const ProfileBodyWrapper = styled.div`
   width: 100%;
   background-color: #fff;
   box-shadow: var(--box-shadow);
-  padding: 5rem;
+
+  @media (min-width: 996px){
+    padding: 5rem;
+  }
 `
 
 export default ProfileBody

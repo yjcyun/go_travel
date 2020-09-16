@@ -65,6 +65,7 @@ const SideNavWrapper = styled.aside`
   width: 330px;
   padding: 5rem 0 5rem 1rem;
   color: #fff;
+  display: none;
 
   .header {
     padding-left: 2rem;
@@ -72,6 +73,10 @@ const SideNavWrapper = styled.aside`
     padding: 0.5rem 0 0.5rem 2rem;
     border-top-left-radius: 2rem;
     border-bottom-left-radius: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
   }
 `;
 

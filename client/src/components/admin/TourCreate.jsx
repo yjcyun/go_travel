@@ -39,41 +39,43 @@ class TourCreate extends Component {
         <ProfileBody>
           <h2>Create New Tour</h2>
           <TourFormWrapper>
-            <small style={{ color: 'tomato' }}>* fields are required</small>
-            <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-              {tourForm.map(tour => {
-                return (
+            <small style={{ color: 'tomato' }}>All fields are required</small>
+            <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+              <FormGrid>
+                {tourForm.map(tour => {
+                  return (
+                    <Field
+                      key={tour.label}
+                      name={tour.name}
+                      label={tour.label}
+                      type={tour.type}
+                      min={tour.min}
+                      values={tour.values}
+                      component={tour.type === 'select' ? this.renderSelect : this.renderInput}
+                    />
+                  )
+                })}
+                {imageForm.map(image => (
                   <Field
-                    key={tour.label}
-                    name={tour.name}
-                    label={tour.label}
-                    type={tour.type}
-                    min={tour.min}
-                    values={tour.values}
-                    component={tour.type === 'select' ? this.renderSelect : this.renderInput}
+                    key={image.id}
+                    name={image.name}
+                    label={image.label}
+                    type={image.type}
+                    component={this.fileUpload}
+                    accept='image/*'
                   />
-                )
-              })}
-              {imageForm.map(image => (
+                ))}
                 <Field
-                  key={image.id}
-                  name={image.name}
-                  label={image.label}
-                  type={image.type}
-                  component={this.fileUpload}
-                  accept='image/*'
+                  name='description'
+                  label='Description'
+                  component={this.renderTextarea}
+                  placeholder='Write a description of tour'
                 />
-              ))}
-              <Field
-                name='description'
-                label='Description'
-                component={this.renderTextarea}
-                placeholder='Write a description of tour'
-              />
+              </FormGrid>
               <ButtonWrapper>
-                <Button type='submit' dark>Create</Button>
+                <Button type='submit' dark>Create Tour</Button>
               </ButtonWrapper>
-            </Form>
+            </form>
           </TourFormWrapper>
         </ProfileBody>
       </ProfilePageWrapper>
@@ -81,7 +83,7 @@ class TourCreate extends Component {
   }
 }
 // FORM VALIDATE
-const validate = ({ name, price, maxGroupSize, duration, summary }) => {
+const validate = ({ name, price, maxGroupSize, duration, summary, startDates, description, startLocation, imageCover, image1, image2, image3 }) => {
   const errors = {};
 
   if (!name) errors.name = 'Enter tour name';
@@ -89,12 +91,19 @@ const validate = ({ name, price, maxGroupSize, duration, summary }) => {
   if (!maxGroupSize) errors.maxGroupSize = 'Enter number of participants';
   if (!duration) errors.duration = 'Enter tour duration';
   if (!summary) errors.summary = 'Enter tour summary';
+  if (!startDates) errors.startDates = 'Enter tour startDates';
+  if (!description) errors.description = 'Enter tour description';
+  if (!startLocation) errors.startLocation = 'Enter tour start location';
+  if (!imageCover) errors.imageCover = 'Enter tour thumbnail';
+  if (!image1) errors.image1 = 'Enter tour image1';
+  if (!image2) errors.image2 = 'Enter tour image2';
+  if (!image3) errors.image3 = 'Enter tour image3';
 
   return errors;
 }
 
 // STYLE
-const Form = styled.form`
+const FormGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 2rem;

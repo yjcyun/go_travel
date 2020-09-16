@@ -4,7 +4,7 @@ export const FormWrapper = styled.div`
   display:flex;
   flex-direction: column;
   justify-content: center;
-  padding: ${props => props.auth ? '0 1rem' : '5rem'};
+  padding: ${props => props.auth ? '0 1rem' : '2rem'};
 
   h2 {
     margin: 1.5rem 0;
@@ -14,6 +14,7 @@ export const FormWrapper = styled.div`
     margin: 0 auto;
     max-width: 600px;
     width: 100%;
+    padding: ${props => props.auth ? '0 1rem' : '5rem'};
   }
 `
 
