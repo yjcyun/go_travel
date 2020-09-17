@@ -2,12 +2,14 @@ export const loginForm = [
   {
     name: 'email',
     label: 'Email',
-    type: 'text'
+    type: 'text',
+    placeholder: 'admin@gotravel.com'
   },
   {
     name: 'password',
     label: 'Password',
-    type: 'password'
+    type: 'password',
+    placeholder:'test1234'
   }
 ];
 

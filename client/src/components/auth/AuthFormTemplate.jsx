@@ -11,6 +11,7 @@ class AuthFormTemplate extends Component {
       <FormWrapper>
         <Logo largeLogo light/>
         <h2>{title}</h2>
+        <p>Login as admin and try all the features or create a new account</p>
         {alert}
         <form onSubmit={this.props.handleSubmit(onSubmit)}>
           {fields}

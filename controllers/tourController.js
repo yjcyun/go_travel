@@ -46,7 +46,7 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
     .toFile(`client/public/tours/${req.files.imageCover.filename}`);
 
   // 2) Images
-  // TODO: NEEDS REFACTORING. TOO MANY REPETITIONS
+  //TODO: NEEDS REFACTORING.
   req.files.image1.filename = `tour-${tourName}-${Date.now()}-1.jpeg`;
   await sharp(req.files.image1[0].buffer)
     .resize(2000, 1333)
@@ -73,17 +73,16 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
 
 // CREATE TOUR CONTROLLER
 exports.createTour = catchAsync(async (req, res, next) => {
-  console.log(req.body)
-  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'image1', 'image2', 'image3', 'description', 'startLocation','startDates');
+
+  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'description', 'startLocation','startDates');
 
   if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
   if (req.files) filteredBody.image1 = req.files.image1.filename;
   if (req.files) filteredBody.image2 = req.files.image2.filename;
   if (req.files) filteredBody.image3 = req.files.image3.filename;
-console.log('filteredBody',filteredBody)
+ 
   // 3) Update user doc
   const doc = await Tour.create(filteredBody);
-  console.log(doc)
 
   res.status(201).json({
     status: 'success',
@@ -93,7 +92,7 @@ console.log('filteredBody',filteredBody)
 
 // UPDATE TOUR CONTROLLER
 exports.updateTour = catchAsync(async (req, res, next) => {
-  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'imageCover', 'image1', 'image2', 'image3', 'description', 'startLocation');
+  const filteredBody = filterObj(req.body, 'name', 'price', 'difficulty', 'maxGroupSize', 'summary', 'duration', 'description', 'startLocation');
 
   if (req.files) filteredBody.imageCover = req.files.imageCover.filename;
   if (req.files) filteredBody.image1 = req.files.image1.filename;
@@ -205,5 +204,6 @@ const filterObj = (obj, ...allowedFields) => {
   Object.keys(obj).forEach(el => {
     if (allowedFields.includes(el)) newObj[el] = obj[el];
   })
+  console.log(newObj)
   return newObj;
 }

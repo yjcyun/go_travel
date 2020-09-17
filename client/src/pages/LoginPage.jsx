@@ -28,6 +28,7 @@ class LoginPage extends Component {
         label={login.label}
         type={login.type}
         component={this.renderInput}
+        placeholder={login.placeholder}
       />
     ));
 

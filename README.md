@@ -13,6 +13,5 @@ Complete with
   * State management with Redux
   * Forms created with Redux-Form
   * Routes handled with React-Router-DOM
-  * Interactive map using Mapbox
   * Payment handled with Stripe
   * Use of both class-based and fuction-based components (will upgrade to all function-based in the future)

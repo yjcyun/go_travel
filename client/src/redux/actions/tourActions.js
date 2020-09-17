@@ -35,15 +35,13 @@ export const createTour = (formValues) => async (dispatch) => {
     if (formValues.image2) formData.append('image2', formValues.image2[0]);
     if (formValues.image3) formData.append('image3', formValues.image3[0]);
 
-    console.log(formValues)
-    for (var pair of formData.entries()) {
-      console.log('frontend', pair[0] + ' - ' + pair[1]);
-    }
+    // for (var pair of formData.entries()) {
+    //   console.log('frontend', pair[0] + ' - ' + pair[1]);
+    // }
 
     const response = await axios.post('/api/v1/tours', formData);
-
     dispatch({ type: CREATE_TOUR, payload: response.data });
-    //FIXME: PAGE RELOADS AFTER DISPATCH - possibly from the backend? history.push does not work
+    //FIXME: BUG ALERT !!! PAGE RELOADS AFTER DISPATCH - code does not run after line 43. Problem in tourController?
     history.push('/');
 
   } catch (err) {
