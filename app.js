@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 
+
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
@@ -29,14 +30,6 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-// Limit requests from same API
-// const limiter = rateLimit({
-//   max: 100,
-//   windowMs: 60 * 60 * 1000,
-//   message: 'Too many requests from this IP. Please try again in an hour.'
-// });
-// app.use('/api', limiter);
-
 // Body parser, adds data to the incoming body
 app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser());
@@ -52,13 +45,13 @@ app.use(hpp({
   whitelist: ['duration', 'ratingsQuantity', 'average', 'maxGroupSize', 'difficulty', 'price']
 }));
 
-
-
 // Add current time
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
 })
+
+
 
 // 2) ROUTES
 app.use('/api/v1/tours', tourRouter);

@@ -18,7 +18,6 @@
 body {
   /* background-color: var(--background-clr); */
   font-family: 'Poppins', sans-serif;
-  margin: 1.5rem;
 }
 
 a {
@@ -51,16 +50,23 @@ input:disabled {
 
 .body-container {
   max-width: 1170px;
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
   margin: auto;
 }
 
 .extra-margin {
-  margin: 10rem auto;
+  margin: 5rem auto;
 }
+
 
 @media (min-width: 568px) {
   .mb-10 {
     margin-bottom: 10rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .extra-margin{
+    margin: 13rem auto;
   }
 }

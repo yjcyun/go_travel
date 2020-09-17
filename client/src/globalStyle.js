@@ -122,3 +122,4 @@ export const CardLayout = styled.div`
   grid-gap: 2rem;
   margin: 5rem auto;
 `
+

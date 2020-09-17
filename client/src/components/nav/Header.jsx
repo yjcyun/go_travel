@@ -5,9 +5,9 @@ import { CgMenuRightAlt } from 'react-icons/cg';
 import { navLinks } from '../../constants/navLinks';
 import { logout } from '../../redux/actions/authActions';
 import HeaderMobile from './HeaderMobile';
-import styled from 'styled-components';
-import Logo from './Logo';
 import MenuDropdown from './MenuDropdown';
+import Logo from './Logo';
+import styled from 'styled-components';
 
 const Header = (props) => {
   const [open, setOpen] = useState(false);
@@ -66,6 +66,7 @@ const HeaderWrapper = styled.nav`
   position: relative;
   transition: all 0.2s;
   width: 100%;
+  padding: 0 1rem;
 `
 
 const NavsList = styled.ul`

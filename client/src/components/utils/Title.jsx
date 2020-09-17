@@ -31,7 +31,7 @@ const Accent = styled.div`
   height: 3px;
   width: 4rem;
   background-color: var(--accent-clr);
-  margin: ${props => props.center ? '0 auto 0.5rem' : '0 0 0.5rem'};
+  margin: ${props => props.center ? '0.5rem auto 0' : '0.5rem 0 0'};
 `
 
 export default Title
