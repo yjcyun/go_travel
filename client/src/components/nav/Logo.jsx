@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-const Logo = ({ largeLogo, light}) => {
+const Logo = ({ largeLogo, light }) => {
   return (
     <LogoWrapper large={largeLogo} light={light}>
       <Link to='/'>
@@ -22,7 +22,7 @@ const LogoWrapper = styled.div`
    a{
      display: flex;
      align-items: center;
-     color:${props=>props.light? '#000':'#fff'};
+     color:${props => props.light ? '#000' : '#fff'};
    }
 
   @media (min-width: 768px) {

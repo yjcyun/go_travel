@@ -27,7 +27,7 @@ const HeroWrapper = styled.section`
   height: calc(100vh - 3rem);
 
   @media(min-width: 768px) {
-    height: 80vh;
+    height: calc(100vh - 3rem);
   }
 `
 

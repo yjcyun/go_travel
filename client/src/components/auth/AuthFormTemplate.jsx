@@ -6,10 +6,10 @@ import Logo from '../nav/Logo'
 
 class AuthFormTemplate extends Component {
   render() {
-    const { title, alert, onSubmit, fields, forgotpass, button1, button2, linkto, auth } = this.props;
+    const { title, alert, onSubmit, fields, forgotpass, button1, button2, linkto, white} = this.props;
     return (
-      <FormWrapper auth={auth}>
-        <Logo largeLogo />
+      <FormWrapper>
+        <Logo largeLogo light/>
         <h2>{title}</h2>
         {alert}
         <form onSubmit={this.props.handleSubmit(onSubmit)}>
@@ -17,7 +17,7 @@ class AuthFormTemplate extends Component {
           {forgotpass}
           <ButtonWrapper>
             <Button type='submit' dark>{button1}</Button>
-            <AuthHr><span>or</span></AuthHr>
+            <AuthHr white={white}><span>or</span></AuthHr>
             <Link to={linkto}>
               <Button>{button2}</Button>
             </Link>

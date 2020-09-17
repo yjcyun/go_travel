@@ -47,11 +47,12 @@ export const AuthHr = styled.div`
   margin: 0.2rem auto;
   background-color: silver;
   position: relative;
+
   span {
     position: absolute;
     left: calc(50% - 1.5rem);
     top: -0.8rem;
-    background-color: var(--background-clr);
+    background-color: #fff;
     padding: 0 1rem;
     font-size: 0.9rem;
   }

@@ -12,7 +12,7 @@ const AboutUs = () => {
         <p>Read more <span>&#8594;</span></p>
       </div>
       <div className='about-image'>
-        <img src='background-1.jpg' alt='background-1' />
+        <img src='/tours/tour-1-4.jpg' alt='background-1' />
       </div>
     </AboutUsWrapper>
   )
