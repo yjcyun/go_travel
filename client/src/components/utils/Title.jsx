@@ -4,10 +4,10 @@ import styled from 'styled-components'
 const Title = ({ title, center }) => {
   return (
     <TitleContainer>
-      <Accent center={center}></Accent>
       <h2>
         {title}
       </h2>
+      <Accent center={center}></Accent>
     </TitleContainer>
 
   )

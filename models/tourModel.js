@@ -70,6 +70,7 @@ const tourSchema = new mongoose.Schema({
   image1: String,
   image2: String,
   image3: String,
+  images: [String],
   createdAt: {
     type: Date,
     default: Date.now(),

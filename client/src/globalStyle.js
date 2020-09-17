@@ -121,11 +121,4 @@ export const CardLayout = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-gap: 2rem;
   margin: 5rem auto;
-
-  a:nth-child(2){
-    padding-top: ${props => props.home ? '2rem' : ''};
-  }
-  a:nth-child(3){
-    padding-top: ${props => props.home ? '4rem' : ''};
-  }
 `
