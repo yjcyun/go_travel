@@ -60,7 +60,7 @@
     "image1": "tour-1-1.jpg",
     "image2": "tour-1-2.jpg",
     "image3": "tour-1-3.jpg",
-    "images":["tour-1-cover.jpg", "tour-1-1.jpg","tour-1-2.jpg","tour-1-3.jpg","tour-1-4.jpg","tour-1-5.jpg","tour-1-6.jpg"],
+    "images":["tour-1-cover.jpg", "tour-1-1.jpg","tour-1-2.jpg","tour-1-3.jpg","tour-1-4.jpg","tour-1-5.jpg"],
     "startDates": [
       "2021-04-25T09:00:00.000Z",
       "2021-07-20T09:00:00.000Z",

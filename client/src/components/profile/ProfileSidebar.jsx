@@ -18,31 +18,14 @@ const ProfileSidebar = (props) => {
       return;
     } else if (props.isAdmin.user.role === 'admin') {
       return (
-        <>
-          <Admin>
-            <p className='header'>Admin</p>
-            <NavList>
-              <NavLink to='/admin/tours' activeClassName='selected'>
-                <BsPeopleFill /> Manage tours
-          </NavLink>
-            </NavList>
-            <NavList>
-              <NavLink to='/admin/users' activeClassName='selected'>
-                <BsPeopleFill /> manage users
-          </NavLink>
-            </NavList>
-            <NavList>
-              <NavLink to='/admin/reviews' activeClassName='selected'>
-                <BsPeopleFill /> manage reviews
-          </NavLink>
-            </NavList>
-            <NavList>
-              <NavLink to='/admin/bookings' activeClassName='selected'>
-                <BsPeopleFill /> manage bookings
-          </NavLink>
-            </NavList>
-          </Admin>
-        </>
+        <Admin>
+          <p className='header'>Admin</p>
+          <NavList>
+            <NavLink to='/admin/tours' activeClassName='selected'>
+              <BsPeopleFill /> Manage tours
+              </NavLink>
+          </NavList>
+        </Admin>
       )
     }
   }
@@ -55,16 +38,6 @@ const ProfileSidebar = (props) => {
         <NavList>
           <NavLink to='/me/profile' activeClassName='selected' isActive={checkActive}>
             <MdDashboard /> Profile
-          </NavLink>
-        </NavList>
-        <NavList>
-          <NavLink to='/me/bookings' activeClassName='selected'>
-            <BsPeopleFill /> My Bookings
-          </NavLink>
-        </NavList>
-        <NavList>
-          <NavLink to='/me/reviews' activeClassName='selected'>
-            <BsPeopleFill /> My Reviews
           </NavLink>
         </NavList>
         {/* ADMIN ONLY */}

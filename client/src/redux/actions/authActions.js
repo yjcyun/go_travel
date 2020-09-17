@@ -58,7 +58,7 @@ export const logout = () => async dispatch => {
   try {
     const response = await axios.get('/api/v1/users/logout');
     dispatch({ type: LOG_OUT });
-    if (response.data.status === 'success') window.location.reload(true);
+    history.push('/');
   }
   catch (err) {
     console.log(err)

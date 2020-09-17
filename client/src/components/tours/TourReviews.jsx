@@ -12,7 +12,7 @@ const TourReviews = ({ reviews }) => {
   }
 
   const renderReviews = () => {
-    if(!reviews) return null;
+    if(!reviews) return <div>No reviews yet</div>;
 
     return reviews.filter((el, index) => index < 3).map(({ review, _id, user, rating, createdAt }) => (
       <ReviewCard key={_id}>

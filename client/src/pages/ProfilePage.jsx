@@ -1,13 +1,15 @@
 import React from 'react'
-import { ProfilePageWrapper } from '../globalStyle'
+import { ProfileBox, ProfilePageWrapper } from '../globalStyle'
 import ProfileSidebar from '../components/profile/ProfileSidebar'
 import UserProfile from '../components/profile/UserProfile'
 
 const ProfilePage = () => {
   return (
     <ProfilePageWrapper>
-      <ProfileSidebar />
-      <UserProfile />
+      <ProfileBox>
+        <ProfileSidebar />
+        <UserProfile />
+      </ProfileBox>
     </ProfilePageWrapper>
   )
 }

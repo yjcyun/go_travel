@@ -59,7 +59,13 @@ export const AuthHr = styled.div`
 `
 
 export const ProfilePageWrapper = styled.div`
-  margin: 5rem 0;
+  padding: 5rem 1rem;
+  background: #f4f4f4;
+`
+
+export const ProfileBox = styled.div`
+  max-width: 1170px;
+  margin: auto;
   display: flex;
 `
 
@@ -125,5 +131,13 @@ export const CardLayout = styled.div`
 
   @media(min-width:768px) {
     padding: 5rem 1rem;
+  }
+`
+
+export const BackButton = styled.div`
+  margin-bottom: 2rem;
+
+  a{
+    color: var(--accent-clr);
   }
 `

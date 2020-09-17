@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { imageForm, tourForm } from '../../constants/formFields'
 import { fetchTour, updateTour } from '../../redux/actions/tourActions'
-import { ButtonWrapper, Button, TourFormWrapper, ProfilePageWrapper } from '../../globalStyle'
+import { ButtonWrapper, Button, TourFormWrapper, ProfilePageWrapper, ProfileBox, BackButton } from '../../globalStyle'
+import { HiOutlineArrowNarrowLeft } from 'react-icons/hi';
 import ProfileSidebar from '../profile/ProfileSidebar'
 import ProfileBody from '../profile/ProfileBody'
 import styled from 'styled-components'
@@ -41,48 +43,52 @@ class TourEdit extends Component {
 
     return (
       <ProfilePageWrapper>
-        <ProfileSidebar />
-        <ProfileBody>
-          <h2>Edit Tour</h2>
-          <TourFormWrapper>
-            <small style={{ color: 'tomato' }}>All fields are required</small>
-            <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-              {tourForm.map(tour => {
-                return (
+        <ProfileBox>
+          <ProfileSidebar />
+          <ProfileBody>
+            <BackButton>
+              <Link to='/admin/tours'><HiOutlineArrowNarrowLeft />Go back to tour list</Link>
+            </BackButton>
+            <h2>Edit Tour</h2>
+            <TourFormWrapper>
+              <small style={{ color: 'tomato' }}>All fields are required</small>
+              <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                {tourForm.map(tour => {
+                  return (
+                    <Field
+                      key={tour.label}
+                      name={tour.name}
+                      label={tour.label}
+                      type={tour.type}
+                      min={tour.min}
+                      values={tour.values}
+                      component={tour.type === 'select' ? this.renderSelect : this.renderInput}
+                    />
+                  )
+                })}
+                {imageForm.map(image => (
                   <Field
-                    key={tour.label}
-                    name={tour.name}
-                    label={tour.label}
-                    type={tour.type}
-                    min={tour.min}
-                    values={tour.values}
-                    component={tour.type === 'select' ? this.renderSelect : this.renderInput}
+                    key={image.id}
+                    name={image.name}
+                    label={image.label}
+                    type={image.type}
+                    component={this.fileUpload}
+                    accept='image/*'
                   />
-                )
-              })}
-              {imageForm.map(image => (
+                ))}
                 <Field
-                  key={image.id}
-                  name={image.name}
-                  label={image.label}
-                  type={image.type}
-                  component={this.fileUpload}
-                  accept='image/*'
+                  name='description'
+                  label='Description'
+                  component={this.renderTextarea}
+                  placeholder='Write a description of tour'
                 />
-              ))}
-              <Field
-                name='description'
-                label='Description'
-                component={this.renderTextarea}
-                placeholder='Write a description of tour'
-              />
-              <ButtonWrapper>
-                <Button type='submit' dark>Update</Button>
-              </ButtonWrapper>
-            </Form>
-          </TourFormWrapper>
-
-        </ProfileBody>
+                <ButtonWrapper>
+                  <Button type='submit' dark>Update</Button>
+                </ButtonWrapper>
+              </Form>
+            </TourFormWrapper>
+          </ProfileBody>
+        </ProfileBox>
       </ProfilePageWrapper>
     )
   }

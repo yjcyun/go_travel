@@ -76,6 +76,7 @@ const Table = styled.div`
     a{
       display: flex;
       align-items: center;
+      color: #000;
     }
   }
 

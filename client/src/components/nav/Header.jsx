@@ -50,7 +50,7 @@ const Header = (props) => {
         <MenuBar>
           <CgMenuRightAlt onClick={() => setOpen(!open)} style={{ color: '#fff' }} />
         </MenuBar>
-        {open && <HeaderMobile open={open} setOpen={setOpen} />}
+        {open && <HeaderMobile open={open} setOpen={setOpen} isSignedIn={props.auth} />}
       </div>
     </HeaderWrapper>
   )
