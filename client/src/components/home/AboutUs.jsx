@@ -35,10 +35,6 @@ const AboutUsWrapper = styled.section`
     cursor: pointer;
   }
 
-  img {
-    border-radius: 0.5rem;
-  }
-
   @media (min-width: 768px) {
     grid-gap: 5rem;
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-import { CardLayout } from '../globalStyle'
-import ToursItem from '../components/tours/tour-list/ToursItem'
+import { CardLayout, PageWrapper } from '../globalStyle'
 import { fetchTours } from '../redux/actions/tourActions';
+import ToursItem from '../components/tours/ToursItem'
+import styled from 'styled-components';
+import Footer from '../components/utils/Footer';
 
 class ToursPage extends Component {
   componentDidMount() {
@@ -23,12 +24,19 @@ class ToursPage extends Component {
     }
 
     return (
-      <CardLayout>
-        {this.renderTours()}
-      </CardLayout>
+      <ToursPageWrapper>
+        <CardLayout className='body-container'>
+          {this.renderTours()}
+        </CardLayout>
+        <Footer light />
+      </ToursPageWrapper>
     )
   }
 }
+
+const ToursPageWrapper = styled.div`
+  background: #f4f4f4;
+`
 
 const mapStateToProps = state => {
   return { tours: Object.values(state.tours) }

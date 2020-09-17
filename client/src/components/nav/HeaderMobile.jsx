@@ -30,14 +30,16 @@ const HeaderMobile = ({ open, setOpen }) => {
 
 const Sidebar = styled.div`
   position: fixed;
-  top: 5rem;
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 5rem);
+  top: 6rem;
+  left: 1.5rem;
+  width: calc(100% - 3rem);
+  height: calc(100vh - 7.5rem);
   background-color: var(--accent-clr);
   z-index: 100;
   display: flex; 
   transition: all 0.2s;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 
   @media (min-width: 768px) {
     display: none;
@@ -52,6 +54,7 @@ const Navs = styled.ul`
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 3rem 0;
 `
 
 const NavItem = styled.li`

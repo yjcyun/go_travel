@@ -119,7 +119,10 @@ export const Error = styled.span`
 export const CardLayout = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-gap: 2rem;
-  margin: 5rem auto;
-`
+  grid-gap: 2rem;  
+  padding: 3rem 1rem;
 
+  @media(min-width:768px) {
+    padding: 5rem 1rem;
+  }
+`

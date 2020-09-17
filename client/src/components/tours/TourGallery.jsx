@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Title from '../../utils/Title'
+import Title from '../utils/Title'
 import styled from 'styled-components'
 
 const TourGallery = ({ image1, image2, image3 }) => {
@@ -57,11 +57,7 @@ const Gallery = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 1rem;
   margin: 2rem 0;
-
-  img {
-    border-radius: 1rem;
-  }
-
+  
   @media(min-width: 768px) {
     grid-template-columns: 4fr 1fr;
   }

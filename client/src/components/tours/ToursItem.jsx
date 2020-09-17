@@ -24,7 +24,7 @@ const ToursItem = ({ name, price, duration, summary, imageCover, slug, id }) => 
 }
 
 const TourCard = styled.div`
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
   background: #fff;
   position: relative;
   color: #000;

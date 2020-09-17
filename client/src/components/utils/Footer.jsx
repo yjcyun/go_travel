@@ -3,10 +3,10 @@ import { IoLogoGithub, IoIosGlobe } from 'react-icons/io'
 import styled from 'styled-components'
 import Logo from '../nav/Logo'
 
-const Footer = () => {
+const Footer = ({ light }) => {
   return (
     <FooterWrapper className='body-container'>
-      <Logo />
+      <Logo light={light} />
       <div className='copyright'>
         &copy;{new Date().getFullYear()} Christina Yun
             <a href='https://github.com/yjcyun/GoTravel'><IoLogoGithub className='icon' /></a>

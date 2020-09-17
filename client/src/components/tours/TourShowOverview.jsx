@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { AiOutlineClockCircle } from 'react-icons/ai'
 import { FiTrendingUp, FiUser, FiCalendar } from 'react-icons/fi'
-import Title from '../../utils/Title'
+import Title from '../utils/Title'
 
 
 const TourShowOverview = (props) => {
@@ -21,9 +21,9 @@ const TourShowOverview = (props) => {
 
   return (
     <TourOverviewContainer>
-      <Title title='Tour Overview' />
       <TourOverview>
         <TourOverviewLeft>
+          <Title title='Tour Overview' />
           <div>
             <FiCalendar className='icon' />
             <span>Next tour</span>{firstDate(startDates)}

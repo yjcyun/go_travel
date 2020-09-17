@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { processPayment } from '../../../redux/actions/checkoutAction';
+import { processPayment } from '../../redux/actions/checkoutAction';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import styled from 'styled-components';
@@ -35,7 +35,7 @@ const BannerWrapper = styled.div`
   background: var(--accent-clr);
   border-radius: 1rem;
   width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 5rem;
 
   @media (max-width: 996px) {
     flex-direction: column;

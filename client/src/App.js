@@ -5,7 +5,6 @@ import { setAuthToken } from './utils/setAuthToken';
 import { loadUser } from './redux/actions/authActions';
 import { store } from './redux/store';
 import Header from './components/nav/Header';
-import TourShow from './components/tours/tour-show/TourShow';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import history from './history';
@@ -16,10 +15,11 @@ import BookingsPage from './pages/BookingsPage';
 import AdminToursPage from './pages/AdminToursPage';
 import TourEdit from './components/admin/TourEdit';
 import TourCreate from './components/admin/TourCreate';
-import './app.css';
 import TourDelete from './components/admin/TourDelete';
 import HomePage from './pages/HomePage';
 import ToursPage from './pages/ToursPage';
+import './app.css';
+import SingleTourPage from './pages/SingleTourPage';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -47,11 +47,10 @@ const App = () => {
 
   // FOR OTHER PAGES, SHOW NAVBAR
   const defaultContainer = () => (
-    <div className='body-container'>
+    <div className='body-margin'>
       <Header />
-
       <Route exact path='/tours' component={ToursPage} />
-      <Route path='/tours/:id' component={TourShow} />
+      <Route path='/tours/:id' component={SingleTourPage} />
       <Route path='/me/profile' component={ProfilePage} />
       <Route path='/me/bookings' component={BookingsPage} />
       <Route exact path='/admin/tours' component={AdminToursPage} />

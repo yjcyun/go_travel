@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-const Logo = ({ largeLogo,dark }) => {
+const Logo = ({ largeLogo, light}) => {
   return (
-    <LogoWrapper large={largeLogo} dark={dark}>
+    <LogoWrapper large={largeLogo} light={light}>
       <Link to='/'>
         <img src='/logo.png' alt='Logo' />
         <span>GoTravel</span>
@@ -22,10 +22,9 @@ const LogoWrapper = styled.div`
    a{
      display: flex;
      align-items: center;
-     color: ${props => props.dark ? '#fff' : '#000'};
+     color:${props=>props.light? '#000':'#fff'};
    }
 
- 
   @media (min-width: 768px) {
     span {
       font-size: ${props => props.large ? '2rem' : '1.5rem'}

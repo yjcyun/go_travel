@@ -41,15 +41,17 @@ const Header = (props) => {
   })
 
   return (
-    <HeaderWrapper className='body-container'>
-      <Logo dark />
-      <NavsList>
-        {renderLinks}
-      </NavsList>
-      <MenuBar>
-        <CgMenuRightAlt onClick={() => setOpen(!open)} />
-      </MenuBar>
-      {open && <HeaderMobile open={open} setOpen={setOpen} />}
+    <HeaderWrapper home={props.home}>
+      <div className='body-container'>
+        <Logo />
+        <NavsList>
+          {renderLinks}
+        </NavsList>
+        <MenuBar>
+          <CgMenuRightAlt onClick={() => setOpen(!open)} style={{ color: '#fff' }} />
+        </MenuBar>
+        {open && <HeaderMobile open={open} setOpen={setOpen} />}
+      </div>
     </HeaderWrapper>
   )
 }
@@ -59,14 +61,19 @@ const mapStateToProps = state => {
 }
 
 const HeaderWrapper = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 5rem;
-  position: relative;
-  transition: all 0.2s;
-  width: 100%;
-  padding: 0 1rem;
+  background-color: ${props=>props.home? '' : '#444'};
+
+  .body-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    position: relative;
+    transition: all 0.2s;
+    width: 100%;
+    padding: 0 1rem;
+  }
+  
 `
 
 const NavsList = styled.ul`
@@ -97,7 +104,7 @@ const NavItem = styled.li`
   align-items: center;
 
   a, span {
-    color: ${props => props.dark ? '#fff' : '#000'};
+    color: #fff;
     letter-spacing: 1px;
     font-weight: 500;
   }

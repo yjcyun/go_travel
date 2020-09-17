@@ -6,7 +6,7 @@ import Header from '../nav/Header'
 const Hero = () => {
   return (
     <HeroWrapper>
-      <Header dark />
+      <Header home />
       <Content className='body-container'>
         <h1>Start your adventure</h1>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur, est!</p>
@@ -25,7 +25,6 @@ const HeroWrapper = styled.section`
   background-repeat: no-repeat;
   background-position: center;
   height: calc(100vh - 3rem);
-  border-radius: 0.5rem;
 
   @media(min-width: 768px) {
     height: 80vh;

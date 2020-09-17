@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import StarRatings from 'react-star-ratings';
 import { FaQuoteLeft } from 'react-icons/fa'
 import { AiOutlineMinus } from 'react-icons/ai'
-import Title from '../../utils/Title';
+import Title from '../utils/Title';
 
 
 const TourReviews = ({ reviews }) => {
@@ -56,10 +56,14 @@ const TitleWrapper = styled.div`
 `
 
 const Reviews = styled.div`
-  margin: 4rem 1.5rem;
+  margin: 4rem 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    margin: 4rem 1.5rem;
+  }
 `
 
 const ReviewCard = styled.div`

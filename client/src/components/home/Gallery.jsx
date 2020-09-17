@@ -31,14 +31,7 @@ const EachGallery = styled.div`
   grid-gap: 1rem;
   margin: 5rem auto;
   grid-template-columns: 1fr;
-
-  img {
-    border-radius: 1rem;
-  }
-
- 
- 
-
+  
   @media(min-width: 768px) {
     .img:nth-child(1) {
       grid-area: first;

@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { fetchTour } from '../../../redux/actions/tourActions';
+import { fetchTour } from '../redux/actions/tourActions';
+import TourBanner from '../components/tours/TourBanner';
+import TourGallery from '../components/tours/TourGallery';
+import TourReviews from '../components/tours/TourReviews';
+import TourShowHeader from '../components/tours/TourShowHeader';
+import TourShowHeaderImg from '../components/tours/TourShowHeaderImg';
+import TourShowOverview from '../components/tours/TourShowOverview';
 import styled from 'styled-components';
-import TourShowHeader from './TourShowHeader';
-import TourShowHeaderImg from './TourShowHeaderImg';
-import TourShowOverview from './TourShowOverview';
-import TourGallery from './TourGallery';
-import TourReviews from './TourReviews';
-import TourBanner from './TourBanner';
+import Footer from '../components/utils/Footer';
 
-class TourShow extends Component {
+class SingleTourPage extends Component {
   componentDidMount() {
     this.props.fetchTour(this.props.match.params.id);
   }
@@ -22,7 +23,8 @@ class TourShow extends Component {
     const { name } = this.props.tour;
 
     return (
-        <TourShowContainer>
+      <TourShowContainer>
+        <div className='body-container'>
           <h1>{name.toUpperCase()}</h1>
           <TourShowHeader {...this.props.tour} />
           <TourShowHeaderImg {...this.props.tour} />
@@ -30,7 +32,9 @@ class TourShow extends Component {
           <TourGallery {...this.props.tour} />
           <TourReviews {...this.props.tour} />
           <TourBanner {...this.props.tour} />
-        </TourShowContainer>
+        </div>
+        <Footer light />
+      </TourShowContainer>
     )
   }
 }
@@ -40,7 +44,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const TourShowContainer = styled.div`
-  margin: 3rem auto;
+  background: #f4f4f4;
+  padding: 5rem 1rem 0;
 
   h1 {
     text-align: center;
@@ -54,4 +59,4 @@ const TourShowContainer = styled.div`
   }
 `
 
-export default connect(mapStateToProps, { fetchTour })(TourShow)
+export default connect(mapStateToProps, { fetchTour })(SingleTourPage)

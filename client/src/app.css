@@ -16,7 +16,7 @@
 }
 
 body {
-  /* background-color: var(--background-clr); */
+  background-color: #fff;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -50,7 +50,6 @@ input:disabled {
 
 .body-container {
   max-width: 1170px;
-  /* padding: 0 1rem; */
   margin: auto;
 }
 
@@ -68,5 +67,8 @@ input:disabled {
 @media (min-width: 768px) {
   .extra-margin{
     margin: 13rem auto;
+  }
+  .body-margin {
+    margin: 1.5rem;
   }
 }
