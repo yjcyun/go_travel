@@ -1,4 +1,5 @@
 import axios from "axios";
+import history from "../../history";
 import { STRIPE_CHECKOUT } from "../type/types";
 
 // PROCESS PAYMENT
@@ -12,7 +13,7 @@ export const processPayment = (id, stripePromise) => async dispatch => {
     });
     
     dispatch({ type: STRIPE_CHECKOUT, payload: response.data });
-
+    history.push('/');
   } catch (err) {
     console.log(err);
   }

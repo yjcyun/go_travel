@@ -42,7 +42,7 @@ export const createTour = (formValues) => async (dispatch) => {
     const response = await axios.post('/api/v1/tours', formData);
     dispatch({ type: CREATE_TOUR, payload: response.data });
     //FIXME: BUG ALERT !!! PAGE RELOADS AFTER DISPATCH - code does not run after line 43. Problem in tourController?
-    history.push('/');
+    history.push('/admin/tours');
 
   } catch (err) {
     console.log(err)
@@ -71,7 +71,7 @@ export const updateTour = (id, formValues) => async dispatch => {
 
   const response = await axios.patch(`/api/v1/tours/${id}`, formData);
   dispatch({ type: UPDATE_TOUR, payload: response.data });
-  history.push('/')
+  history.push('/admin/tours')
 }
 
 // DELETE TOUR
