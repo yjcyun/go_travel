@@ -20,6 +20,7 @@ import HomePage from './pages/HomePage';
 import ToursPage from './pages/ToursPage';
 import './app.css';
 import SingleTourPage from './pages/SingleTourPage';
+import ScrollToTop from './ScrollToTop';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -61,14 +62,13 @@ const App = () => {
   )
 
   return (
-    <>
-      <Router history={history}>
+    <Router history={history}>
+      <ScrollToTop/>
         <Switch>
           <Route exact path={['/login', '/signup', '/forgot-password', '/forgot-password-confirm', '/']} component={loginContainer} />
           <Route component={defaultContainer} />
         </Switch>
-      </Router>
-    </>
+    </Router>
   );
 }
 

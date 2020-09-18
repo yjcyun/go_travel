@@ -2,8 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import StarRatings from 'react-star-ratings';
 import { FiMapPin } from 'react-icons/fi';
+import { processPayment } from '../../redux/actions/checkoutAction';
+import { connect } from 'react-redux';
+import { loadStripe } from '@stripe/stripe-js';
 
-const TourShowHeader = ({ startLocation, ratingsAverage, price }) => {
+const TourShowHeader = ({ startLocation, ratingsAverage, price}) => {
+
   return (
     <Header>
       <div className='header-box'>
@@ -65,4 +69,5 @@ const Header = styled.div`
     margin: 0 3rem;
   }
 `
-export default TourShowHeader
+
+export default connect(null, { processPayment })(TourShowHeader)

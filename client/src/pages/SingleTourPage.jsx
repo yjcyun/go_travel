@@ -21,17 +21,16 @@ class SingleTourPage extends Component {
     }
 
     const { name } = this.props.tour;
-
     return (
       <TourShowContainer>
         <div className='body-container'>
           <h1>{name.toUpperCase()}</h1>
-          <TourShowHeader {...this.props.tour} />
+          <TourShowHeader {...this.props.tour} {...this.props.auth}/>
           <TourShowHeaderImg {...this.props.tour} />
           <TourShowOverview {...this.props.tour} />
           <TourGallery {...this.props.tour} />
           <TourReviews {...this.props.tour} />
-          <TourBanner {...this.props.tour} />
+          <TourBanner {...this.props.tour} {...this.props.auth} />
         </div>
         <Footer light />
       </TourShowContainer>
@@ -40,7 +39,10 @@ class SingleTourPage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { tour: state.tours[ownProps.match.params.id] }
+  return { 
+    tour: state.tours[ownProps.match.params.id],
+    auth: state.auth 
+  }
 }
 
 const TourShowContainer = styled.div`

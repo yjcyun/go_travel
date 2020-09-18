@@ -43,7 +43,7 @@ export const logIn = (formValues) => async dispatch => {
     const response = await axios.post('/api/v1/users/login', body, config);
     dispatch({ type: LOGIN_SUCCESS, payload: response.data });
     dispatch(loadUser());
-
+    
     history.push('/');
   }
   catch (err) {
