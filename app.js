@@ -7,8 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
-
-
+const compression = require('compression');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
@@ -20,7 +19,7 @@ const app = express();
 
 // 1) GLOBAL MIDDLEWARES
 // to serve static files
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'client', 'build')))
 
 // Set Security HTTP Headers
 app.use(helmet());
@@ -51,6 +50,7 @@ app.use((req, res, next) => {
   next();
 })
 
+app.use(compression());
 
 
 // 2) ROUTES
@@ -58,6 +58,10 @@ app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/bookings', bookingRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 // 3) Error handler
 app.all('*', (req, res, next) => {

@@ -4,7 +4,6 @@ import StarRatings from 'react-star-ratings';
 import { FiMapPin } from 'react-icons/fi';
 import { processPayment } from '../../redux/actions/checkoutAction';
 import { connect } from 'react-redux';
-import { loadStripe } from '@stripe/stripe-js';
 
 const TourShowHeader = ({ startLocation, ratingsAverage, price}) => {
 

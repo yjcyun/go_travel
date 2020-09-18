@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { CardLayout, PageWrapper } from '../globalStyle'
+import { CardLayout } from '../globalStyle'
 import { fetchTours } from '../redux/actions/tourActions';
 import ToursItem from '../components/tours/ToursItem'
 import styled from 'styled-components';
