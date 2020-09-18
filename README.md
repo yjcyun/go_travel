@@ -15,3 +15,9 @@ Complete with
   * Routes handled with React-Router-DOM
   * Payment handled with Stripe
   * Use of both class-based and fuction-based components (will upgrade to all function-based in the future)
+  * LOTS OF BUGS!!!
+
+### Sneak peak
+![Tours](/screenshots/tours.png)
+![Admin Page](/screenshots/createtour.png)
+![Stripe](/screenshots/stripe.png)
