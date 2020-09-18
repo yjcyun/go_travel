@@ -18,6 +18,6 @@ Complete with
   * LOTS OF BUGS!!!
 
 ### Sneak peak
-![Tours](/screenshots/tours.png)
-![Admin Page](/screenshots/createtour.png)
-![Stripe](/screenshots/stripe.png)
+![Tours](./public/screenshots/tours.png)
+![Admin Page](./public/screenshots/createtour.png)
+![Stripe](./public/screenshots/stripe.png)
